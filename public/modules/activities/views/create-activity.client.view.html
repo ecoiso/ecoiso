@@ -1,0 +1,195 @@
+<!--<section data-ng-controller="ActivitiesController">
+    <div class="page-header">
+        <h1>New Activity</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="name" id="name" class="form-control" placeholder="Name" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>-->
+<div class="page-wrap">
+<div class="row">
+<div class="col-sm-12 col-md-6">
+    <div class="panel panel-default panel-hovered panel-stacked mb20">
+        <div class="panel-heading">Native Controls</div>
+        <div class="panel-body">
+            <form class="form-horizontal ng-pristine ng-valid" role="form"> <!-- form horizontal acts as a row -->
+                <!-- normal control -->
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Normal Control</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+                <!-- with hint -->
+                <div class="form-group">
+                    <label class="col-md-3 control-label">With Hint</label>
+                    <div class="col-md-9">
+                        <input type="text" placeholder="Hint Text" class="form-control">
+                        <p class="text-danger text-right xsmall">hint description</p>
+                    </div>
+                </div>
+
+                <!-- passowrd control -->
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Password</label>
+                    <div class="col-md-9">
+                        <input type="password" placeholder="Password Text" class="form-control">
+                    </div>
+                </div>
+
+                <!-- Disabled control -->
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Disabled</label>
+                    <div class="col-md-9">
+                        <input type="text" disabled="" placeholder="Input is disabled" class="form-control">
+                    </div>
+                </div>
+
+                <!-- textarea control -->
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Textarea</label>
+                    <div class="col-md-9">
+                        <textarea placeholder="Message here" class="form-control resize-v" rows="5"></textarea>
+                    </div>
+                </div>
+
+                <!-- native select -->
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Native Select</label>
+                    <div class="col-md-9">
+                        <select class="form-control">
+                            <option disabled="" selected="" value="0">Select a fruit</option>
+                            <option value="1">Apple</option>
+                            <option value="2">Orange</option>
+                            <option value="3">Grapes</option>
+                            <option value="4">Pineapple</option>
+                            <option value="5">Cherry</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- success control -->
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Success Control</label>
+                    <div class="col-md-9">
+                        <div class="has-success">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- warning control -->
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Warning Control</label>
+                    <div class="col-md-9">
+                        <div class="has-warning">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- error control -->
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Error Control</label>
+                    <div class="col-md-9">
+                        <div class="has-error">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- prepend control -->
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Prepend</label>
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            <span class="input-group-addon ion ion-person"></span>
+                            <input type="text" placeholder="Full Name" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- append control -->
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Append</label>
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            <input type="email" placeholder="Email Address" class="form-control">
+                            <span class="input-group-addon ion ion-email-unread"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- both control -->
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Both Addon</label>
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            <span class="input-group-addon">$</span>
+                            <input type="email" placeholder="Both Addon" class="form-control">
+                            <span class="input-group-addon">0.0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- dropdown control -->
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Dropdown</label>
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <div dropdown="" class="dropdown">
+                                    <button type="button" dropdown-toggle="" class="btn btn-pink dropdown-toggle" aria-haspopup="true" aria-expanded="false">Click Me<span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="javascript:;">Action</a></li>
+                                        <li><a href="javascript:;">Another action</a></li>
+                                        <li><a href="javascript:;">Something else here</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="javascript:;">Separated link</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <input type="text" placeholder="Dropdown button addon" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- button addon -->
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Button Addon</label>
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default ion ion-paper-airplane"></button>
+                            </div>
+                            <input type="text" placeholder="Button Addon" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix right">
+                    <button type="submit" class="btn btn-primary mr5">Submit</button>
+                    <button class="btn btn-default">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>

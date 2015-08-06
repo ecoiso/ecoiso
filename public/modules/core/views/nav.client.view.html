@@ -1,0 +1,125 @@
+
+<div class="nav-head" ng-controller="ActivitiesController" ng-init="init()" ng-click="init()">
+    <!-- site logo -->
+    <a href="/#!/activities" class="site-logo">
+        <i class="ion ion-home" ng-show="authentication.user.roles[0] == 'superAdmin' "></i>
+        <i class="ion ion-android-globe" ng-show="authentication.user.roles[0] == 'commander' "></i>
+        <span class="text" ng-show="authentication.user.roles[0] != 'commander' && authentication.user.roles[0] != 'superAdmin'">{{company.showName}}</span>
+        <span class="text" ng-show="authentication.user.roles[0] == 'commander' ">Trụ sở</span>
+        <span class="text" ng-show="authentication.user.roles[0] == 'superAdmin' ">Quản trị hệ thống</span>
+    </a>
+</div>
+
+
+<!-- Site nav (vertical) -->
+
+<nav class="site-nav clearfix" role="navigation" data-ng-show="authentication.user"  data-ng-controller="ProcessesController">
+
+    <!-- navigation -->
+    <ul class="list-unstyled clearfix nav-list mb15" collapse-nav-accordion highlight-active id="nav-left">
+        <li class="flags-active" onclick="activeNav(this)">
+            <a href="/#!/activities" md-ink-ripple>
+                <i class="ion ion-ios-speedometer-outline"></i>
+                <span class="text">Tổng quan</span>
+            </a>
+        </li>
+        <li class="flags-active" onclick="activeNav(this)">
+            <a href="/#!/processes/create" md-ink-ripple ng-if="authentication.user.roles[0] == 'manager'">
+                <i class="ion ion-android-create"></i>
+                <span class="text">Tạo Quy trình</span>
+            </a>
+        </li>
+        <li class="flags-active" ng-if="authentication.user.roles[0] == 'manager' || authentication.user.roles[0] == 'staff'" onclick="activeNav(this)">
+            <a href="javascript:;" md-ink-ripple ng-mouseover="findDraft()" data-ng-click="findDraft()" id="find-draft">
+                <i class="ion ion-hammer"></i>
+                <span class="text">Quy trình đang dự thảo</span>
+                <i class="arrow ion-chevron-left" style="margin-left: 205px;"></i>
+                <!--<span style="margin-left:210px" class="badge badge-xs badge-pink" id="count-draft">{{processesDraft.length}}</span>-->
+            </a>
+            <ul class="inner-drop list-unstyled" data-ng-init="findDraft()">
+                <li style="display: inline-flex;width:100%;height:30px;line-height:30px" data-ng-repeat="process in processesDraft">
+                    <a data-ng-href="#!/processes/{{process._id}}"  md-ink-ripple><span data-ng-bind="process.name"></span></a>
+                </li>
+            </ul>
+        </li>
+        <li class="flags-active" ng-if="authentication.user.roles[0] == 'manager' || authentication.user.roles[0] == 'staff'" onclick="activeNav(this)">
+            <a href="javascript:;" md-ink-ripple ng-mouseover="findWaitingPublish()" data-ng-click="findWaitingPublish()">
+                <i class="ion ion-android-stopwatch"></i>
+                <span class="text">Quy trình đang chờ duyệt</span>
+                <i class="arrow ion-chevron-left" style="margin-left: 205px;"></i>
+                <!--<span style="margin-left:210px" class="badge badge-xs badge-primary"><b>{{processesWaiting.length}}</b></span>-->
+            </a>
+            <ul class="inner-drop list-unstyled" data-ng-init="findWaitingPublish()" >
+                <li style="display: inline-flex;width:100%;height:30px;line-height:30px" data-ng-repeat="process in processesWaiting">
+                    <a data-ng-href="#!/processes/{{process._id}}"  md-ink-ripple><span data-ng-bind="process.name"></span></a>
+                </li>
+            </ul>
+        </li>
+        <li class="flags-active" ng-if="authentication.user.roles[0] != 'commander' && authentication.user.roles[0] != 'superAdmin''" onclick="activeNav(this)">
+            <a href="javascript:;" md-ink-ripple ng-mouseover="findPublish()" data-ng-click="findPublish()" >
+                <i class="ion ion-bookmark"></i>
+                <span class="text">Quy trình đã ban hành</span>
+                <i class="arrow ion-chevron-left" style="margin-left: 205px;"></i>
+                <!--<span style="margin-left:210px" class="badge badge-xs badge-success">{{processesPublish.length}}</span>-->
+            </a>
+            <ul class="inner-drop list-unstyled" data-ng-init="findPublish()" >
+                <li style="display: inline-flex;width:100%;height:30px;line-height:30px" data-ng-repeat="process in processesPublish">
+                    <a data-ng-href="#!/processes/{{process._id}}"  md-ink-ripple><span data-ng-bind="process.name"></span></a>
+                </li>
+            </ul>
+        </li>
+        <li class="flags-active" ng-if="authentication.user.roles[0] != 'commander' && authentication.user.roles[0] != 'superAdmin' && authentication.user.roles[0] != 'admin'" onclick="activeNav(this)">
+            <a href="/#!/listProfiles-lv0" md-ink-ripple>
+                <i class="ion ion-folder"></i>
+                <span class="text">Hồ sơ</span>
+            </a>
+        </li>
+        <li class="flags-active" ng-if="authentication.user.roles[0] == 'admin'" onclick="activeNav(this)">
+            <a href="/#!/usersList" md-ink-ripple>
+                <i class="ion ion-person"></i>
+                <span class="text">Tài khoản</span>
+            </a>
+        </li>
+        <li class="flags-active" ng-if="authentication.user.roles[0] == 'admin'" onclick="activeNav(this)">
+            <a href="/#!/signup" md-ink-ripple>
+                <i class="ion ion-person-add"></i>
+                <span class="text">Tạo tài khoản</span>
+            </a>
+        </li>
+        <li class="flags-active" ng-if="authentication.user.roles[0] == 'admin'" onclick="activeNav(this)">
+            <a href="/#!/companies/{{authentication.user.company}}/edit" md-ink-ripple>
+                <i class="ion ion-android-settings"></i>
+                <span class="text">Cấu hình</span>
+            </a>
+        </li>
+        <li class="flags-active" ng-if="authentication.user.roles[0] == 'superAdmin' || authentication.user.roles[0] == 'commander'" onclick="activeNav(this)">
+            <a href="/#!/companies" md-ink-ripple>
+                <i class="ion ion-social-usd-outline"></i>
+                <span class="text">Danh sách công ty</span>
+            </a>
+        </li>
+        <li class="flags-active" ng-if="authentication.user.roles[0] == 'superAdmin' || authentication.user.roles[0] == 'commander'" onclick="activeNav(this)">
+            <a href="/#!/companies/create" md-ink-ripple>
+                <i class="ion ion-arrow-graph-up-right"></i>
+                <span class="text">Thêm công ty</span>
+            </a>
+        </li>
+        <li class="flags-active" ng-if="authentication.user.roles[0] == 'commander'" onclick="activeNav(this)">
+            <a href="/#!/agency" md-ink-ripple>
+                <i class="ion ion-home"></i>
+                <span class="text">Danh sách nhà phân phối</span>
+            </a>
+        </li>
+        <li class="flags-active" ng-if=" authentication.user.roles[0] == 'commander'" onclick="activeNav(this)">
+            <a href="/#!/agency/create" md-ink-ripple>
+                <i class="ion ion-plus"></i>
+                <span class="text">Thêm nhà phân phối</span>
+            </a>
+        </li>
+    </ul> <!-- #end navigation -->
+</nav>
+
+<!-- nav-foot -->
+<footer class="nav-foot">
+    <p>2015 &copy; <span>EcoISO</span></p>
+</footer>

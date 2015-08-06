@@ -1,0 +1,41 @@
+<div class="page page-auth">
+    <div class="auth-container " style="margin: auto !important">
+        <div class="form-head mb20">
+            <h1 class="site-logo h2 mb5 mt5 text-center text-bold"><i class="ion ion-leaf" style="margin-right:15px;font-size:29px"></i><a href="javascript:;">EcoISO</a></h1>
+        </div>
+        <div class="form-container" data-ng-controller="AuthenticationController">
+            <form class="form-horizontal"  data-ng-submit="signin()" autocomplete="off">
+                <div data-ng-show="error" class="text-center text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
+                <!--<label for="username">Tài khoản </label>-->
+                <md-input-container>
+                    <div class="input-group  col-md-12" style="display: inline-flex">
+                        <span class="input-group-addon ion" style="width: 60px">
+                            <i class="ion-android-person"></i>
+                        </span>
+                        <input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Tài khoản">
+                    </div>
+                </md-input-container>
+                <!--<label for="password">Mật khẩu </label>-->
+                <md-input-container>
+                    <div class="input-group  col-md-12" style="display: inline-flex">
+                        <span class="input-group-addon ion" style="width: 60px">
+                            <i class="ion-locked"></i>
+                        </span>
+                        <input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Mật khẩu">
+                    </div>
+                </md-input-container>
+                <!--<div class="clearfix mb15"><a href="#/pages/forget-pass" class="text-success small">Forget your password?</a></div>-->
+                <div class="btn-group btn-group-justified mb15">
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-success">Đăng nhập</button>
+                    </div>
+                </div>
+                <!--<div class="clearfix text-center small">
+                    <p>Don't have an account? <a href="#/pages/signup">Create Now</a></p>
+                </div>-->
+            </form>
+        </div>
+    </div> <!-- #end signin-container -->
+</div>

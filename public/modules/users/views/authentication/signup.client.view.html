@@ -1,0 +1,55 @@
+<div class="page page-forms-elements ng-scope">
+    <ol class="breadcrumb breadcrumb-small">
+        <li><a href="/#!/activities">Trang chủ</a></li>
+        <li class="active"><a href="/#!/signup">Đăng ký tài khoản mới</a></li>
+    </ol>
+    <div class="page-wrap">
+    <div class="row" data-ng-controller="AuthenticationController" ng-init="userCompany()">
+        <div class="">
+            <div class="panel panel-default panel-hovered panel-stacked mb20">
+                <div class="panel-heading" style="background: none">Đăng ký tài khoản mới</div>
+                <div class="panel-body">
+            <form name="userForm" data-ng-submit="signup()" class="signin form-horizontal  col-md-10 col-md-offset-1" novalidate autocomplete="off">
+                <fieldset>
+                    <div data-ng-show="error" class="text-center text-danger">
+                        <strong data-ng-bind="error"></strong>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstName">Họ và đệm </label>
+                        <input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="credentials.firstName" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Tên </label>
+                        <input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="credentials.lastName" placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Thư điện tử </label>
+                        <input type="email" id="email" name="email" class="form-control" data-ng-model="credentials.email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="department">Phòng / Ban  </label>
+                        <input type="text" id="department" name="department" class="form-control" data-ng-model="credentials.department" placeholder="Department">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Tài khoản </label>
+                        <br>
+                        <div class="input-group  col-md-12" style="display: inline-flex">
+                            <span class="input-group-addon ion" style="width: 60px">{{company.shortName.toLowerCase() +'_'}}</span>
+                            <input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mật khẩu </label>
+                        <input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
+                    </div>
+                    <div class="clearfix col-sm-offset-9">
+                        <button type="submit" class="btn btn-large btn-primary">Đăng ký tài khoản</button>
+                    </div>
+                </fieldset>
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+</div>

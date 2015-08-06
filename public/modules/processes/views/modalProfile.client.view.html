@@ -1,0 +1,43 @@
+<div class="modal-style" data-ng-controller="ProcessesController" ng-int="fillInfoModalProfile()">
+    <div class="modal-header clearfix">
+        <h4 class="modal-title h3" id="nameOfDocument"><input id="name-main-document" ng-model="model.profile.name"
+                                                              name="nameDocument"
+                                                              style="width: 80%;border: 0px;float: left;"
+                                                              value="{{ model.profile.name }}" readonly/></h4>
+        <span class="close ion ion-android-close" ng-click="modalClose()"></span>
+    </div>
+    <div class="modal-body">
+        <div style="width: 28%;float: left">
+            <ul style="list-style: none;padding: 0">
+                <li>
+                    <a ng-click="" tabindex="0" style="color:#000 !important;font-weight: bold">
+                        <i class="indented tree-icon ion ion-minus" role="button" tabindex="0"> </i>
+                        <span class="indented tree-label ng-binding">{{ model.profile.name }}</span>
+                    </a>
+                </li>
+                <li style="padding-left: 5%">
+                    <a ng-click="" tabindex="0">
+                        <i class="indented tree-icon ion ion-document" role="button" tabindex="0"> </i>
+                        <span class="indented tree-label ng-binding">Đơn xin nghỉ ốm </span>
+                    </a>
+                </li>
+                <li style="padding-left: 5%">
+                    <a ng-click="" tabindex="0">
+                        <i class="indented tree-icon ion ion-document" role="button" tabindex="0"> </i>
+                        <span class="indented tree-label ng-binding">Hợp đồng lao động </span>
+                    </a>
+                </li>
+                <li style="padding-left: 5%">
+                    <a ng-click="" tabindex="0">
+                        <i class="indented tree-icon ion ion-document" role="button" tabindex="0"> </i>
+                        <span class="indented tree-label ng-binding">Sơ yếu lý lịch</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <iframe ng-src="/ViewerJS/index.html#/uploads/1436947417013_Chuong_trinh_dao_tao_ISO_Dak_Nong_ngay_12-14_thang_8_(3_ngày).output.pdf" style="width: 70%;height:945px"></iframe>
+    </div>
+</div>
+
+
+<!-- #end Modal Content -->

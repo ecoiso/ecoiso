@@ -1,0 +1,60 @@
+<div class="page page-forms-wizard">
+    <ol class="breadcrumb breadcrumb-small">
+        <li><a href="/#!/activities">Trang chủ</a></li>
+        <li class="active"><a href="/#!/search">Tìm kiếm</a></li>
+    </ol>
+    <div class="page-wrap">
+
+        <div class="row" ng-controller="HomeController">
+            <div class="col-md-12">
+
+                <form class="form-horizontal" action="javascript:;"  ng-submit="searchGlobal()">
+                    <div class="input-group input-group-lg mb15">
+                        <input class="form-control" ng-model="keyword" placeholder="Nhập từ khóa cần tìm kiếm" type="text">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default ion ion-search" type="submit">Tìm kiếm</button>
+                        </div>
+                    </div>
+                </form>
+                <div ng-if="resultSearch.length != 0">
+                <!-- search results -->
+                <div class="search-heading mb5 ml5">
+                    <h4 class="text-light h5">
+                        <strong>{{resultSearch.length}}</strong> kết qua tìm thấy với từ khóa
+                        <strong class="search-keyword text-danger text-normal">{{keyword}}</strong>
+                    </h4>
+                </div>
+
+
+                <!-- Search results -->
+                <div class="panel panel-lined mb20">
+                    <div class="panel-body">
+                        <div class="result mb20" ng-repeat="result in resultSearch">
+                            <h4 class="mb0 text-info">{{result.name}}</h4>
+                            <a href="javascript:;" class="small text-success">http://iso.ecoit.asia</a>
+                            <p class="mt5 summary">Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            <!--<div class="tags">
+                                <span>Tags:&nbsp;</span>
+                                <label class="label label-primary">One</label>
+                                <label class="label label-primary">Two</label>
+                                <label class="label label-primary">Three</label>
+                            </div>-->
+                            <hr>
+                        </div>
+
+
+
+                        <pagination total-items="50" ng-model="currentPage" class="pagination"></pagination>
+                    </div>
+                </div> <!-- #end search-results -->
+                </div>
+
+            </div>
+        </div> <!-- #end row -->
+
+    </div> <!-- #end page-wrap -->
+
+</div>

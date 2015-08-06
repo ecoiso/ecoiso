@@ -1,0 +1,74 @@
+
+<div class="page page-ui-extras ng-scope">
+    <ol class="breadcrumb breadcrumb-small">
+        <li><a href="/#!/activities">Trang chủ</a></li>
+        <li class="active"><a href="/#!/companies">Danh sách công ty</a></li>
+    </ol>
+    <div class="page-wrap">
+        <!-- row -->
+        <div class="row" data-ng-controller="CompaniesController" data-ng-init="find()">
+            <!-- Basic Table -->
+            <div class="col-md-12">
+                <div class="panel panel-lined panel-hovered mb20 table-responsive">
+                    <div class="panel-heading">
+                        Danh sách công ty sử dụng phần mềm
+                        <form class="form-horizontal right col-lg-4">
+                            <input class="form-control input-sm" placeholder="Tên công ty cần tìm kiếm" ng-model="searchTextFilter" type="text">
+                        </form>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table ng-scope table-bordered table-striped table-condensed table-hover">
+                            <thead>
+                            <tr>
+                                <th class="col-lg-1"><button class="btn btn-default btn-gplus btn-sm ion ion-trash-a" type="button"></button></th>
+                                <th>Tên công ty</th>
+                                <th>Tên viết tắt</th>
+                                <th>Ngày đăng ký</th>
+                                <th>Ngày hết hạn</th>
+                                <th class="col-md-1"></th>
+                            </tr>
+                            </thead>
+                            <tbody >
+                            <tr data-ng-repeat="company in companies | filter:searchTextFilter"  class="ng-scope">
+                                <td>
+                                    <div class="ui-checkbox ui-checkbox-primary ml5">
+                                        <label><input type="checkbox"><span></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="ng-binding">{{company.name}}</td>
+                                <td class="ng-binding">{{company.shortName}}</td>
+                                <td class="ng-binding"><span data-ng-bind="company.created | date:'medium'"></span></td>
+                                <td><span data-ng-bind="company.expireDate | date:'medium'"></span></td>
+                                <td class="ng-binding" style="text-align: center">
+                                    <button data="{{ company._id }}" ng-click="openModal($event)" md-ink-ripple="" class="btn btn-default ion ion-gear-a" type="button"><div class="md-ripple-container" style=""></div></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- #end page-wrap -->
+</div>
+<!--
+<section data-ng-controller="CompaniesController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Companies</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="company in companies" data-ng-href="#!/companies/{{company._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="company.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="company.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="company.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!companies.$resolved || companies.length">
+    	No Companies yet, why don't you <a href="/#!/companies/create">create one</a>?
+    </div>
+</section>-->

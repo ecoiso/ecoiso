@@ -1,0 +1,161 @@
+<div class="modal-style" data-ng-controller="ProcessesController" ng-int="fillInfoModal()">
+    <div class="modal-header clearfix">
+        <form id="data-upload-name-onchage-button" method="post" ng-submit="saveChangeNameDocument(model)" >
+            <input type="hidden" style="display: none" name="doc_id" value="{{ model.document._id }}"/>
+            <h4  class="modal-title h3" id="nameOfDocument"><input onclick="showReloadName()" id="name-main-document" ng-model="model.document.name"
+                                                                  name="nameDocument"
+                                                                  style="width: 80%;border: 0px;float: left;"
+                                                                  value="{{ model.document.name }}" readonly/></h4>
+            <button ng-if="model.process.kind[0] != 'publish'" class="btn btn-success btn-xs " style="float: left;display: none;margin-right: 20px"
+                    id="reload-name-button" type="submit" onclick="hiddenReloadName()"><span
+                    class="ion ion-checkmark"></span></button>
+            <span ng-if="model.process.kind[0] != 'publish'" type="button" class="btn btn-danger btn-xs ion ion-refresh" style="float: left;height:24px"
+                  onclick="showReloadName()"></span>
+        </form>
+        <span class="close ion ion-android-close" ng-click="modalClose()"></span>
+    </div>
+    <div class="modal-body">
+        <iframe ng-src="{{trustSrc(model.document.urlPdf)}}" style="width: 70%;height:945px" mozbrowser></iframe>
+        <div class="modal-right-content" style="width: 28%;float: right">
+            <button md-ink-ripple="" class="btn btn-danger btn-icon-inline pull-right btn-xs hidden" type="button"
+                    onclick="turnOnEdit()" style="margin: 5px">
+                <i class="ion ion-hammer"></i>Chỉnh sửa
+                <div class="md-ripple-container" style=""></div>
+            </button>
+            <button id="button-add-submit-quick" md-ink-ripple=""
+                    class="btn btn-success btn-icon-inline pull-right btn-xs" type="button"
+                    style="margin: 5px;display: none">
+                <i class="ion ion-checkmark"></i>Xác nhận thay đổi
+                <div class="md-ripple-container" style=""></div>
+            </button>
+
+            <button id="button-add-property-quick" md-ink-ripple=""
+                    class="btn btn-primary btn-icon-inline pull-right btn-xs" type="button" onclick="addProperty()"
+                    style="margin: 5px;display: none">
+                <i class="ion ion-plus"></i>Thêm thuộc tính
+                <div class="md-ripple-container" style=""></div>
+            </button>
+            <h4 class="h3" style="display: block;float: left" class="pull-left">Bảng thuộc tính của văn bản</h4>
+
+            <form id="data-upload-property-onchage-button" method="post"
+                  style="width: 100% ;float: left;margin-bottom:50px">
+                <div id="table-propertites" width="100%">
+                    <ul style="list-style: none">
+                        <li>
+                            <label class="label label-primary">Tác giả :</label><br>
+                            <input type="text" value="{{model.document.user.displayName}}" readonly
+                                       style="border: none; ">
+                        </li>
+                        <li>
+                            <label class="label label-primary">Kích thước :</label><br>
+                            <input type="text" value="{{model.document.size}} bytes" readonly style="border: none;" />
+                            
+                        </li>
+                        <li>
+                            <label class="label label-primary">Thời điểm tạo :</label><br>
+                            <input type="text" value="{{model.document.created | date:'medium'}}" readonly
+                                       style="border: none;" />
+                        </li>
+                        <li>
+                           <label class="label label-primary">Thời điểm cập nhật :</label><br>
+                            
+                            <input type="text" value="{{model.document.last_updated | date:'medium'}}" readonly
+                                       style="border: none;width: 85%" />
+                        </li>
+                        <li>
+                           <label class="label label-primary">Cán bộ cập nhật :</label><br>
+                            <input type="text" value="" readonly style="border: none;width: 85%" >
+                        </li>
+                        <li>
+                           <label class="label label-primary">Loại văn bản :</label><br>
+                            
+                                <input ng-if="model.document.kind == 'process' " type="text" value="Quy trình" readonly style="border: none;width: 85%" />
+                            
+                            
+                                <input ng-if="model.document.kind == 'model' " type="text" value="Biểu mẫu" readonly style="border: none;width: 85%" />
+                            
+                            
+                                <input ng-if="model.document.kind == 'profile' " type="text" value="Hồ sơ xử lý" readonly style="border: none;width: 85%" />
+                            
+                        </li>
+
+                        <!--<tr ng-reapeat="property in model.document.properties">
+                           <input style="border: none" type="text" value="" readonly/>
+                            <input style="border: none" type="text" value="" readonly/>
+                            
+                                <button class="btn btn-danger btn-xs removeProperty" style="float: right;display:none"><span
+                                        class="ion ion-trash-a"></span></button>
+                            
+                        </tr>-->
+
+                    </ul>
+
+
+                </div>
+            </form>
+            <div style="margin-top: 50px">
+                <!---->
+                <h3 class="h3">Quản lý phiên bản</h3>
+                <md-divider class="ng-scope md-default-theme"></md-divider>
+                <table width="100%">
+                    <tr ng-repeat="(key,value) in model.document.versions">
+                        <td ng-if="key == 0"><label class="label label-primary">Phiên bản mới nhất :</label>
+                        <td ng-if="key != 0"><label class="label label-primary">Phiên bản:</label>
+                        <strong>{{model.document.number_versions[key]}}</strong>
+                        
+                            <button data="{{value}}" ng-click="download($event)" md-ink-ripple=""
+                                    class="btn btn-default btn-facebook" type="button" style="height:25px;line-height:25px;padding-top:0;width:38px;text-align:center">
+                                <i class="ion ion-ios-cloud-download-outline"></i>
+                                <div class="md-ripple-container" style=""></div>
+                            </button>
+                        
+                    </tr>
+                </table>
+                <!---->
+                <div ng-controller="NewVersionUploadController" ng-if="model.process.kind[0] != 'publish'">
+                    <form id="data-upload-onchage-button" method="post" enctype="multipart/form-data"
+                          style="margin-top:30px">
+                        <!--<button md-ink-ripple="" class="btn btn-line-success btn-rounded" type="button" id="fake-button-file" onclick="selectNewfile()">Tải phiên bản mới
+                            <div class="md-ripple-container" style=""></div>
+                        </button>-->
+                        <!--<input type="file"  ng-model="fileNewVersion" onchange="showFileSelected()" style="display: none" id="true-button-file" name="file" accept="application/msword,application/pdf,application/vnd.ms-excel" />-->
+                        <div style="width: 100%;margin: 20px 0px;" id="box-new-version" >
+                            <div class="panel panel-default mb20 mini-box panel-hovered">
+                                <div class="panel-body">
+                                    <div class="clearfix">
+                                        <div class="info left">
+                                            <h4 class="mt0 text-pink text-bold" id="name-file-up-version"></h4>
+                                            <h5 class="text-light mb0">Phiên bản tiếp theo :
+                                                <input type="radio" name="version" class="md-primary"
+                                                       value="{{((model.document.number_versions[0]|number)/1.0 + 0.1).toFixed(1)}}"
+                                                       checked/>{{((model.document.number_versions[0]|number)/1.0 +
+                                                0.1).toFixed(1) }}
+                                                <input type="radio" name="version"
+                                                       value="{{((model.document.number_versions[0]|number)/1 + 1).toFixed(0) }}.0"/>{{((model.document.number_versions[0]|number)/1
+                                                + 1).toFixed(0)}}.0
+                                            </h5>
+                                        </div>
+                                        <div class="right ion ion-plane"></div>
+                                    </div>
+                                </div>
+                                <input type="text" style="display: none" id="doc_id" value="{{ model.document._id }}"/>
+
+                                <div class="panel-footer clearfix panel-footer-sm panel-footer-pink"
+                                     id="button-upload-new-version" style="cursor: pointer;padding:0">
+                                    <button ngf-select ngf-multiple="false" ng-model="files" class="mt0 mb0 left"
+                                            accept="application/msword,application/pdf,application/vnd.ms-excel"
+                                            style="width: 100%;height:40px;background:none;border:none">Tải lên phiên
+                                        bản mới
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- #end Modal Content -->

@@ -1,0 +1,56 @@
+<div class="page page-forms-wizard">
+    <ol class="breadcrumb breadcrumb-small">
+        <li><a href="/#!/activities">Trang chủ</a></li>
+        <li class="active"><a href="/#!/processes/create">Tạo bộ quy trình</a></li>
+    </ol>
+    <div class="page-wrap">
+        <!-- row -->
+        <div class="row"  data-ng-controller="ProcessesController">
+            <!-- minimal form interface -->
+            <div class="col-md-10 col-md-offset-1 mb20">
+                <h3 class="text-center mb20">Bộ Quy Trình</h3>
+                <form data-ng-submit="create()" class="form-horizontal ng-invalid ng-invalid-required ng-valid-email ng-valid-min ng-valid-max ng-valid-minlength ng-valid-maxlength ng-dirty ng-valid-parse ng-invalid-pattern" role="form">
+                    <ul class="list-unstyled" >
+                        <li class="col-md-12">
+                            <div class="form-group form-group-lg">
+                                <label class="control-label">Tên của bộ quy trình</label>
+                                <input type="text" required=""  data-ng-model="name" placeholder="Tên bộ quy trình chỉ gồm số và chữ." class="form-control ng-pristine ng-invalid ng-invalid-required ng-valid-pattern ng-touched"  tabindex="0" aria-required="true" aria-invalid="true">
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="col-md-12">
+                        <div class="panel panel-default panel-stacked panel-hovered  form-group form-group-lg">
+                            <div class="panel-body">
+                                <ul class="list-unstyled ">
+                                    <li>
+                                        <a md-ink-ripple="" href="javascript:;" class="btn-tag btn-tag-success">Thông tin liên quan
+                                            <div class="md-ripple-container" style=""></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="form-group" ng-init="listStaffs()" style="display: inline">
+                                    <label class="col-md-4 control-label">Người được phân công</label>
+                                    <div class="input-group  col-md-6" style="display: inline-flex">
+                                        <span class="input-group-addon ion ion-person" style="width: 60px;line-height:30px"></span>
+                                        <select class="form-control " data-ng-model="userProcess" ng-options="user.displayName for user in staffs"></select>
+                                    </div>
+                                </div>
+                                <!--<div class="form-group">
+                                    <label class="col-lg-4 control-label">Yêu cầu đối với người được phân công</label>
+                                    <div class="col-lg-6">
+                                        <textarea ng-model="managerRequire" required=""  class="form-control ng-invalid ng-invalid-required " aria-required="true" aria-invalid="true" style="min-height: 100px"></textarea>
+                                    </div>
+                                </div>-->
+                                <div class="clearfix col-md-10 mt20" style="padding:0">
+                                    <input type="submit" class="btn btn-primary right" value="Tạo bộ quy trình" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- Full Form wizard -->
+            <!-- #end form wizard -->
+        </div> <!-- #end row -->
+    </div> <!-- #end page-wrap -->
+</div>

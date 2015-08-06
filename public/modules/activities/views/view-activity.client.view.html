@@ -1,0 +1,501 @@
+<div ng-controller="DashboardCtrl" class="page page-dashboard ng-scope">
+
+    <div class="page-wrap">
+
+        <div class="row">
+            <!-- dashboard header -->
+            <div class="col-md-12">
+                <div class="dash-head clearfix mt15 mb20">
+                    <div class="left">
+                        <h4 class="mb5 text-light">Welcome to Materia</h4>
+                        <p class="small"><strong>AngularJS</strong> admin app</p>
+                    </div>
+                    <div class="right mt10">
+                        <span bar-color="#4CAF50" type="bar" sparkline=""><canvas style="display: inline-block; width: 64px; height: 18px; vertical-align: top;" width="64" height="18"></canvas></span>
+                        <h5 class="text-bold mb0 mt5">$1,33,404</h5>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- #end row -->
+
+        <!-- mini boxes -->
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="panel panel-default mb20 mini-box panel-hovered">
+                    <div class="panel-body">
+                        <div class="clearfix">
+                            <div class="info left">
+                                <h4 class="mt0 text-primary text-bold">$30,200</h4>
+                                <h5 class="text-light mb0">All Earnings</h5>
+                            </div>
+                            <div class="right ion ion-ios-pulse icon"></div>
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix panel-footer-sm panel-footer-primary">
+                        <p class="mt0 mb0 left">% change</p>
+                        <span height="1.15em" width="1.15em" bar-color="#fff" type="bar" class="right" sparkline=""><canvas style="display: inline-block; width: 34px; height: 14px; vertical-align: top;" width="34" height="14"></canvas></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="panel panel-default mb20 mini-box panel-hovered">
+                    <div class="panel-body">
+                        <div class="clearfix">
+                            <div class="info left">
+                                <h4 class="mt0 text-success text-bold">320K+</h4>
+                                <h5 class="text-light mb0">Page Views</h5>
+                            </div>
+                            <div class="right ion ion-ios-people-outline icon"></div>
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix panel-footer-sm panel-footer-success">
+                        <p class="mt0 mb0 left">% change</p>
+                        <span height="1.15em" width="1.15em" bar-color="#fff" type="bar" class="right" sparkline=""><canvas style="display: inline-block; width: 29px; height: 14px; vertical-align: top;" width="29" height="14"></canvas></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="panel panel-default mb20 mini-box panel-hovered">
+                    <div class="panel-body">
+                        <div class="clearfix">
+                            <div class="info left">
+                                <h4 class="mt0 text-info text-bold">110</h4>
+                                <h5 class="text-light mb0">Task Completed</h5>
+                            </div>
+                            <div class="right ion ion-ios-flask-outline icon"></div>
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix panel-footer-sm panel-footer-info">
+                        <p class="mt0 mb0 left">% change</p>
+                        <span height="1.15em" width="1.15em" bar-color="#fff" type="bar" class="right" sparkline=""><canvas style="display: inline-block; width: 29px; height: 14px; vertical-align: top;" width="29" height="14"></canvas></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="panel panel-default mb20 mini-box panel-hovered">
+                    <div class="panel-body">
+                        <div class="clearfix">
+                            <div class="info left">
+                                <h4 class="mt0 text-pink text-bold">10K+</h4>
+                                <h5 class="text-light mb0">Downloads</h5>
+                            </div>
+                            <div class="right ion ion-ios-cloud-download-outline icon"></div>
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix panel-footer-sm panel-footer-pink">
+                        <p class="mt0 mb0 left">% change</p>
+                        <span height="1.15em" width="1.15em" bar-color="#fff" type="bar" class="right" sparkline=""><canvas style="display: inline-block; width: 29px; height: 14px; vertical-align: top;" width="29" height="14"></canvas></span>
+                    </div>
+                </div>
+            </div>
+            <!-- #end mini boxes -->
+        </div> <!-- #end row -->
+
+        <!-- row -->
+        <div class="row">
+
+            <!-- Analytics -->
+            <div class="col-md-7">
+                <div class="panel panel-default mb20 panel-hovered analytics">
+                    <div class="panel-heading">Analytics</div>
+                    <div class="panel-body">
+                        <div config="analyticsconfig" id="c3chartAnalytics" class="ng-isolate-scope c3" style="max-height: 330px; position: relative;"><svg style="overflow: hidden;" width="705.75" height="330"><defs><clipPath id="c3-1438242191744-clip"><rect width="663.75" height="296"/></clipPath><clipPath id="c3-1438242191744-clip-xaxis"><rect x="-41" y="-20" width="735.75" height="50"/></clipPath><clipPath id="c3-1438242191744-clip-yaxis"><rect x="-39" y="-4" width="60" height="320"/></clipPath><clipPath id="c3-1438242191744-clip-grid"><rect width="663.75" height="296"/></clipPath><clipPath id="c3-1438242191744-clip-subchart"><rect width="663.75"/></clipPath></defs><g transform="translate(40.5,4.5)"><text class="c3-text c3-empty" text-anchor="middle" dominant-baseline="middle" x="331.875" y="148" style="opacity: 0;"/><rect class="c3-zoom-rect" width="663.75" height="296" style="opacity: 0;"/><g clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191744-clip)" class="c3-regions" style="visibility: visible;"/><g clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191744-clip-grid)" class="c3-grid" style="visibility: visible;"><g class="c3-xgrid-focus"><line class="c3-xgrid-focus" x1="277" x2="277" y1="0" y2="296" style="visibility: hidden;"/></g></g><g clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191744-clip)" class="c3-chart"><g class="c3-event-rects c3-event-rects-single" style="fill-opacity: 0;"><rect class=" c3-event-rect c3-event-rect-0" x="0.6875" y="0" width="110.625" height="296"/><rect class=" c3-event-rect c3-event-rect-1" x="110.6875" y="0" width="110.625" height="296"/><rect class=" c3-event-rect c3-event-rect-2" x="221.6875" y="0" width="110.625" height="296"/><rect class=" c3-event-rect c3-event-rect-3" x="332.6875" y="0" width="110.625" height="296"/><rect class=" c3-event-rect c3-event-rect-4" x="442.6875" y="0" width="110.625" height="296"/><rect class=" c3-event-rect c3-event-rect-5" x="553.6875" y="0" width="110.625" height="296"/></g><g class="c3-chart-bars"><g class="c3-chart-bar c3-target c3-target-Network-Load" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-Network-Load c3-bars c3-bars-Network-Load" style="cursor: pointer;"><path class=" c3-shape c3-shape-0 c3-bar c3-bar-0" style="stroke: rgb(63, 81, 181); fill: rgb(63, 81, 181); opacity: 1;" d="M 22.8125,296 L22.8125,255.77272727272725 L89.1875,255.77272727272725 L89.1875,296 z"/><path class=" c3-shape c3-shape-1 c3-bar c3-bar-1" style="stroke: rgb(63, 81, 181); fill: rgb(63, 81, 181); opacity: 1;" d="M 132.8125,296 L132.8125,161.9090909090909 L199.1875,161.9090909090909 L199.1875,296 z"/><path class=" c3-shape c3-shape-2 c3-bar c3-bar-2" style="stroke: rgb(63, 81, 181); fill: rgb(63, 81, 181); opacity: 1;" d="M 243.8125,296 L243.8125,188.72727272727275 L310.1875,188.72727272727275 L310.1875,296 z"/><path class=" c3-shape c3-shape-3 c3-bar c3-bar-3" style="stroke: rgb(63, 81, 181); fill: rgb(63, 81, 181); opacity: 1;" d="M 354.8125,296 L354.8125,108.27272727272728 L421.1875,108.27272727272728 L421.1875,296 z"/><path class=" c3-shape c3-shape-4 c3-bar c3-bar-4" style="stroke: rgb(63, 81, 181); fill: rgb(63, 81, 181); opacity: 1;" d="M 464.8125,296 L464.8125,94.86363636363639 L531.1875,94.86363636363639 L531.1875,296 z"/><path class=" c3-shape c3-shape-5 c3-bar c3-bar-5" style="stroke: rgb(63, 81, 181); fill: rgb(63, 81, 181); opacity: 1;" d="M 575.8125,296 L575.8125,27.818181818181827 L642.1875,27.818181818181827 L642.1875,296 z"/></g></g><g class="c3-chart-bar c3-target c3-target-CPU-Load" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-CPU-Load c3-bars c3-bars-CPU-Load" style="cursor: pointer;"/></g></g><g class="c3-chart-lines"><g class="c3-chart-line c3-target c3-target-Network-Load" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-Network-Load c3-lines c3-lines-Network-Load"/><g class=" c3-shapes c3-shapes-Network-Load c3-areas c3-areas-Network-Load"/><g class=" c3-selected-circles c3-selected-circles-Network-Load"/><g class=" c3-shapes c3-shapes-Network-Load c3-circles c3-circles-Network-Load" style="cursor: pointer;"/></g><g class="c3-chart-line c3-target c3-target-CPU-Load" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-CPU-Load c3-lines c3-lines-CPU-Load"><path class=" c3-shape c3-shape c3-line c3-line-CPU-Load" style="stroke: rgb(56, 180, 238); opacity: 1;" d="M56,175.31818181818178Q143.9,172.63636363636363,166,161.9090909090909C199.15,145.8181818181818,243.7,76.0909090909091,277,68.04545454545455S354.85,104.25,388,108.27272727272728S464.85,76.76136363636365,498,94.86363636363639Q520.1,106.9318181818182,609,228.95454545454544"/></g><g class=" c3-shapes c3-shapes-CPU-Load c3-areas c3-areas-CPU-Load"><path class=" c3-shape c3-shape c3-area c3-area-CPU-Load" style="fill: rgb(56, 180, 238); opacity: 0.2;" d="M 56 175.31818181818178"/></g><g class=" c3-selected-circles c3-selected-circles-CPU-Load"/><g class=" c3-shapes c3-shapes-CPU-Load c3-circles c3-circles-CPU-Load" style="cursor: pointer;"><circle class=" c3-shape c3-shape-0 c3-circle c3-circle-0" r="2.5" style="fill: rgb(56, 180, 238); opacity: 1;" cx="56" cy="175.31818181818178"/><circle class=" c3-shape c3-shape-1 c3-circle c3-circle-1" r="2.5" style="fill: rgb(56, 180, 238); opacity: 1;" cx="166" cy="161.9090909090909"/><circle class=" c3-shape c3-shape-2 c3-circle c3-circle-2" r="2.5" style="fill: rgb(56, 180, 238); opacity: 1;" cx="277" cy="68.04545454545455"/><circle class=" c3-shape c3-shape-3 c3-circle c3-circle-3" r="2.5" style="fill: rgb(56, 180, 238); opacity: 1;" cx="388" cy="108.27272727272728"/><circle class=" c3-shape c3-shape-4 c3-circle c3-circle-4" r="2.5" style="fill: rgb(56, 180, 238); opacity: 1;" cx="498" cy="94.86363636363639"/><circle class=" c3-shape c3-shape-5 c3-circle c3-circle-5" r="2.5" style="fill: rgb(56, 180, 238); opacity: 1;" cx="609" cy="228.95454545454544"/></g></g></g><g class="c3-chart-arcs" transform="translate(331.875,143)"><text class="c3-chart-arcs-title" style="text-anchor: middle; opacity: 0;"/></g><g class="c3-chart-texts"><g class="c3-chart-text c3-target c3-target-Network-Load" style="opacity: 1; pointer-events: none;"><g class=" c3-texts c3-texts-Network-Load"/></g><g class="c3-chart-text c3-target c3-target-CPU-Load" style="opacity: 1; pointer-events: none;"><g class=" c3-texts c3-texts-CPU-Load"/></g></g></g><g clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191744-clip-grid)" class="c3-grid c3-grid-lines"><g class="c3-xgrid-lines"/><g class="c3-ygrid-lines"/></g><g class="c3-axis c3-axis-x" clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191744-clip-xaxis)" transform="translate(0,296)" style="visibility: visible; opacity: 1;"><text class="c3-axis-x-label" transform="" style="text-anchor: end;" x="663.75" dx="-0.5em" dy="-0.5em"/><g class="tick" style="opacity: 1;" transform="translate(56, 0)"><line y2="6" x1="0" x2="0"/><text y="9" x="0" style="text-anchor: middle; display: block;" transform=""><tspan x="0" dy=".71em" dx="0">0</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(166, 0)"><line y2="6" x1="0" x2="0"/><text y="9" x="0" style="text-anchor: middle; display: block;" transform=""><tspan x="0" dy=".71em" dx="0">1</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(277, 0)"><line y2="6" x1="0" x2="0"/><text y="9" x="0" style="text-anchor: middle; display: block;" transform=""><tspan x="0" dy=".71em" dx="0">2</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(388, 0)"><line y2="6" x1="0" x2="0"/><text y="9" x="0" style="text-anchor: middle; display: block;" transform=""><tspan x="0" dy=".71em" dx="0">3</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(498, 0)"><line y2="6" x1="0" x2="0"/><text y="9" x="0" style="text-anchor: middle; display: block;" transform=""><tspan x="0" dy=".71em" dx="0">4</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(609, 0)"><line y2="6" x1="0" x2="0"/><text y="9" x="0" style="text-anchor: middle; display: block;" transform=""><tspan x="0" dy=".71em" dx="0">5</tspan></text></g><path class="domain" d="M0,6V0H663.75V6"/></g><g class="c3-axis c3-axis-y" clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191744-clip-yaxis)" transform="translate(0,0)" style="visibility: visible; opacity: 1;"><text class="c3-axis-y-label" transform="rotate(-90)" style="text-anchor: end;" x="0" dx="-0.5em" dy="1.2em"/><g class="tick" style="opacity: 1;" transform="translate(0,296)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">0</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,270)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">20</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,243)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">40</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,216)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">60</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,189)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">80</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,162)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">100</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,136)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">120</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,109)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">140</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,82)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">160</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,55)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">180</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,28)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">200</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,1)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">220</tspan></text></g><path class="domain" d="M-6,1H0V296H-6"/></g><g class="c3-axis c3-axis-y2" transform="translate(663.75,0)" style="visibility: hidden; opacity: 1;"><text class="c3-axis-y2-label" transform="rotate(-90)" style="text-anchor: end;" x="0" dx="-0.5em" dy="-0.5em"/><g class="tick" style="opacity: 1;" transform="translate(0,296)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,267)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.1</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,237)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.2</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,208)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.3</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,178)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.4</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,149)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.5</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,119)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.6</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,90)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.7</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,60)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.8</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,31)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.9</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,1)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">1</tspan></text></g><path class="domain" d="M6,1H0V296H6"/></g></g><g transform="translate(20.5,330.5)" style="visibility: hidden;"><g clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191744-clip-subchart)" class="c3-chart"><g class="c3-chart-bars"/><g class="c3-chart-lines"/></g><g clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191744-clip)" class="c3-brush" style="pointer-events: all;"><rect class="background" style="visibility: hidden; cursor: crosshair;" x="0" width="683.75"/><rect class="extent" style="cursor: move;" x="0" width="0"/><g class="resize e" style="cursor: ew-resize; display: none;" transform="translate(0,0)"><rect x="-3" width="6" height="6" style="visibility: hidden;"/></g><g class="resize w" style="cursor: ew-resize; display: none;" transform="translate(0,0)"><rect x="-3" width="6" height="6" style="visibility: hidden;"/></g></g><g class="c3-axis-x" transform="translate(0,0)" clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191744-clip-xaxis)" style="opacity: 1;"><g class="tick" style="opacity: 1;" transform="translate(56, 0)"><line y2="6" x1="0" x2="0"/><text y="9" x="0" style="text-anchor: middle; display: block;" transform=""><tspan x="0" dy=".71em" dx="0">0</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(166, 0)"><line y2="6" x1="0" x2="0"/><text y="9" x="0" style="text-anchor: middle; display: block;" transform=""><tspan x="0" dy=".71em" dx="0">1</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(277, 0)"><line y2="6" x1="0" x2="0"/><text y="9" x="0" style="text-anchor: middle; display: block;" transform=""><tspan x="0" dy=".71em" dx="0">2</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(388, 0)"><line y2="6" x1="0" x2="0"/><text y="9" x="0" style="text-anchor: middle; display: block;" transform=""><tspan x="0" dy=".71em" dx="0">3</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(498, 0)"><line y2="6" x1="0" x2="0"/><text y="9" x="0" style="text-anchor: middle; display: block;" transform=""><tspan x="0" dy=".71em" dx="0">4</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(609, 0)"><line y2="6" x1="0" x2="0"/><text y="9" x="0" style="text-anchor: middle; display: block;" transform=""><tspan x="0" dy=".71em" dx="0">5</tspan></text></g><path class="domain" d="M0,6V0H663.75V6"/></g></g><g transform="translate(50.5,5.5)"><g class="c3-legend-background"><rect height="51" width="111.53334045410156"/></g><g class=" c3-legend-item c3-legend-item-Network-Load" style="visibility: visible; cursor: pointer;"><text style="pointer-events: none;" x="24" y="19">Network Load</text><rect class="c3-legend-item-event" style="fill-opacity: 0;" x="10" y="5" width="101.53334045410156" height="21"/><rect class="c3-legend-item-tile" style="pointer-events: none; fill: rgb(63, 81, 181);" x="10" y="10" width="10" height="10"/></g><g class=" c3-legend-item c3-legend-item-CPU-Load" style="visibility: visible; cursor: pointer; opacity: 1;"><text style="pointer-events: none;" x="24" y="40">CPU Load</text><rect class="c3-legend-item-event" style="fill-opacity: 0;" x="10" y="26" width="80.19999694824219" height="21"/><rect class="c3-legend-item-tile" style="pointer-events: none; fill: rgb(56, 180, 238);" x="10" y="31" width="10" height="10"/></g></g></svg><div class="c3-tooltip-container" style="position: absolute; pointer-events: none; display: none; top: 16.4167px; left: 339.5px;"><table class="c3-tooltip"><tbody><tr><th colspan="2">2</th></tr><tr class="c3-tooltip-name-Network Load"><td class="name"><span style="background-color:#3F51B5"></span>Network Load</td><td class="value">80</td></tr><tr class="c3-tooltip-name-CPU Load"><td class="name"><span style="background-color:#38B4EE"></span>CPU Load</td><td class="value">170</td></tr></tbody></table></div></div>
+                        <div class="inline-charts mt30">
+                            <ul class="list-unstyled clearfix">
+                                <li class="col-md-3 col-xs-6">
+                                    <span height="3em" width="3em" line-color="#3F51B5" fill-color="#fff" sparkline=""><canvas style="display: inline-block; width: 42px; height: 42px; vertical-align: top;" width="42" height="42"></canvas></span>
+                                    <p class="mt5"><strong>Downloads</strong></p>
+                                </li>
+                                <li class="col-md-3 col-xs-6">
+                                    <span height="3em" width="3em" fill-color="#fff" line-color="#FDD835" sparkline=""><canvas style="display: inline-block; width: 42px; height: 42px; vertical-align: top;" width="42" height="42"></canvas></span>
+                                    <p class="mt5"><strong>Uploads</strong></p>
+                                </li>
+                                <li class="col-md-3 col-xs-6">
+                                    <span height="3em" width="3em" line-color="#4CAF50" fill-color="#fff" sparkline=""><canvas style="display: inline-block; width: 42px; height: 42px; vertical-align: top;" width="42" height="42"></canvas></span>
+                                    <p class="mt5"><strong>Page Views</strong></p>
+                                </li>
+                                <li class="col-md-3 col-xs-6">
+                                    <span height="3em" width="3em" line-color="#E91E63" fill-color="#fff" sparkline=""><canvas style="display: inline-block; width: 42px; height: 42px; vertical-align: top;" width="42" height="42"></canvas></span>
+                                    <p class="mt5"><strong>Unique Visits</strong></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- #end analytics -->
+
+
+            <!-- recent activities -->
+            <div class="col-md-5">
+                <div class="panel panel-default mb20 activities">
+                    <div class="panel-heading">Activities</div>
+                    <div class="panel-body">
+                        <ul class="list-unstyled">
+                            <li class="primary">
+                                <span class="point"></span>
+                                <span class="time small text-muted">2 mins ago</span>
+                                <p>Jonathan attend a meeting.</p>
+                            </li>
+                            <li class="success">
+                                <span class="point"></span>
+                                <span class="time small text-muted">1 hour ago</span>
+                                <p>Designed the wordpress theme</p>
+                            </li>
+                            <li class="warning">
+                                <span class="point"></span>
+                                <span class="time small text-muted">4:30 p.m</span>
+                                <p>Lily created her account.</p>
+                            </li>
+                            <li class="info">
+                                <span class="point"></span>
+                                <span class="time small text-muted">2 days ago</span>
+                                <p>Your domain will expired in 13 days.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #end recent activities -->
+
+
+            <div class="col-md-5">
+                <div class="panel panel-default mb20 panel-hovered">
+                    <div class="panel-heading">Usage Stats</div>
+                    <div class="panel-body">
+                        <ul class="list-unstyled">
+                            <li class="col-md-4 col-sm-4">
+                                <div class="easypiechart ng-isolate-scope" options="storageOpts" percent="storagePercent" easypiechart="">
+                                    <div class="data">
+                                        <strong class="xsmall ng-binding">80%</strong>
+                                        <p class="xsmall">Storage</p>
+                                    </div>
+                                    <canvas height="100" width="100"></canvas></div>
+                            </li>
+                            <li class="col-md-4 col-sm-4">
+                                <div class="easypiechart ng-isolate-scope" options="serverOpts" percent="serverPercent" easypiechart="">
+                                    <div class="data">
+                                        <strong class="xsmall ng-binding">35%</strong>
+                                        <p class="xsmall">Server</p>
+                                    </div>
+                                    <canvas height="100" width="100"></canvas></div>
+                            </li>
+                            <li class="col-md-4 col-sm-4">
+                                <div class="easypiechart ng-isolate-scope" options="clientOpts" percent="clientPercent" easypiechart="">
+                                    <div class="data">
+                                        <strong class="xsmall ng-binding">54%</strong>
+                                        <p class="xsmall">Client</p>
+                                    </div>
+                                    <canvas height="100" width="100"></canvas></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- #end row -->
+
+        <!-- row -->
+        <div class="row">
+
+            <!-- profile -->
+            <div class="col-md-4 col-sm-6">
+                <div class="panel panel-default mb20 panel-hovered profile-widget">
+                    <div class="panel-body">
+                        <div class="clearfix mb15 top-info">
+                            <div class="left-side">
+                                <h3 class="text-light mt0">Robert Smith</h3>
+                                <p><strong>About:&nbsp;</strong>WebDesigner</p>
+                                <p><strong>Hobbies:&nbsp;</strong>Listening Music, learn new things and playing guitar.</p>
+                                <p>
+                                    <strong>Skills: </strong>
+                                    <label class="label label-pink">html5</label>
+                                    <label class="label label-pink">css3</label>
+                                    <label class="label label-pink">jquery</label>
+                                </p>
+                            </div>
+                            <div class="right-side">
+                                <img alt="user" src="images/admin.jpg">
+                                <div class="rating" ng-init="x = 4">
+						   	 		<span aria-valuenow="4" aria-valuemax="5" aria-valuemin="0" role="slider" tabindex="0" ng-keydown="onKeydown($event)" ng-mouseleave="reset()" class="text-warning ng-isolate-scope ng-valid" state-off="'fa fa-star-o'" state-on="'fa fa-star'" max="5" ng-model="x" aria-invalid="false">
+    <!-- ngRepeat: r in range track by $index --><i ng-class="$index &lt; value &amp;&amp; (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')" class="glyphicon ng-scope fa fa-star" ng-click="rate($index + 1)" ng-mouseenter="enter($index + 1)" ng-repeat="r in range track by $index" role="button" tabindex="0">
+                                        <span class="sr-only ng-binding">(*)</span>
+                                    </i><!-- end ngRepeat: r in range track by $index --><i ng-class="$index &lt; value &amp;&amp; (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')" class="glyphicon ng-scope fa fa-star" ng-click="rate($index + 1)" ng-mouseenter="enter($index + 1)" ng-repeat="r in range track by $index" role="button" tabindex="0">
+                                        <span class="sr-only ng-binding">(*)</span>
+                                    </i><!-- end ngRepeat: r in range track by $index --><i ng-class="$index &lt; value &amp;&amp; (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')" class="glyphicon ng-scope fa fa-star" ng-click="rate($index + 1)" ng-mouseenter="enter($index + 1)" ng-repeat="r in range track by $index" role="button" tabindex="0">
+                                        <span class="sr-only ng-binding">(*)</span>
+                                    </i><!-- end ngRepeat: r in range track by $index --><i ng-class="$index &lt; value &amp;&amp; (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')" class="glyphicon ng-scope fa fa-star" ng-click="rate($index + 1)" ng-mouseenter="enter($index + 1)" ng-repeat="r in range track by $index" role="button" tabindex="0">
+                                        <span class="sr-only ng-binding">(*)</span>
+                                    </i><!-- end ngRepeat: r in range track by $index --><i ng-class="$index &lt; value &amp;&amp; (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')" class="glyphicon ng-scope fa fa-star-o" ng-click="rate($index + 1)" ng-mouseenter="enter($index + 1)" ng-repeat="r in range track by $index" role="button" tabindex="0">
+                                        <span class="sr-only ng-binding">( )</span>
+                                    </i><!-- end ngRepeat: r in range track by $index -->
+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="user-badges list-unstyled row">
+                            <li class="col-xs-4">
+                                <i class="ion ion-ios-chatboxes-outline text-success"></i>
+                                <strong>192</strong>
+                                <button class="btn btn-success btn-xs mt15">View</button>
+                            </li>
+                            <li class="col-xs-4">
+                                <i class="ion ion-ios-heart-outline text-primary"></i>
+                                <strong>5K+</strong>
+                                <button class="btn btn-info btn-xs mt15">Follow</button>
+                            </li>
+                            <li class="col-xs-4">
+                                <i class="ion ion-ios-body text-danger"></i>
+                                <strong>32</strong>
+                                <button class="btn btn-primary btn-xs mt15">Profile</button>
+                            </li>
+                        </ul>
+                    </div> <!-- #end panel-body -->
+                </div>
+            </div>
+
+            <!-- browser share -->
+            <div class="col-md-4 col-sm-6">
+                <div class="panel panel-default mb20 panel-hovered">
+                    <div class="panel-heading">Browser Share</div>
+                    <div class="panel-body text-center">
+                        <div config="browserconfig" id="c3chartbrowsershare" class="ng-isolate-scope c3" style="max-height: 260px; position: relative;"><svg style="overflow: hidden;" width="260" height="260"><defs><clipPath id="c3-1438242191933-clip"><rect width="260" height="214"/></clipPath><clipPath id="c3-1438242191933-clip-xaxis"><rect x="-31" y="-20" width="322" height="62"/></clipPath><clipPath id="c3-1438242191933-clip-yaxis"><rect x="-29" y="-4" width="20" height="238"/></clipPath><clipPath id="c3-1438242191933-clip-grid"><rect width="260" height="214"/></clipPath><clipPath id="c3-1438242191933-clip-subchart"><rect width="260"/></clipPath></defs><g transform="translate(0.5,4.5)"><text class="c3-text c3-empty" text-anchor="middle" dominant-baseline="middle" x="130" y="107" style="opacity: 0;"/><rect class="c3-zoom-rect" width="260" height="214" style="opacity: 0;"/><g clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191933-clip)" class="c3-regions" style="visibility: hidden;"/><g clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191933-clip-grid)" class="c3-grid" style="visibility: hidden;"><g class="c3-xgrid-focus"><line class="c3-xgrid-focus" x1="-10" x2="-10" y1="0" y2="214" style="visibility: hidden;"/></g></g><g clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191933-clip)" class="c3-chart"><g class="c3-event-rects c3-event-rects-single" style="fill-opacity: 0;"><rect class=" c3-event-rect c3-event-rect-0" x="0" y="0" width="260" height="214"/></g><g class="c3-chart-bars"><g class="c3-chart-bar c3-target c3-target-Chrome" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-Chrome c3-bars c3-bars-Chrome" style="cursor: pointer;"/></g><g class="c3-chart-bar c3-target c3-target-Firefox" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-Firefox c3-bars c3-bars-Firefox" style="cursor: pointer;"/></g><g class="c3-chart-bar c3-target c3-target-Safari" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-Safari c3-bars c3-bars-Safari" style="cursor: pointer;"/></g><g class="c3-chart-bar c3-target c3-target-IE" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-IE c3-bars c3-bars-IE" style="cursor: pointer;"/></g><g class="c3-chart-bar c3-target c3-target-Other" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-Other c3-bars c3-bars-Other" style="cursor: pointer;"/></g></g><g class="c3-chart-lines"><g class="c3-chart-line c3-target c3-target-Chrome" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-Chrome c3-lines c3-lines-Chrome"/><g class=" c3-shapes c3-shapes-Chrome c3-areas c3-areas-Chrome"/><g class=" c3-selected-circles c3-selected-circles-Chrome"/><g class=" c3-shapes c3-shapes-Chrome c3-circles c3-circles-Chrome" style="cursor: pointer;"/></g><g class="c3-chart-line c3-target c3-target-Firefox" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-Firefox c3-lines c3-lines-Firefox"/><g class=" c3-shapes c3-shapes-Firefox c3-areas c3-areas-Firefox"/><g class=" c3-selected-circles c3-selected-circles-Firefox"/><g class=" c3-shapes c3-shapes-Firefox c3-circles c3-circles-Firefox" style="cursor: pointer;"/></g><g class="c3-chart-line c3-target c3-target-Safari" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-Safari c3-lines c3-lines-Safari"/><g class=" c3-shapes c3-shapes-Safari c3-areas c3-areas-Safari"/><g class=" c3-selected-circles c3-selected-circles-Safari"/><g class=" c3-shapes c3-shapes-Safari c3-circles c3-circles-Safari" style="cursor: pointer;"/></g><g class="c3-chart-line c3-target c3-target-IE" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-IE c3-lines c3-lines-IE"/><g class=" c3-shapes c3-shapes-IE c3-areas c3-areas-IE"/><g class=" c3-selected-circles c3-selected-circles-IE"/><g class=" c3-shapes c3-shapes-IE c3-circles c3-circles-IE" style="cursor: pointer;"/></g><g class="c3-chart-line c3-target c3-target-Other" style="opacity: 1; pointer-events: none;"><g class=" c3-shapes c3-shapes-Other c3-lines c3-lines-Other"/><g class=" c3-shapes c3-shapes-Other c3-areas c3-areas-Other"/><g class=" c3-selected-circles c3-selected-circles-Other"/><g class=" c3-shapes c3-shapes-Other c3-circles c3-circles-Other" style="cursor: pointer;"/></g></g><g class="c3-chart-arcs" transform="translate(130,102)"><text class="c3-chart-arcs-title" style="text-anchor: middle; opacity: 1;"/><g class="c3-chart-arc c3-target c3-target-Chrome"><g class=" c3-shapes c3-shapes-Chrome c3-arcs c3-arcs-Chrome"><path class=" c3-shape c3-shape c3-arc c3-arc-Chrome" style="fill: rgb(63, 81, 181); cursor: pointer; opacity: 1;" transform="" d="M5.9334137418689255e-15,-96.89999999999999A96.89999999999999,96.89999999999999 0 0,1 6.691916491725898,96.66865186640271L3.23891520600562,46.788026548341456A46.89999999999999,46.89999999999999 0 0,0 2.871796744000543e-15,-46.89999999999999Z"/></g><text dy=".35em" style="opacity: 1; text-anchor: middle; pointer-events: none;" class="" transform="translate(77.4737165564775,-2.6783657193490784)">48.9%</text></g><g class="c3-chart-arc c3-target c3-target-Firefox"><g class=" c3-shapes c3-shapes-Firefox c3-arcs c3-arcs-Firefox"><path class=" c3-shape c3-shape c3-arc c3-arc-Firefox" style="fill: rgb(76, 175, 80); cursor: pointer; opacity: 1;" transform="" d="M-81.81537598114528,51.92161643346473A96.89999999999999,96.89999999999999 0 0,1 -87.41678066277882,-41.80809082648497L-42.310082694368695,-20.235288542436994A46.89999999999999,46.89999999999999 0 0,0 -39.59897970604451,25.130276684514918Z"/></g><text dy=".35em" style="opacity: 1; text-anchor: middle; pointer-events: none;" class="" transform="translate(-77.38194194036697,4.624441754166029)">16.1%</text></g><g class="c3-chart-arc c3-target c3-target-Safari"><g class=" c3-shapes c3-shapes-Safari c3-arcs c3-arcs-Safari"><path class=" c3-shape c3-shape c3-arc c3-arc-Safari" style="fill: rgb(244, 67, 54); cursor: pointer; opacity: 1;" transform="" d="M-87.41678066277882,-41.80809082648497A96.89999999999999,96.89999999999999 0 0,1 -41.25801335265549,-87.67774138395731L-19.96904877440188,-42.43638876065632A46.89999999999999,46.89999999999999 0 0,0 -42.310082694368695,-20.235288542436994Z"/></g><text dy=".35em" style="opacity: 1; text-anchor: middle; pointer-events: none;" class="" transform="translate(-54.64244131761182,-54.986853036442696)">10.9%</text></g><g class="c3-chart-arc c3-target c3-target-IE"><g class=" c3-shapes c3-shapes-IE c3-arcs c3-arcs-IE"><path class=" c3-shape c3-shape c3-arc c3-arc-IE" style="fill: rgb(233, 30, 99); cursor: pointer; opacity: 1;" transform="" d="M6.691916491725898,96.66865186640271A96.89999999999999,96.89999999999999 0 0,1 -81.81537598114528,51.92161643346473L-39.59897970604451,25.130276684514918A46.89999999999999,46.89999999999999 0 0,0 3.23891520600562,46.788026548341456Z"/></g><text dy=".35em" style="opacity: 1; text-anchor: middle; pointer-events: none;" class="" transform="translate(-34.97617782593183,69.1810478721506)">17.1%</text></g><g class="c3-chart-arc c3-target c3-target-Other"><g class=" c3-shapes c3-shapes-Other c3-arcs c3-arcs-Other"><path class=" c3-shape c3-shape c3-arc c3-arc-Other" style="fill: rgb(56, 180, 238); cursor: pointer; opacity: 1;" transform="" d="M-41.25801335265549,-87.67774138395731A96.89999999999999,96.89999999999999 0 0,1 6.826424764333534e-14,-96.89999999999999L3.304017765193424e-14,-46.89999999999999A46.89999999999999,46.89999999999999 0 0,0 -19.96904877440188,-42.43638876065632Z"/></g><text dy=".35em" style="opacity: 1; text-anchor: middle; pointer-events: none;" class="" transform="translate(-16.910464073059895,-75.65306738549171)">7.0%</text></g></g><g class="c3-chart-texts"><g class="c3-chart-text c3-target c3-target-Chrome" style="opacity: 1; pointer-events: none;"><g class=" c3-texts c3-texts-Chrome"/></g><g class="c3-chart-text c3-target c3-target-Firefox" style="opacity: 1; pointer-events: none;"><g class=" c3-texts c3-texts-Firefox"/></g><g class="c3-chart-text c3-target c3-target-Safari" style="opacity: 1; pointer-events: none;"><g class=" c3-texts c3-texts-Safari"/></g><g class="c3-chart-text c3-target c3-target-IE" style="opacity: 1; pointer-events: none;"><g class=" c3-texts c3-texts-IE"/></g><g class="c3-chart-text c3-target c3-target-Other" style="opacity: 1; pointer-events: none;"><g class=" c3-texts c3-texts-Other"/></g></g></g><g clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191933-clip-grid)" class="c3-grid c3-grid-lines"><g class="c3-xgrid-lines"/><g class="c3-ygrid-lines"/></g><g class="c3-axis c3-axis-x" clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191933-clip-xaxis)" transform="translate(0,214)" style="visibility: visible; opacity: 0;"><text class="c3-axis-x-label" transform="" style="text-anchor: end;" x="260" dx="-0.5em" dy="-0.5em"/><g class="tick" style="opacity: 1;" transform="translate(130, 0)"><line y2="6" x1="0" x2="0"/><text y="9" x="0" style="text-anchor: middle; display: block;" transform=""><tspan x="0" dy=".71em" dx="0">0</tspan></text></g><path class="domain" d="M0,6V0H260V6"/></g><g class="c3-axis c3-axis-y" clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191933-clip-yaxis)" transform="translate(0,0)" style="visibility: visible; opacity: 0;"><text class="c3-axis-y-label" transform="rotate(-90)" style="text-anchor: end;" x="0" dx="-0.5em" dy="1.2em"/><g class="tick" style="opacity: 1;" transform="translate(0,205)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">5</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,184)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">10</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,163)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">15</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,142)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">20</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,120)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">25</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,99)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">30</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,78)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">35</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,57)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">40</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,36)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">45</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,15)"><line x2="-6"/><text x="-9" y="0" style="text-anchor: end;"><tspan x="-9" dy="3">50</tspan></text></g><path class="domain" d="M-6,1H0V214H-6"/></g><g class="c3-axis c3-axis-y2" transform="translate(260,0)" style="visibility: hidden; opacity: 0;"><text class="c3-axis-y2-label" transform="rotate(-90)" style="text-anchor: end;" x="0" dx="-0.5em" dy="-0.5em"/><g class="tick" style="opacity: 1;" transform="translate(0,214)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,193)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.1</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,172)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.2</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,151)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.3</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,129)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.4</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,108)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.5</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,87)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.6</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,65)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.7</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,44)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.8</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,23)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">0.9</tspan></text></g><g class="tick" style="opacity: 1;" transform="translate(0,1)"><line x2="6" y2="0"/><text x="9" y="0" style="text-anchor: start;"><tspan x="9" dy="3">1</tspan></text></g><path class="domain" d="M6,1H0V214H6"/></g></g><g transform="translate(0.5,260.5)" style="visibility: hidden;"><g clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191933-clip-subchart)" class="c3-chart"><g class="c3-chart-bars"/><g class="c3-chart-lines"/></g><g clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191933-clip)" class="c3-brush" style="pointer-events: all;"><rect class="background" style="visibility: hidden; cursor: crosshair;" x="0" width="260"/><rect class="extent" style="cursor: move;" x="0" width="0"/><g class="resize e" style="cursor: ew-resize; display: none;" transform="translate(0,0)"><rect x="-3" width="6" height="6" style="visibility: hidden;"/></g><g class="resize w" style="cursor: ew-resize; display: none;" transform="translate(0,0)"><rect x="-3" width="6" height="6" style="visibility: hidden;"/></g></g><g class="c3-axis-x" transform="translate(0,0)" clip-path="url(http://solutionportal.net/projects/materia/angular/#c3-1438242191933-clip-xaxis)" style="opacity: 0;"><g class="tick" style="opacity: 1;" transform="translate(130, 0)"><line y2="6" x1="0" x2="0"/><text y="9" x="0" style="text-anchor: middle; display: block;" transform=""><tspan x="0" dy=".71em" dx="0">0</tspan></text></g><path class="domain" d="M0,6V0H260V6"/></g></g><g transform="translate(0,218)"><g class=" c3-legend-item c3-legend-item-Chrome" style="visibility: visible; cursor: pointer;"><text style="pointer-events: none;" x="28.416664123535156" y="9">Chrome</text><rect class="c3-legend-item-event" style="fill-opacity: 0;" x="14.416664123535156" y="-5" width="70" height="21"/><rect class="c3-legend-item-tile" style="pointer-events: none; fill: rgb(63, 81, 181);" x="14.416664123535156" y="0" width="10" height="10"/></g><g class=" c3-legend-item c3-legend-item-Firefox" style="visibility: visible; cursor: pointer;"><text style="pointer-events: none;" x="98.41666412353516" y="9">Firefox</text><rect class="c3-legend-item-event" style="fill-opacity: 0;" x="84.41666412353516" y="-5" width="64.43333435058594" height="21"/><rect class="c3-legend-item-tile" style="pointer-events: none; fill: rgb(76, 175, 80);" x="84.41666412353516" y="0" width="10" height="10"/></g><g class=" c3-legend-item c3-legend-item-Safari" style="visibility: visible; cursor: pointer;"><text style="pointer-events: none;" x="162.8499984741211" y="9">Safari</text><rect class="c3-legend-item-event" style="fill-opacity: 0;" x="148.8499984741211" y="-5" width="59.05000305175781" height="21"/><rect class="c3-legend-item-tile" style="pointer-events: none; fill: rgb(244, 67, 54);" x="148.8499984741211" y="0" width="10" height="10"/></g><g class=" c3-legend-item c3-legend-item-IE" style="visibility: visible; cursor: pointer;"><text style="pointer-events: none;" x="221.9000015258789" y="9">IE</text><rect class="c3-legend-item-event" style="fill-opacity: 0;" x="207.9000015258789" y="-5" width="37.68333435058594" height="21"/><rect class="c3-legend-item-tile" style="pointer-events: none; fill: rgb(233, 30, 99);" x="207.9000015258789" y="0" width="10" height="10"/></g><g class=" c3-legend-item c3-legend-item-Other" style="visibility: visible; cursor: pointer;"><text style="pointer-events: none;" x="120.32499694824219" y="30">Other</text><rect class="c3-legend-item-event" style="fill-opacity: 0;" x="106.32499694824219" y="16" width="47.350006103515625" height="21"/><rect class="c3-legend-item-tile" style="pointer-events: none; fill: rgb(56, 180, 238);" x="106.32499694824219" y="21" width="10" height="10"/></g></g></svg><div class="c3-tooltip-container" style="position: absolute; pointer-events: none; display: none;"></div></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- list widgets -->
+            <div class="col-md-4 col-sm-12">
+                <div class="panel panel-default mb20 list-widget">
+                    <ul class="list-unstyled clearfix">
+                        <li>
+                            <i class="fa fa-file-o"></i>
+                            <span class="text">File List</span>
+                            <span class="badge badge-xs badge-primary right">100</span>
+                        </li>
+                        <li>
+                            <i class="fa fa-comments-o"></i>
+                            <span class="text">Messages</span>
+                            <span class="badge badge-xs badge-info right">40+</span>
+                        </li>
+                        <li>
+                            <i class="fa fa-bullhorn"></i>
+                            <span class="text">Notifications</span>
+                            <span class="badge badge-xs badge-success right">22</span>
+                        </li>
+                        <li>
+                            <i class="fa fa-hdd-o"></i>
+                            <span class="text">Bandwidth usage</span>
+                            <span class="badge badge-xs badge-danger right">80%</span>
+                        </li>
+                        <li>
+                            <i class="fa fa-microphone"></i>
+                            <span class="text">Calls Attended</span>
+                            <span class="badge badge-xs badge-info circle right">5</span>
+                        </li>
+                        <li>
+                            <i class="fa fa-bookmark-o"></i>
+                            <span class="text">Bookmarks Today</span>
+                            <span class="badge badge-xs circle badge-warning right">2</span>
+                        </li>
+                        <li>
+                            <i class="fa fa-bug"></i>
+                            <span class="text">Bug Fix Today</span>
+                            <span class="badge badge-xs circle badge-danger right">8</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- #end row -->
+
+        <!-- row -->
+        <div class="row">
+
+            <!-- todo list -->
+            <!-- ngInclude: 'views/todo.html' --><div ng-include=" 'views/todo.html' " class="col-md-5 ng-scope"><div ng-controller="TodoCtrl" class="panel panel-default panel-hovered mb30 todo ng-scope">
+            <div class="panel-heading">
+                <span>Todo List</span>
+                <button md-ink-ripple="" ng-click="markAll(allChecked)" class="btn btn-pink btn-xs right" tabindex="0">Toggle All</button>
+            </div>
+            <div class="panel-body">
+                <ul class="list-unstyled todo-list">
+                    <!-- ngRepeat: todo in todos | filter: statusFilter track by $index --><li ng-class="{completed: todo.completed, editing: todo === editedTodo}" ng-repeat="todo in todos | filter: statusFilter track by $index" class="ng-scope">
+                    <div class="ui-checkbox ui-checkbox-pink">
+                        <label>
+                            <input type="checkbox" ng-checked="todo.completed" ng-change="toggleCompleted(todo)" ng-model="todo.completed" class="toggle ng-pristine ng-untouched ng-valid" tabindex="0" aria-checked="false" aria-invalid="false">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div ng-dblclick="editTodo(todo)" class="todo-title ng-binding" tabindex="0">
+                        Eat healthy, Eat fresh
+                        <form class="todo-edit ng-pristine ng-valid" ng-submit="doneEditing(todo)">
+                            <input ng-model="todo.title" ng-trim="false" class="ng-pristine ng-untouched ng-valid" tabindex="0" aria-invalid="false">
+                        </form>
+                    </div>
+                    <span ng-click="removeTodo(todo)" class="destroy ion ion-close right" role="button" tabindex="0"></span>
+
+
+                </li><!-- end ngRepeat: todo in todos | filter: statusFilter track by $index --><li ng-class="{completed: todo.completed, editing: todo === editedTodo}" ng-repeat="todo in todos | filter: statusFilter track by $index" class="ng-scope completed">
+                    <div class="ui-checkbox ui-checkbox-pink">
+                        <label>
+                            <input type="checkbox" ng-checked="todo.completed" ng-change="toggleCompleted(todo)" ng-model="todo.completed" class="toggle ng-pristine ng-untouched ng-valid" tabindex="0" checked="checked" aria-checked="true" aria-invalid="false">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div ng-dblclick="editTodo(todo)" class="todo-title ng-binding" tabindex="0">
+                        Donate some money
+                        <form class="todo-edit ng-pristine ng-valid" ng-submit="doneEditing(todo)">
+                            <input ng-model="todo.title" ng-trim="false" class="ng-pristine ng-untouched ng-valid" tabindex="0" aria-invalid="false">
+                        </form>
+                    </div>
+                    <span ng-click="removeTodo(todo)" class="destroy ion ion-close right" role="button" tabindex="0"></span>
+
+
+                </li><!-- end ngRepeat: todo in todos | filter: statusFilter track by $index --><li ng-class="{completed: todo.completed, editing: todo === editedTodo}" ng-repeat="todo in todos | filter: statusFilter track by $index" class="ng-scope">
+                    <div class="ui-checkbox ui-checkbox-pink">
+                        <label>
+                            <input type="checkbox" ng-checked="todo.completed" ng-change="toggleCompleted(todo)" ng-model="todo.completed" class="toggle ng-pristine ng-untouched ng-valid" tabindex="0" aria-checked="false" aria-invalid="false">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div ng-dblclick="editTodo(todo)" class="todo-title ng-binding" tabindex="0">
+                        Wake up at 5:00 A.M
+                        <form class="todo-edit ng-pristine ng-valid" ng-submit="doneEditing(todo)">
+                            <input ng-model="todo.title" ng-trim="false" class="ng-pristine ng-untouched ng-valid" tabindex="0" aria-invalid="false">
+                        </form>
+                    </div>
+                    <span ng-click="removeTodo(todo)" class="destroy ion ion-close right" role="button" tabindex="0"></span>
+
+
+                </li><!-- end ngRepeat: todo in todos | filter: statusFilter track by $index --><li ng-class="{completed: todo.completed, editing: todo === editedTodo}" ng-repeat="todo in todos | filter: statusFilter track by $index" class="ng-scope">
+                    <div class="ui-checkbox ui-checkbox-pink">
+                        <label>
+                            <input type="checkbox" ng-checked="todo.completed" ng-change="toggleCompleted(todo)" ng-model="todo.completed" class="toggle ng-pristine ng-untouched ng-valid" tabindex="0" aria-checked="false" aria-invalid="false">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div ng-dblclick="editTodo(todo)" class="todo-title ng-binding" tabindex="0">
+                        Hangout with friends at 12:00
+                        <form class="todo-edit ng-pristine ng-valid" ng-submit="doneEditing(todo)">
+                            <input ng-model="todo.title" ng-trim="false" class="ng-pristine ng-untouched ng-valid" tabindex="0" aria-invalid="false">
+                        </form>
+                    </div>
+                    <span ng-click="removeTodo(todo)" class="destroy ion ion-close right" role="button" tabindex="0"></span>
+
+
+                </li><!-- end ngRepeat: todo in todos | filter: statusFilter track by $index --><li ng-class="{completed: todo.completed, editing: todo === editedTodo}" ng-repeat="todo in todos | filter: statusFilter track by $index" class="ng-scope">
+                    <div class="ui-checkbox ui-checkbox-pink">
+                        <label>
+                            <input type="checkbox" ng-checked="todo.completed" ng-change="toggleCompleted(todo)" ng-model="todo.completed" class="toggle ng-pristine ng-untouched ng-valid" tabindex="0" aria-checked="false" aria-invalid="false">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div ng-dblclick="editTodo(todo)" class="todo-title ng-binding" tabindex="0">
+                        Another todo on the list. Add as many you want.
+                        <form class="todo-edit ng-pristine ng-valid" ng-submit="doneEditing(todo)">
+                            <input ng-model="todo.title" ng-trim="false" class="ng-pristine ng-untouched ng-valid" tabindex="0" aria-invalid="false">
+                        </form>
+                    </div>
+                    <span ng-click="removeTodo(todo)" class="destroy ion ion-close right" role="button" tabindex="0"></span>
+
+
+                </li><!-- end ngRepeat: todo in todos | filter: statusFilter track by $index --><li ng-class="{completed: todo.completed, editing: todo === editedTodo}" ng-repeat="todo in todos | filter: statusFilter track by $index" class="ng-scope completed">
+                    <div class="ui-checkbox ui-checkbox-pink">
+                        <label>
+                            <input type="checkbox" ng-checked="todo.completed" ng-change="toggleCompleted(todo)" ng-model="todo.completed" class="toggle ng-pristine ng-untouched ng-valid" tabindex="0" checked="checked" aria-checked="true" aria-invalid="false">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div ng-dblclick="editTodo(todo)" class="todo-title ng-binding" tabindex="0">
+                        The last but not the least.
+                        <form class="todo-edit ng-pristine ng-valid" ng-submit="doneEditing(todo)">
+                            <input ng-model="todo.title" ng-trim="false" class="ng-pristine ng-untouched ng-valid" tabindex="0" aria-invalid="false">
+                        </form>
+                    </div>
+                    <span ng-click="removeTodo(todo)" class="destroy ion ion-close right" role="button" tabindex="0"></span>
+
+
+                </li><!-- end ngRepeat: todo in todos | filter: statusFilter track by $index -->
+                </ul>
+
+                <!-- Add todo input -->
+                <form data-ng-submit="addTodo()" class="input-todo ng-pristine ng-valid" id="input-todo">
+                    <input type="text" ng-model="newTodo" placeholder="Write some todo task here..." class="ng-pristine ng-untouched ng-valid" tabindex="0" aria-invalid="false">
+                </form>
+            </div>
+            <div id="todo-filters" class="panel-footer todo-foot clearfix">
+                <div class="left">
+                    <button btn-radio=" 'all' " ng-model="todoshow" ng-click="filter('all')" ng-class="{active: statusFilter == ''}" class="selected btn btn-xs btn-default ng-pristine ng-untouched ng-valid active" tabindex="0" aria-invalid="false">All</button>
+                    <button md-ink-ripple="" btn-radio=" 'active' " ng-model="todoshow" ng-click="filter('active')" ng-class="{active: statusFilter.completed == false}" class="btn btn-xs btn-default ng-pristine ng-untouched ng-valid" tabindex="0" aria-invalid="false">Active</button>
+                </div>
+                <div class="right">
+                    <span class="remaining btn btn-xs btn-default ng-binding">4 left</span>
+                    <button ng-click="clearCompleted()" class="btn btn-pink btn-xs ng-binding" tabindex="0">Clear Completed (2)</button>
+                </div>
+            </div>
+        </div></div>
+
+
+            <!-- Project stats -->
+            <div class="col-md-7">
+                <div class="panel panel-default mb20 panel-hovered project-stats table-responsive">
+                    <div class="panel-heading">Project Stats</div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th class="col-sm-5">Project</th>
+                                <th class="col-sm-1">Progress</th>
+                                <th>Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>101</td>
+                                <td>Designing Wordpress Theme</td>
+                                <td class="text-center">
+                                    <span height="2em" width="2em" slice-colors="[#4CAF50,#eee]" type="pie" sparkline=""><canvas style="display: inline-block; width: 28px; height: 28px; vertical-align: top;" width="28" height="28"></canvas></span>
+                                </td>
+                                <td>20<sup>th</sup> Jan 2015</td>
+                            </tr>
+
+                            <tr>
+                                <td>220</td>
+                                <td>Convert to SASS</td>
+                                <td class="text-center">
+                                    <span height="2em" width="2em" slice-colors="[#4CAF50,#eee]" type="pie" sparkline=""><canvas style="display: inline-block; width: 28px; height: 28px; vertical-align: top;" width="28" height="28"></canvas></span>
+                                </td>
+                                <td>28<sup>th</sup> Jan 2015</td>
+                            </tr>
+
+                            <tr>
+                                <td>310</td>
+                                <td>Adding animations to template</td>
+                                <td class="text-center">
+                                    <span height="2em" width="2em" slice-colors="[#4CAF50,#eee]" type="pie" sparkline=""><canvas style="display: inline-block; width: 28px; height: 28px; vertical-align: top;" width="28" height="28"></canvas></span>
+                                </td>
+                                <td>02<sup>nd</sup> Feb 2015</td>
+                            </tr>
+
+                            <tr>
+                                <td>405</td>
+                                <td>Lorem ipsum dolar sit amet</td>
+                                <td class="text-center">
+                                    <span height="2em" width="2em" slice-colors="[#4CAF50,#eee]" type="pie" sparkline=""><canvas style="display: inline-block; width: 28px; height: 28px; vertical-align: top;" width="28" height="28"></canvas></span>
+                                </td>
+                                <td>28<sup>th</sup> Mar 2015</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- #end row -->
+
+    </div> <!-- #end page-wrap -->
+</div>

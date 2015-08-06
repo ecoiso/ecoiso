@@ -1,0 +1,141 @@
+<div class="page page-forms-wizard" data-ng-controller="ProcessesController" data-ng-init="findOne()" data-ng-show="authentication.user">
+    <ol class="breadcrumb breadcrumb-small">
+        <li><a href="/#!/activities">Trang chủ</a></li>
+        <li class="active">
+            <a href="javascript:;" ng-if="process.kind[0] == 'draft'">Bộ quy trình dự thảo</a>
+            <a href="javascript:;" ng-if="process.kind[0] == 'waitingPublish'">Bộ quy trình đang chờ duyệt</a>
+            <a href="javascript:;" ng-if="process.kind[0] == 'publish'">Bộ quy trình đã ban hành</a>
+        </li>
+        <li class="active"><a href="javascript:;">{{process.name}}</a></li>
+    </ol>
+    <div class="page-wrap">
+        <!-- row -->
+        <div class="row" id="img-container" >
+            <div id="name-processing">
+                <a md-ink-ripple="" href="javascript:;" class="btn-tag btn-tag-purple">{{process.name}}
+                    <div class="md-ripple-container" style=""></div>
+                </a>
+                <div  class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == process.user._id)) && authentication.user.roles[0] == 'manager' ">
+                    <a ng-if="process.kind[0] != 'publish'" tooltip="Sửa tên bộ quy trình " class="btn btn-primary" href="/#!/processes/{{process._id}}/edit">
+                        <i class="glyphicon glyphicon-edit"></i>
+                    </a>
+                    <a tooltip="Xóa bộ quy trình " class="btn btn-primary" data-ng-click="remove();">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </a>
+                </div>
+            </div>
+            <small>
+                <em class="text-muted">
+                    Được tạo vào lúc
+                    <span data-ng-bind="process.created | date:'medium'"></span>
+                    bởi
+                    <span data-ng-bind="process.user.displayName"></span>
+                </em>
+            </small>
+            <div class="row">
+                <div id="button-process-process-1" ng-if="authentication.user.roles[0] == 'staff' && process.kind[0] != 'publish' ">
+                    <button ng-click="requirePublic()" type="button" class="btn btn-danger btn-icon-inline pull-right" md-ink-ripple="" style="margin:5px 17px">
+                        <i class="ion ion-paper-airplane"></i>Đề nghị phê duyệt và ban hành
+                        <div style="" class="md-ripple-container"></div>
+                        <div class="md-ripple-container" style=""></div>
+                    </button>
+                </div>
+
+                <div id="button-process-process-2"  ng-if="authentication.user.roles[0] == 'manager' && process.kind[0] != 'publish' ">
+                    <button ng-click="acceptPublic()" type="button" class="btn btn-success btn-icon-inline pull-right" md-ink-ripple="" style="margin:5px 17px">
+                        <i class="ion ion-paper-airplane"></i>Phê duyệt và ban hành
+                        <div style="" class="md-ripple-container"></div>
+                        <div class="md-ripple-container" style=""></div>
+                    </button>
+                    <button ng-click="denyPublic()" type="button" class="btn btn-danger btn-icon-inline pull-right" md-ink-ripple="" style="margin:5px 17px">
+                        <i class="ion ion-paper-airplane"></i>Từ chối phê duyệt và ban hành
+                        <div style="" class="md-ripple-container"></div>
+                        <div class="md-ripple-container" style=""></div>
+                    </button>
+                </div>
+            </div>
+            {{log}}
+            <!---->
+            <div>
+                <div class="panel mb20 panel-hovered">
+                    <div class="panel-heading">
+                        <a md-ink-ripple="" href="javascript:;" class="btn-tag btn-tag-info">Quy trình<div class="md-ripple-container" style=""></div></a>
+                    </div>
+                    <div class="panel-body">
+                        <div ng-if="process.kind[0] != 'publish' " tooltip="Thả tập pdf , doc, docx , xls, xlsx hoặc nháy chuột " ng-controller="ProcessUploadController" class="col-sm-2" style="text-align: center; margin-bottom: 10px; height: 185px;">
+                            <div ngf-drop ngf-select ng-model="files" class="drop-box" style="height: 100%"
+                                 ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
+                                 accept="application/msword,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                                Thả tập pdf , doc, docx , xls, xlsx hoặc nháy chuột ( Tối đa 10 tệp/ 1 lần ) </div>
+                            <div ngf-no-file-drop>Kéo/thả tập tin không được trình duyệt này hỗ trợ </div>
+                        </div>
+                        <div ng-repeat='fileProgress in fileProgresses'  class=" pull-left col-sm-2 img-hover" style="text-align: center;margin-bottom: 10px">
+                            <label class="label label-info label-fix" tooltip="{{fileProgress.name}}" style="display:block;width:78%;overflow:hidden;margin-left:11%">{{fileProgress.name}}</label>
+                            <img check-image ng-src="/uploads/{{fileProgress.thumb_image}}-0.jpg" tooltip="{{fileProgress.name}}" class="col-sm-10 img-thumb-document" data="{{ fileProgress._id }}" ng-click="openModalView($event)" style="width:100%;padding:0 10%;height: 178px !important;"/>
+                            <button tooltip="Tải về" data="{{fileProgress.versions[0]}}" ng-click="download($event)" style="position: absolute;top:80%;right:18%;height:25px;line-height:25px;padding-top:0;width:38px;text-align:center" md-ink-ripple="" class="btn btn-default btn-facebook" type="button"><i class="ion ion-ios-cloud-download-outline"></i><div class="md-ripple-container" style=""></div></button>
+                            <span ng-if="authentication.user._id == fileProgress.user && process.kind[0] != 'publish' "><button tooltip="Xóa" data="{{ fileProgress._id }}"  ng-click="removeDocument($event)"  style="position: absolute; height:25px;line-height:25px;top:80%;right:40%;padding-top:0;width:38px" md-ink-ripple="" class="btn btn-default btn-gplus" type="button"><i class="ion ion-trash-a"></i><div class="md-ripple-container" style=""></div></button></span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!---->
+
+            <div>
+                <div class="panel mb20 panel-hovered">
+                    <div class="panel-heading">
+                        <a md-ink-ripple="" href="javascript:;" class="btn-tag btn-tag-info">Biểu mẫu<div class="md-ripple-container" style=""></div></a>
+                    </div>
+                    <div class="panel-body">
+                        <div ng-if="process.kind[0] != 'publish' " tooltip="Thả tập pdf , doc, docx , xls, xlsx hoặc nháy chuột " ng-controller="ModelUploadController"  class="col-sm-2" style="text-align: center; margin-bottom: 10px; height: 185px;">
+                            <div ngf-drop ngf-select ng-model="files" class="drop-box" style="height: 100%"
+                                 ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
+                                 accept="application/msword,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                                Thả tập pdf , doc, docx , xls, xlsx hoặc nháy chuột ( Tối đa 10 tệp/ 1 lần )</div>
+                            <div ngf-no-file-drop>Kéo/thả tập tin không được trình duyệt này hỗ trợ </div>
+                        </div>
+                        <div ng-repeat='fileProgressModel in fileProgressModel' class=" pull-left col-sm-2 img-hover" style="text-align: center;margin-bottom: 10px">
+                            <label class="label label-info label-fix" tooltip="{{fileProgressModel.name}}" style="display:block;width:78%;overflow:hidden;margin-left:11%">{{fileProgressModel.name}}</label>
+                            <img check-image ng-src="/uploads/{{fileProgressModel.thumb_image}}-0.jpg" tooltip="{{fileProgressModel.name}}" class="col-sm-10 img-thumb-document" data="{{ fileProgressModel._id }}" ng-click="openModalView($event)" style="width:100%;padding:0 10%;height: 178px !important;"/>
+                            <button tooltip="Tải về" data="{{fileProgressModel.versions[0]}}" ng-click="download($event)" style="position: absolute;top:80%;right:18%;height:25px;line-height:25px;padding-top:0;width:38px;text-align:center" md-ink-ripple="" class="btn btn-default btn-facebook" type="button"><i class="ion ion-ios-cloud-download-outline"></i><div class="md-ripple-container" style=""></div></button>
+                            <span ng-if="authentication.user._id == fileProgressModel.user && process.kind[0] != 'publish' "><button tooltip="Xóa" data="{{ fileProgressModel._id }}" ng-click="removeDocument($event)" style="position: absolute; height:25px;line-height:25px;top:80%;right:40%;padding-top:0;width:38px" md-ink-ripple="" class="btn btn-default btn-gplus" type="button"><i class="ion ion-trash-a"></i><div class="md-ripple-container" style=""></div></button></span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Profiles-->
+            <!--<div class="col-sm-12" ng-if="process.kind[0] == 'publish' ">
+                <div class="panel mb20 panel-hovered">
+                    <div class="panel-heading">
+                        <a md-ink-ripple="" href="javascript:;" class="pull-left btn-tag btn-tag-success">Hồ sơ xử lý<div class="md-ripple-container" style=""></div></a>
+                        <section data-ng-controller="ProfilesController">
+                        <form name="profileForm" data-ng-submit="create()" class="col-sm-5 form-horizontal" novalidate autocomplete="off">
+                            <fieldset>
+                                <div data-ng-show="error" class="text-center text-danger">
+                                    <strong data-ng-bind="error"></strong>
+                                </div>
+                                <div class="form-group col-sm-8" style="padding:0;margin:0">
+                                    <input type="text" data-ng-model="name" id="name" class="form-control"  required placeholder="Điền tên thư mục chứa hồ sơ...">
+                                </div>
+                                <div class="form-group" style="padding:0;margin:0">
+                                    <button md-ink-ripple="" class="btn btn-line-info btn-icon-inline" type="submit"><i class="ion ion-folder"></i>Tạo thư mục<div class="md-ripple-container" style=""></div></button>
+                                </div>
+                            </fieldset>
+                        </form>
+                        </section>
+                    </div>
+                    <div class="panel-body" style="margin-top: 20px">
+                        <div class="col-sm-2" style="text-align: center;margin-bottom: 10px"  ng-repeat='profile in profilesProcess' >
+                            <label class="label label-info label-fix" tooltip="{{profile.name}}" style="display:block;width:78%;overflow:hidden;margin-left:11%">{{profile.name}}</label>
+                            <img src="/modules/core/img/file-folder.png" style="width: 50%" tooltip="{{profile.name}}" data="{{ profile._id }}" ng-click="openModalProfile($event)"/>
+                            <span ng-if="authentication.user._id == profile.user && process.kind[0] == 'publish' "><button  data="{{profile._id}}" ng-click="removeProfile($event)" style="margin-top:5px;height:25px;line-height:25px;padding-top:0" md-ink-ripple="" class="btn btn-line-danger btn-icon-inline" type="button"><i class="ion ion-backspace"></i>Xóa bỏ<div class="md-ripple-container" style=""></div></button></span>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+        </div> <!-- #end row -->
+    </div> <!-- #end page-wrap -->
+</div>
