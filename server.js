@@ -19,6 +19,15 @@ var db = mongoose.connect(config.db, function(err) {
 		console.log(chalk.red(err));
 	}
 });
+//Create multiple mongoDB :))
+			mongoose.createConnection('mongodb://localhost/ecoiso-3002');
+			var db2 = mongoose.connection;
+			db2.on('error', console.error.bind(console, 'connection error:'));
+			db2.once('open', function callback() {
+				console.log('db connection open');
+			});
+
+
 
 // Init the express application
 var app = require('./config/express')(db);

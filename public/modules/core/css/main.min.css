@@ -4057,14 +4057,14 @@ fieldset[disabled] .btn-youtube.active {
   background: #f0f0f0;
   position: fixed;
   bottom: 0;
-  width: 280px;
+  width: 100%;
   opacity: .95;
   font-size: 12px;
   text-align: center;
   display: table;
   box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
   padding: 6px;
-  visibility: hidden;
+  /*visibility: hidden;*/
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -5433,4 +5433,11 @@ md-input-container {
 }
 .marginLeft20percent{
   margin-left: 20%;
+}
+.first-text-intro{
+  font-size:50px;
+  font-family:Times New Roman;
+  font-weight:bold;
+  width:40px;
+  margin-top:-15px;
 }

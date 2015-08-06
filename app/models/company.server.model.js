@@ -71,6 +71,11 @@ var CompanySchema = new Schema({
         type: String,
         default: '',
         trim: true
+    },
+        intro:{
+        type: String,
+        default: '',
+        trim: true
     }
 
 });
