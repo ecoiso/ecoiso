@@ -153,20 +153,16 @@ exports.uploadLogo = function(req,res){
                     fs.readFile(file.path, function (err, data) {
                         var newPath = "./public/uploads/" + _filename;
 						var gm = require('gm');
-
-						gm(newPath)
-							.resize(200, 200)
-							.autoOrient()
-							.write(writeStream, function (err) {
-								if (!err) console.log(' resize error! ');
-							});
-                        /*fs.writeFile(newPath, data, function (err) {
+                        fs.writeFile(newPath, data, function (err) {
                             if (err) {
                                 res.json(err);
                             } else {
+								gm(this.getImgStream(newPath)).size(function(err, value){
+										console.log(value);
+									})
                                 res.send(_filename);
                             }
-                        });*/
+                        });
                     });
                 }}
         });
