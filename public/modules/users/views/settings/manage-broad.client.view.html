@@ -58,8 +58,8 @@
                     <tbody>
                     <tr data-ng-repeat="user in users | filter:searchTextFilter" style="text-align: center" >
                         <td>
-                            <div class="ui-checkbox ui-checkbox-primary ml5">
-                                <label><input ng-show="user.roles[0] != 'admin' " type="checkbox"  ng-model="user.checked"><span></span>
+                            <div ng-if="user.roles[0] != 'admin' "  class="ui-checkbox ui-checkbox-primary ml5">
+                                <label><input ng-if="user.roles[0] != 'admin' " type="checkbox"  ng-model="user.checked"><span></span>
                                 </label>
                             </div>
                         </td>
