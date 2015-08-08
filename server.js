@@ -23,6 +23,7 @@ var app = require('./config/express')(db);
 // Bootstrap passport config
 require('./config/passport')();
 // Start the app by listening on <port>
+//config.port = 80;
 app.listen(config.port);
 //app.listen(8181);
 // Expose app

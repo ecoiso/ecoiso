@@ -20,10 +20,13 @@ exports.index = function(req, res) {
 		// Expose app
 		//exports = module.exports = app;
 		req.sessionStore.db.databaseName = 'ecoiso-3002';
-		console.log(req.sessionStore);
+		//console.log(req.sessionStore);
+		res.render('index', {
+			user: req.user || null,
+			request: req
+		});
+	}else{
+		res.render('./home/index');
 	}
-	res.render('index', {
-		user: req.user || null,
-		request: req
-	});
+
 };
