@@ -8,6 +8,16 @@ angular.module('companies').controller('CompaniesController', ['$scope','$http',
         $scope.usersInCompany = [];
         $scope.model = [];
         $scope.logo = '';
+        $scope.init = function(){
+            $http.get('findCompanyByShortName'+ window.location.pathname).success(function(data){
+                //$http.get('findCompany/'+data[0]._id).success(function(data1){
+                $scope.company = data[0];
+                document.getElementById('site-head').style.backgroundColor = $scope.company.colorBackground;
+                document.getElementById('onclick-change-showname').style.backgroundColor = $scope.company.colorBackground;
+                //});
+            })
+        };
+        $scope.init();
 		// Create new Company
 		$scope.create = function() {
 			// Create new Company object
@@ -16,16 +26,18 @@ angular.module('companies').controller('CompaniesController', ['$scope','$http',
                 shortName: this.shortName,
 				address: this.address,
 				mail: this.mail,
-				phone: this.phone
+				phone: this.phone,
+                nameDB: 'ecoiso-'+this.shortName
 			});
 
 			// Redirect after save
 			company.$save(function(response) {
                 sweetAlert('Đã thêm công ty vào hệ thống !');
-				$location.path('companies');
 
+                $http.post('/createDefaultAccount',response);
+                $location.path('companies');
 				// Clear form fields
-				$scope.name = '';
+				//$scope.name = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -219,12 +231,37 @@ angular.module('companies').controller('CompaniesController', ['$scope','$http',
         };
         $scope.updateCompanyAdmin = function(){
             var showName = document.getElementById('showName').value;
-            var obj = [{showName:showName},{logo:$scope.company.logo}];
+            var radios = document.getElementsByName('radio');
+            var colorBackground = "";
+            var introCompany = document.getElementById('intro-company').value;
+            for (var i = 0, length = radios.length; i < length; i++) {
+                if (radios[i].checked) {
+                    // do whatever you want with the checked radio
+                    colorBackground = radios[i].value;
+                    // only one radio can be logically checked, don't check the rest
+                    break;
+                }
+            }
+            if(showName == "") showName = $scope.company.showName;
+            if(introCompany == "") introCompany = $scope.company.intro;
+            if(colorBackground == "") colorBackground = $scope.company.colorBackground;
+            var obj = [
+                {showName:showName},
+                {logo:$scope.company.logo},
+                {imageLogin:$scope.company.imageLogin},
+                {intro:introCompany},
+                {colorBackground:colorBackground}
+            ];
             $http.post('updateCompanyAdmin',obj).success(function(data){
                 $scope.company = data;
+                window.location.reload();
                 sweetAlert('Cấu hình thành công !');
                 //window.location.reload();
             });
+        };
+        $scope.changeBackground = function($color){
+            document.getElementById('site-head').style.backgroundColor = $color;
+            document.getElementById('onclick-change-showname').style.backgroundColor = $color;
         };
 	}
 ]);
@@ -240,3 +277,13 @@ var ModalCompanyController = angular.module('companies').controller('ModalCompan
     }
 
 ]);
+/**/
+function randomString(){
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 10; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+};

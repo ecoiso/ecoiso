@@ -14,7 +14,7 @@
                         <div class="mt20">
                             <p>Số thành viên :</p>
                             <p>Số văn bản đã ban hành  :</p>
-                            <p>Số hồ sơ đang quản lý  :
+                            <p>Số hồ sơ đang quản lý  :</p>
                         </div>
                     </div>
                     <div class="right mt10" style="margin-right: 50px">
@@ -22,12 +22,10 @@
                             <img src="uploads/{{company.logo}}" height="200px" width="200px">
                         </p>
                     </div>
-                    <div class="clearfix col-md-12 col-xs-12">
+                    <div class="clearfix col-md-12 col-xs-12" style="text-align: justify">
                         <i class="ion ion-quote left"></i>
-                        <div class="left first-text-intro" >L</div>
-                        oi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong tyLoi gioi thieu ve cong tyLoi gioi thieu ve cong ty Loi gioi thieu ve cong tyLoi gioi thieu ve cong tyLoi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty v Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty...
-                        oi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong tyLoi gioi thieu ve cong tyLoi gioi thieu ve cong ty Loi gioi thieu ve cong tyLoi gioi thieu ve cong tyLoi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty v Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty...
-                        oi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong tyLoi gioi thieu ve cong tyLoi gioi thieu ve cong ty Loi gioi thieu ve cong tyLoi gioi thieu ve cong tyLoi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty v Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty Loi gioi thieu ve cong ty...
+                        <div class="left first-text-intro" > {{company.intro | limitTo:1}}</div>
+                        {{company.intro }}
                         <i class="ion ion-quote"></i>
 
                     </div>
@@ -37,7 +35,7 @@
         <!-- row -->
         <div class="row">
             <!-- profile -->
-            <div class="col-md-4 col-sm-6">
+            <div class="col-md-6 col-sm-6">
                 <div class="panel panel-default mb20 panel-hovered profile-widget">
                     <div class="panel-body">
                         <div class="clearfix mb15 top-info">
@@ -65,6 +63,14 @@
                             </li>
                         </ul>
                     </div> <!-- #end panel-body -->
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="panel panel-default mb20 panel-hovered">
+                    <div class="panel-heading" style="background: none">Bảng thông báo</div>
+                    <div class="panel-body text-center">
+
+                    </div>
                 </div>
             </div>
         </div>

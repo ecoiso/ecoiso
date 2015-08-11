@@ -120,19 +120,27 @@ function randomString(){
 /**
  * */
 exports.updateCompanyAdmin = function(req,res){
-    //console.log(req.body);
-    var att = req.body;
-    Company.update({_id:req.user.company},{$set:{'showName':att[0].showName,'logo':att[1].logo} },function(err,data){
-        if (err) {
-            return res.status(400).send({
-                message: errorHandler.getErrorMessage(err)
-            });
-        } else {
-			Company.findById(req.user.company).exec(function(err, company) {
-				res.json(company);
+	var linkUrl = req.headers.referer;
+    var last = linkUrl.indexOf("/", 8);
+	var originalUrl = linkUrl.substring(last+1,linkUrl.length);
+	var data = {};
+	var att = req.body;
+	Company.update({shortName:originalUrl},{$set:{
+		'showName' : att[0].showName,
+		'logo' : att[1].logo ,
+		imageLogin : att[2].imageLogin,
+		intro : att[3].intro,
+		colorBackground : att[4].colorBackground
+	} },function(err,data){
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
 			});
-        }
-    });
+		} else {
+			res.json(data);
+		}
+	});
+
 };
 /**
  * */
@@ -169,3 +177,35 @@ exports.uploadLogo = function(req,res){
 
     }
 };
+exports.createDefaultAccount = function(req,res){
+	var obj = req.body;
+	var client = mongoose.createConnection('mongodb://localhost/'+obj.nameDB);
+	client.on('connected', function() {
+		delete obj.$resolved;
+		client.collection('companies').save(obj,function(err, company) {
+			if (err) return console.log(err);
+		});
+	});
+};
+
+exports.findCompanyByShortName = function(req,res){
+	var shortName = req.params.shortName;
+	Company.find({"shortName":shortName}).exec(function(err, company) {
+		if (err) return console.log(err);
+		res.json(company);
+		});
+};
+/**
+ * */
+exports.findCompany = function(req,res){
+	var companyID = req.params.companyID;
+	Company.find({"_id":companyID}).exec(function(err, company) {
+		if (err) {
+			return res.status(400).send({
+				message: errorHandler.getErrorMessage(err)
+			});
+		} else {
+			res.json(company);
+		}
+	});
+}

@@ -1,7 +1,8 @@
 <div class="page page-auth">
     <div class="auth-container " style="margin: auto !important">
-        <div class="form-head mb20">
-            <h1 class="site-logo h2 mb5 mt5 text-center text-bold"><i class="ion ion-leaf" style="margin-right:15px;font-size:29px"></i><a href="javascript:;">EcoISO</a></h1>
+        <div class="form-head mb20" ng-controller="ActivitiesController">
+            <h1 class="site-logo h3 mb5 mt5 text-center text-bold">
+                <a href="javascript:;">{{company.name}}</a></h1>
         </div>
         <div class="form-container" data-ng-controller="AuthenticationController">
             <form class="form-horizontal"  data-ng-submit="signin()" autocomplete="off">
@@ -29,7 +30,7 @@
                 <!--<div class="clearfix mb15"><a href="#/pages/forget-pass" class="text-success small">Forget your password?</a></div>-->
                 <div class="btn-group btn-group-justified mb15">
                     <div class="btn-group">
-                        <button type="submit" class="btn btn-success">Đăng nhập</button>
+                        <button type="submit" ng-controller="ActivitiesController" style="background: {{company.colorBackground}};border-color:{{company.colorBackground}}; " class="btn btn-success">Đăng nhập</button>
                     </div>
                 </div>
                 <!--<div class="clearfix text-center small">

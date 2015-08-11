@@ -109,7 +109,7 @@ exports.hasAuthorization = function(req, res, next) {
  *
  */
 exports.listDraft = function(req, res) {
-    Process.find({$and : [{ "kind": ['draft'] },{"userProcess.company":req.user.company },{$or:[{'user': req.user.id},{'userProcess._id': req.user.id}] } ] }, function (err, drafts) {
+    Process.find({$and : [{ "kind": ['draft'] },{$or:[{'user': req.user.id},{'userProcess._id': req.user.id}] } ] }, function (err, drafts) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -124,7 +124,7 @@ exports.listDraft = function(req, res) {
  *
  */
 exports.listWaitingPublish = function(req, res) {
-    Process.find({$and : [{ "kind": ['waitingPublish'] },{"userProcess.company":req.user.company },{$or:[{'user': req.user.id},{'userProcess._id': req.user.id}] } ] }, function (err, waitings) {
+    Process.find({$and : [{ "kind": ['waitingPublish'] },{$or:[{'user': req.user.id},{'userProcess._id': req.user.id}] } ] }, function (err, waitings) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -139,7 +139,7 @@ exports.listWaitingPublish = function(req, res) {
  *
  */
 exports.listPublish = function(req, res) {
-    Process.find({ $and: [{ "kind": ['publish'] },{"userProcess.company":req.user.company }]}, function (err, publish) {
+    Process.find({ $and: [{ "kind": ['publish'] }]}, function (err, publish) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -386,8 +386,3 @@ exports.searchGlobal = function (req, res) {
         }
     });
 };
-/**
- * */
-exports.findCompany = function(req,res){
-    res.json(req.company);
-}

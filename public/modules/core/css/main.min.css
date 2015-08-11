@@ -5441,3 +5441,8 @@ md-input-container {
   width:40px;
   margin-top:-15px;
 }
+.box-color{
+  width: 100px ;
+  height: 30px ;
+  margin: 5px
+}

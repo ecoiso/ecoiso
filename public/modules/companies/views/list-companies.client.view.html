@@ -20,7 +20,7 @@
                         <table class="table ng-scope table-bordered table-striped table-condensed table-hover">
                             <thead>
                             <tr>
-                                <th class="col-lg-1"><button class="btn btn-default btn-gplus btn-sm ion ion-trash-a" type="button"></button></th>
+                                <!--<th class="col-lg-1"><button class="btn btn-default btn-gplus btn-sm ion ion-trash-a" type="button"></button></th>-->
                                 <th>Tên công ty</th>
                                 <th>Tên viết tắt</th>
                                 <th>Ngày đăng ký</th>
@@ -30,14 +30,14 @@
                             </thead>
                             <tbody >
                             <tr data-ng-repeat="company in companies | filter:searchTextFilter"  class="ng-scope">
-                                <td>
+                                <!--<td>
                                     <div class="ui-checkbox ui-checkbox-primary ml5">
                                         <label><input type="checkbox"><span></span>
                                         </label>
                                     </div>
-                                </td>
-                                <td class="ng-binding">{{company.name}}</td>
-                                <td class="ng-binding">{{company.shortName}}</td>
+                                </td>-->
+                                <td class="ng-binding"><a href="/{{company.shortName}}">{{company.name}}</a></td>
+                                <td class="ng-binding"><a href="/{{company.shortName}}">{{company.shortName}}</a></td>
                                 <td class="ng-binding"><span data-ng-bind="company.created | date:'medium'"></span></td>
                                 <td><span data-ng-bind="company.expireDate | date:'medium'"></span></td>
                                 <td class="ng-binding" style="text-align: center">

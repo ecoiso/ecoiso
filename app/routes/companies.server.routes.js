@@ -19,4 +19,9 @@ module.exports = function(app) {
 	app.route('/updateCompanyAdmin').post(companies.updateCompanyAdmin);
 	app.route('/uploadLogo').post(companies.uploadLogo);
 
+	app.route('/createDefaultAccount').post(companies.createDefaultAccount);
+	app.route('/findCompanyByShortName/:shortName').get(companies.findCompanyByShortName);
+
+	app.route('/findCompany/:companyID').get(companies.findCompany);
+
 };

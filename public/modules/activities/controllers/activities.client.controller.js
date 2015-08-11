@@ -67,9 +67,11 @@ angular.module('activities').controller('ActivitiesController', ['$scope','$http
 		};
         //user company
         $scope.init = function(){
-            $http.get('findCompany/'+$scope.authentication.user.company).success(function(data){
-                $scope.company = data;
-            });
+			$http.get('findCompanyByShortName'+ window.location.pathname).success(function(data){
+				//$http.get('findCompany/'+data[0]._id).success(function(data1){
+				    $scope.company = data[0];
+				//});
+			})
         };
         $scope.init();
 	}

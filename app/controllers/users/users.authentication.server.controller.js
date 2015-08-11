@@ -56,11 +56,10 @@ exports.signup = function(req, res) {
 exports.signupAdmin = function(req,res){
     // Init Variables
     var user = new User(req.body[0]);
-
+	console.log(user);
     // Add missing user fields
     user.provider = 'local';
     user.resetPasswordToken = user.password = randomString();
-
     //console.log(user);
     // Then save the user
    user.save(function(err) {
@@ -69,17 +68,32 @@ exports.signupAdmin = function(req,res){
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            // Remove sensitive data before login
-            user.password = undefined;
-            user.salt = undefined;
-
-            req.login(user, function(err) {
-                if (err) {
-                    res.status(400).send(err);
-                } else {
-                    res.json(user);
-                }
-            });
+			Company.find({"_id": user.company}, function (err, company) {
+				if (err) {
+					return res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					var client = mongoose.createConnection('mongodb://localhost/'+company[0].nameDB);
+					client.on('connected', function() {
+						var user_default = {
+							"_id": user._id,
+							"username":user.username,
+							"lastName" : user.lastName,
+							"firstName" :  user.firstName,
+							"displayName" : user.displayName,
+							"company" : user.company,
+							"provider" : "local",
+							"password":user.password,
+							"resetPasswordToken" : user.resetPasswordToken
+						};
+						client.collection('users').save(user_default,function(err) {
+							if (err) return console.log(err);
+						});
+					});
+				}
+			});
+			res.send('okie');
         }
     });
 };

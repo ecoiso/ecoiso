@@ -83,7 +83,7 @@ var UserSchema = new Schema({
 	roles: {
 		type: [{
 			type: String,
-			enum: ['user','staff','manager', 'admin','superAdmin','mmander']
+			enum: ['user','staff','manager', 'administrator','agency','commander']
 		}],
 		default: ['user']
 	},
@@ -94,7 +94,6 @@ var UserSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-	/* For reset password */
 	resetPasswordToken: {
 		type: String,
         default: ''
@@ -107,6 +106,7 @@ var UserSchema = new Schema({
         default: '',
         trim: true
     }
+
 });
 
 /**

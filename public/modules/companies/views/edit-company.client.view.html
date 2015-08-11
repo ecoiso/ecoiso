@@ -17,17 +17,117 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">Tên công ty</br>( trên phần mềm )</label>
-                                <div class="col-md-8" ng-if="company" ng-controller="ActivitiesController">
-                                    <input type="text" id="showName" class="form-control" placeholder="{{company.showName}}" required>
+                                <div class="col-md-8" >
+                                    <input type="text" id="showName" class="form-control"  placeholder="{{company.showName}}" maxlength="15" >
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2 control-label">Ảnh công ty</label>
+                                <label class="col-md-2 control-label">Ảnh logo</label>
                                 <div class="col-md-8">
                                     <div class="btn btn-primary" ngf-select ng-model="file" ngf-multiple="false">Chọn logo</div>
                                 </div>
                                 <div class="col-md-8 ng-scope col-md-offset-2 mt20" ng-if="company.logo">
                                     <img src="uploads/{{company.logo}}" height="100px" width="100px">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Ảnh nền đăng nhập </label>
+                                <div class="col-md-8">
+                                    <div class="btn btn-primary" ngf-select ng-model="file" ngf-multiple="false">Chọn logo</div>
+                                </div>
+                                <div class="col-md-8 ng-scope col-md-offset-2 mt20" ng-if="company.logo">
+                                    <img src="uploads/{{company.logo}}" height="240px" width="180px">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Lời giới thiệu</label>
+                                <div class="col-md-8" >
+                                    <textarea id="intro-company" placeholder="( Lời giới thiệu ~1500 kí tự ) {{company.intro}}" class="form-control resize-v" maxlength="1500" rows="5"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Màu sắc trang công ty</label>
+                                <div class="col-md-8 pull-left" >
+                                    <div class="pull-left box-color" ng-click="changeBackground('#ECF0F1')">
+                                        <input type="radio" id="radio05" name="radio" value="#ECF0F1"/>
+                                        <label for="radio05" style="background-color: #ECF0F1" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#C8F7C5')">
+                                        <input type="radio" id="radio08" name="radio" value="#C8F7C5"/>
+                                        <label for="radio08" style="background-color: #C8F7C5" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#1ABC9C')">
+                                        <input type="radio" id="radio01" name="radio" value="#1ABC9C"/>
+                                        <label for="radio01" style="background-color: #1ABC9C"><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#2ECC71')">
+                                        <input type="radio" id="radio03" name="radio" value="#2ECC71"/>
+                                        <label for="radio03" style="background-color: #2ECC71" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#4caf50')">
+                                        <input type="radio" id="radio07" name="radio" value="#4caf50"/>
+                                        <label for="radio07" style="background-color: #4caf50" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#2890B9')">
+                                        <input type="radio" id="radio15" name="radio" value="#2890B9"/>
+                                        <label for="radio15" style="background-color: #2890B9" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#3498DB')">
+                                        <input type="radio" id="radio20" name="radio" value="#3498DB"/>
+                                        <label for="radio20" style="background-color: #3498DB" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#27AE60')">
+                                        <input type="radio" id="radio16" name="radio" value="#27AE60"/>
+                                        <label for="radio16" style="background-color: #27AE60" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#16A085')">
+                                        <input type="radio" id="radio17" name="radio" value="#16A085"/>
+                                        <label for="radio17" style="background-color: #16A085" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#34495E')">
+                                        <input type="radio" id="radio18" name="radio" value="#34495E"/>
+                                        <label for="radio18" style="background-color: #34495E" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#2C3E50')">
+                                        <input type="radio" id="radio13" name="radio" value="#2C3E50"/>
+                                        <label for="radio13" style="background-color: #2C3E50" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#1F3A93')">
+                                        <input type="radio" id="radio04" name="radio" value="#1F3A93"/>
+                                        <label for="radio04" style="background-color: #1F3A93" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#795548')">
+                                        <input type="radio" id="radio02" name="radio" value="#795548"/>
+                                        <label for="radio02" style="background-color: #795548" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#F5D76E')">
+                                        <input type="radio" id="radio06" name="radio" value="#F5D76E"/>
+                                        <label for="radio06" style="background-color: #F5D76E" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#F1C40F')">
+                                        <input type="radio" id="radio12" name="radio" value="#F1C40F"/>
+                                        <label for="radio12" style="background-color: #F1C40F" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#F39C12')">
+                                        <input type="radio" id="radio10" name="radio" value="#F39C12"/>
+                                        <label for="radio10" style="background-color: #F39C12" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#D35400')">
+                                        <input type="radio" id="radio09" name="radio" value="#D35400"/>
+                                        <label for="radio09" style="background-color: #D35400" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#E74C3C')">
+                                        <input type="radio" id="radio11" name="radio" value="#E74C3C"/>
+                                        <label for="radio11" style="background-color: #E74C3C" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#9B59B6')">
+                                        <input type="radio" id="radio19" name="radio" value="#9B59B6"/>
+                                        <label for="radio19" style="background-color: #9B59B6" ><span></span></label>
+                                    </div>
+                                    <div class="pull-left box-color" ng-click="changeBackground('#8E44AD')">
+                                        <input type="radio" id="radio14" name="radio" value="#8E44AD"/>
+                                        <label for="radio14" style="background-color: #8E44AD" ><span></span></label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="clearfix col-sm-offset-9">
@@ -40,3 +140,31 @@
         </div>
     </div>
 </div>
+<style type = "text/css" scoped>
+    input[type="radio"] {
+        display:none;
+    }
+    input[type="radio"] + label {
+        font-family:Arial, sans-serif;
+        font-size:14px;
+    }
+    input[type="radio"] + label span {
+        display:inline-block;
+        width:100px;
+        height:30px;
+        vertical-align:middle;
+        cursor:pointer;
+    }
+    input[type="radio"] + label span {
+    }
+    input[type="radio"]:checked + label span{
+        border: 3px solid #000000;
+    }
+    input[type="radio"] + label span,
+    input[type="radio"]:checked + label span {
+        -webkit-transition:background-color 0.4s linear;
+        -o-transition:background-color 0.4s linear;
+        -moz-transition:background-color 0.4s linear;
+        transition:background-color 0.4s linear;
+    }
+</style>

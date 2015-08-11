@@ -72,7 +72,23 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		};
         // Find a list of Processes
         $scope.find = $scope.reload = function() {
-            $http.get('listUserInCompany/'+$scope.authentication.user.company).success(function(data){
+            if($scope.authentication.user){
+                $http.get('/users/listUserInCompany').success(function(data){
+                    $scope.users = data;
+                });
+                //$scope.users = Users.query();
+                $scope.$watch('users', function(users){
+                    $scope.count = 0;
+                    $scope.dataSelected = [];
+                    angular.forEach(users, function(user){
+                        if(user.checked){
+                            $scope.count += 1;
+                            $scope.dataSelected.push(user._id);
+                        }
+                    })
+                }, true);
+            }
+           /*$http.get('listUserInCompany').success(function(data){
                 $scope.users = data;
                 $scope.$watch('users', function(users){
                     $scope.count = 0;
@@ -84,18 +100,8 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
                         }
                     })
                 }, true);
-            });
-            /*$scope.users = Users.query();
-            $scope.$watch('users', function(users){
-                $scope.count = 0;
-                $scope.dataSelected = [];
-                angular.forEach(users, function(user){
-                    if(user.checked){
-                        $scope.count += 1;
-                        $scope.dataSelected.push(user._id);
-                    }
-                })
-            }, true);*/
+            });*/
+
         };
         //Delete User
         $scope.deleteUser = function(idx,$id){

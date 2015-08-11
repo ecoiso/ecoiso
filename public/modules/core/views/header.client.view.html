@@ -1,5 +1,5 @@
 <ul class="list-unstyled left-elems marginLeft20percent" data-ng-controller="HeaderController">
-    <li data-ng-if="menu.shouldRender(authentication.user) && authentication.user.roles[0] != 'admin' && authentication.user.roles[0] != 'commander' &&  authentication.user.roles[0] != 'superAdmin'">
+    <li data-ng-if="menu.shouldRender(authentication.user) && authentication.user.roles[0] != 'administrator' && authentication.user.roles[0] != 'commander' &&  authentication.user.roles[0] != 'agency'">
         <div class="form-search hidden-xs">
             <form id="site-search" action="/#!/search">
                 <input type="search" class="form-control" placeholder="Nhập từ khóa cần tìm kiếm...">
@@ -9,13 +9,14 @@
     </li>	<!-- #end search-box -->
 
     <!-- site-logo for mobile nav -->
-    <li >
+    <!--<li >
         <div class="site-logo visible-xs">
             <a href="/" class="text-uppercase h3">
                 <span class="text">EcoISO</span>
             </a>
         </div>
-    </li> <!-- #end site-logo -->
+    </li> -->
+    <!-- #end site-logo -->
     <!-- fullscreen -->
 
    <!-- <li class="fullscreen hidden-xs" onclick="toggleFullScreen()">
@@ -55,13 +56,15 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="/#!/settings/profile">Thay đổi hồ sơ</a>
+                    <a ng-if="authentication.user.roles[0] != 'agency' && authentication.user.roles[0] != 'commander'" href="/#!/settings/profile">Thay đổi hồ sơ</a>
+                    <a ng-if="authentication.user.roles[0] == 'agency' || authentication.user.roles[0] == 'commander'" href="/administrator#!/settings/profile">Thay đổi hồ sơ</a>
                 </li>
                 <!--<li>
                     <a href="/#!/settings/accounts">Manage Social Accounts</a>
                 </li>-->
                 <li data-ng-show="authentication.user.provider === 'local'">
-                    <a href="/#!/settings/password">Đổi mật khẩu </a>
+                    <a ng-if="authentication.user.roles[0] != 'agency' && authentication.user.roles[0] != 'commander'" href="/#!/settings/password">Đổi mật khẩu </a>
+                    <a ng-if="authentication.user.roles[0] == 'agency' || authentication.user.roles[0] == 'commander'" href="/administrator#!/settings/password">Đổi mật khẩu </a>
                 </li>
                 <li class="divider"></li>
                 <li>

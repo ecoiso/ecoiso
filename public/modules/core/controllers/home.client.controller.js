@@ -104,13 +104,7 @@
 	function($rs,$scope, Authentication,$timeout,$http) {
         $scope.keyword ='';
         $scope.resultSearch =[];
-		// This provides Authentication context.
 		$scope.authentication = Authentication;
-        /*$scope.userCompany = function(){
-            $http.get('findCompany/'+$scope.authentication.user.company).success(function(data){
-                $scope.company = data;
-            });
-        };*/
         var mm = window.matchMedia('(max-width: 767px)');
         $rs.isMobile = mm.matches ? !0 : !1, $rs.safeApply = function (fn) {
             var phase = this.$root.$$phase;
@@ -160,14 +154,14 @@
             });
         }
         //user company
-        if($scope.authentication.user){
+        /*if($scope.authentication.user){
             $scope.init = function(){
                 $http.get('findCompany/'+$scope.authentication.user.company).success(function(data){
                     $scope.company = data;
                 });
             };
             $scope.init();
-        }
+        }*/
 
     }
 ]);

@@ -72,7 +72,22 @@ var CompanySchema = new Schema({
         default: '',
         trim: true
     },
-        intro:{
+    intro:{
+        type: String,
+        default: '',
+        trim: true
+    },
+    nameDB:{
+        type: String,
+        default: '',
+        trim: true
+    },
+    string:{
+        type: String,
+        default: '',
+        trim: true
+    },
+    colorBackground:{
         type: String,
         default: '',
         trim: true

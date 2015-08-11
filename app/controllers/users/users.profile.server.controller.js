@@ -59,15 +59,17 @@ exports.me = function(req, res) {
  * List of Users
  */
 exports.list = function(req, res) {
-    User.find().sort('-created').exec(function(err, users) {
-        if (err) {
-            return res.status(400).send({
-                message: errorHandler.getErrorMessage(err)
-            });
-        } else {
-            res.jsonp(users);
-        }
-    });
+        /*User.find().sort('-created').exec(function(err, users) {
+            if (err) {
+                return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            } else {
+                console.log(users);
+                res.jsonp(users);
+            }
+        });
+        */
 };
 /**
  * Remove User
@@ -131,8 +133,17 @@ exports.changeCheckAdmin = function(req,res){
  * */
 
 exports.listUserInCompany = function(req,res){
-    var companyId = req.company._id;
-    User.find({"company":companyId}, function (err, users) {
+   /* User.find({"provider" : "local"},function (err, users) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            console.log(users);
+            //res.json(users);
+        }
+    });*/
+    User.find().exec(function(err, users) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)

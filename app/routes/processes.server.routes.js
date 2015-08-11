@@ -32,7 +32,7 @@ module.exports = function(app) {
     app.route('/acceptPublic').post(processes.acceptPublic);
     app.route('/searchGlobal').post(processes.searchGlobal);
 
-    app.route('/findCompany/:companyId').get(processes.findCompany);
+
 
 
 };
