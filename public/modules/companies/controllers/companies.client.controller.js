@@ -252,7 +252,7 @@ angular.module('companies').controller('CompaniesController', ['$scope','$http',
                 {intro:introCompany},
                 {colorBackground:colorBackground}
             ];
-            $http.post('updateCompanyAdmin',obj).success(function(data){
+            $http.post('/companies/updateCompanyAdmin',obj).success(function(data){
                 $scope.company = data;
                 window.location.reload();
                 sweetAlert('Cấu hình thành công !');

@@ -375,7 +375,7 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
             //var obj = [{'filename':filename}];
             //$http.post('/downloadDocument',obj).success(function(data){
                 //window.location.href = '/uploads/'+filename;
-                window.open('/uploads/'+filename,'_blank');
+                window.open('/aa/uploads/'+filename,'_blank');
             //});
         };
         /*$scope.uploadNewVersions = function(){

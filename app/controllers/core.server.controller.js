@@ -9,15 +9,10 @@ var mongoose = require('mongoose'),
 	chalk = require('chalk');
 exports.index = function(req, res) {
 	if (req.user) {
-		var originalUrl = req.originalUrl.substring(1);
-		if(originalUrl.length > 0 ){
-
-		}else{
 			res.render('index', {
 				user: req.user || null,
 				request: req
 			});
-		}
 	} else {
 		var originalUrl = req.originalUrl.substring(1);
 		if(originalUrl.length > 0 ){

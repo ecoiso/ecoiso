@@ -123,7 +123,6 @@ exports.updateCompanyAdmin = function(req,res){
 	var linkUrl = req.headers.referer;
     var last = linkUrl.indexOf("/", 8);
 	var originalUrl = linkUrl.substring(last+1,linkUrl.length);
-	var data = {};
 	var att = req.body;
 	Company.update({shortName:originalUrl},{$set:{
 		'showName' : att[0].showName,

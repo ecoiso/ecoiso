@@ -16,7 +16,7 @@ module.exports = function(app) {
 
 	// Finish by binding the Company middleware
 	app.param('companyId', companies.companyByID);
-	app.route('/updateCompanyAdmin').post(companies.updateCompanyAdmin);
+	app.route('/companies/updateCompanyAdmin').post(companies.updateCompanyAdmin);
 	app.route('/uploadLogo').post(companies.uploadLogo);
 
 	app.route('/createDefaultAccount').post(companies.createDefaultAccount);
