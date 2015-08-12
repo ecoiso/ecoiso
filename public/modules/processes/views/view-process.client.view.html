@@ -16,10 +16,10 @@
                     <div class="md-ripple-container" style=""></div>
                 </a>
                 <div  class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == process.user._id)) && authentication.user.roles[0] == 'manager' ">
-                    <a ng-if="process.kind[0] != 'publish'" tooltip="Sửa tên bộ quy trình " class="btn btn-primary" href="/#!/processes/{{process._id}}/edit">
+                    <a ng-if="process.kind[0] != 'publish'" title="Sửa tên bộ quy trình " class="btn btn-primary" href="/#!/processes/{{process._id}}/edit">
                         <i class="glyphicon glyphicon-edit"></i>
                     </a>
-                    <a tooltip="Xóa bộ quy trình " class="btn btn-primary" data-ng-click="remove();">
+                    <a title="Xóa bộ quy trình " class="btn btn-primary" data-ng-click="remove();">
                         <i class="glyphicon glyphicon-trash"></i>
                     </a>
                 </div>

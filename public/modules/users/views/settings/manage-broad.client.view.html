@@ -73,7 +73,7 @@
                         <td><span data-ng-bind="user.department"></span></td>
                         <td><span data-ng-bind="user.status"></span></td>
                         <td >
-                            <button ng-show="user.roles[0] != 'admin' " md-ink-ripple="" class="btn btn-gplus ion ion-trash-a icon btn-xs" type="button" ng-click="deleteUser($index,user._id)">
+                            <button ng-show="user.roles[0] != 'admin' " md-ink-ripple="" class="btn btn-gplus ion ion-trash-a icon btn-xs" type="button" title="xóa" ng-click="deleteUser($index,user._id)">
                                 <div class="md-ripple-container" style=""></div>
                             </button>
                         </td>

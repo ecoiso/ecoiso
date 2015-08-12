@@ -1,7 +1,7 @@
 <ul class="list-unstyled left-elems marginLeft20percent" data-ng-controller="HeaderController">
     <li data-ng-if="menu.shouldRender(authentication.user) && authentication.user.roles[0] != 'administrator' && authentication.user.roles[0] != 'commander' &&  authentication.user.roles[0] != 'agency'">
         <div class="form-search hidden-xs">
-            <form id="site-search" action="/#!/search">
+            <form  id="site-search" action="/#!/search">
                 <input type="search" class="form-control" placeholder="Nhập từ khóa cần tìm kiếm...">
                 <button type="submit" class="ion ion-ios-search-strong"></button>
             </form>

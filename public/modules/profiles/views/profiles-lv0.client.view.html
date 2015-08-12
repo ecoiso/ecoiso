@@ -52,10 +52,10 @@
                             <div ng-if="profile.kind != 'profile' ">
                                 <label class="label label-info label-fix" tooltip="{{profile.name}}" style="display:block;width:78%;overflow:hidden;margin-left:11%">{{profile.name}}</label>
                                 <img src="/modules/core/img/file-folder.png" style="width: 50%" tooltip="{{profile.name}}" ng-click="openProfile(profile)"/>
-                                <button ng-if="authentication.user._id == profile.user" tooltip="Cấu hình" ng-click="configFolder(profile)" style="position: absolute;top:80%;right:18%;height:25px;line-height:25px;padding-top:0;width:38px;text-align:center" md-ink-ripple="" class="btn btn-default " type="button"><i class="ion ion-android-settings"></i><div class="md-ripple-container" style=""></div></button>
-                                <span ng-if="authentication.user._id == profile.user"><button tooltip="Xóa" ng-click="removeProfiles(profile)" style="position: absolute; height:25px;line-height:25px;top:80%;right:40%;padding-top:0;width:38px" md-ink-ripple="" class="btn btn-default btn-gplus" type="button"><i class="ion ion-trash-a"></i><div class="md-ripple-container" style=""></div></button></span>
+                                <button ng-if="authentication.user._id == profile.user" title="Cấu hình" ng-click="configFolder(profile)" style="position: absolute;top:80%;right:18%;height:25px;line-height:25px;padding-top:0;width:38px;text-align:center" md-ink-ripple="" class="btn btn-default " type="button"><i class="ion ion-android-settings"></i><div class="md-ripple-container" style=""></div></button>
+                                <span ng-if="authentication.user._id == profile.user"><button title="Xóa" ng-click="removeProfiles(profile)" style="position: absolute; height:25px;line-height:25px;top:80%;right:40%;padding-top:0;width:38px" md-ink-ripple="" class="btn btn-default btn-gplus" type="button"><i class="ion ion-trash-a"></i><div class="md-ripple-container" style=""></div></button></span>
                             </div>
-                        </div>
+                        </div>itle
                     </div>
                 </div>
 
