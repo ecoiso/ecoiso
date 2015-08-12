@@ -1,14 +1,14 @@
-<div class="page page-forms-wizard">
+<div class="page page-forms-wizard" data-ng-controller="ActivitiesController">
     <ol class="breadcrumb breadcrumb-small">
-        <li><a href="/#!/activities">Trang chủ</a></li>
-        <li class="active"><a href="/#!/processes/create">Tạo bộ quy trình</a></li>
+        <li><a href="/{{company.shortName}}#!/activities">Trang chủ</a></li>
+        <li class="active"><a href="/{{company.shortName}}#!/processes/create">Tạo bộ quy trình</a></li>
     </ol>
     <div class="page-wrap">
         <!-- row -->
         <div class="row"  data-ng-controller="ProcessesController">
             <!-- minimal form interface -->
             <div class="col-md-10 col-md-offset-1 mb20">
-                <h3 class="text-center mb20">Bộ Quy Trình</h3>
+                <!--<h3 class="text-center mb20">Bộ Quy Trình</h3>-->
                 <form data-ng-submit="create()" class="form-horizontal ng-invalid ng-invalid-required ng-valid-email ng-valid-min ng-valid-max ng-valid-minlength ng-valid-maxlength ng-dirty ng-valid-parse ng-invalid-pattern" role="form">
                     <ul class="list-unstyled" >
                         <li class="col-md-12">
