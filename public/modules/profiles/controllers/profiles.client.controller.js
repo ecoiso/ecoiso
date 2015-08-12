@@ -239,13 +239,12 @@ var ModalConfigProfileController = angular.module('profiles').controller('ModalC
         $scope.availableUsers = [];
         $scope.multipleUser = {};
         $scope.authentication = Authentication;
-        /*$scope.listUserInCompany = function(){
-
-            $http.get('listUserInCompany/'+$scope.authentication.user.company).success(function(data){
+        $scope.listUserInCompany = function(){
+            $http.get('/users/listUserInCompany/').success(function(data){
                 $scope.availableUsers = data;
             })
 
-        };*/
+        };
         $scope.saveViewerProfile = function(){
             $scope.multipleUser.profileId = document.getElementById('profileIdConfig').value;
             $http.post('/folder/saveViewerProfile',$scope.multipleUser).success(function(data){
