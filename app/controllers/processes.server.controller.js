@@ -230,7 +230,7 @@ exports.createPdf2Jpg = function(req, res){
     res.end("convert success");
 }
 exports.uploadProcess = function (req, res) {
-    if (req.url === '/uploadProcess' && req.method === 'POST') {
+    if (req.url === '/upload/uploadProcess' && req.method === 'POST') {
         // parse a file upload
         var form = new multiparty.Form();
         var host = req.get('host');
@@ -296,7 +296,7 @@ exports.uploadProcess = function (req, res) {
  *
  */
 exports.uploadModel = function(req, res) {
-    if (req.url === '/uploadModel' && req.method === 'POST') {
+    if (req.url === '/upload/uploadModel' && req.method === 'POST') {
         // parse a file upload
         var form = new multiparty.Form();
 

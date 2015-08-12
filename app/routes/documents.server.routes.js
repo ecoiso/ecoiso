@@ -23,10 +23,10 @@ module.exports = function(app) {
     app.route('/removeDocumentProcess/:processId').get(documents.removeDocumentProcess);
     app.route('/removeDocumentModel/:processId').get(documents.removeDocumentModel);
 
-    app.route('/downloadDocument').post(documents.downloadDocument);
-    app.route('/updateNewVersion').post(documents.updateNewVersion);
-    app.route('/documentUpdateVersion').post(documents.documentUpdateVersion);
-    app.route('/createImageThumb').post(documents.createImageThumb);
+    app.route('/documents/downloadDocument').post(documents.downloadDocument);
+    app.route('/documents/updateNewVersion').post(documents.updateNewVersion);
+    app.route('/documents/documentUpdateVersion').post(documents.documentUpdateVersion);
+    app.route('/documents/createImageThumb').post(documents.createImageThumb);
 
     //app.route('/removeDocument').post(documents.removeDocument);
 };

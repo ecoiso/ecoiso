@@ -2,11 +2,13 @@
 <div class="nav-head" ng-controller="CompaniesController" ng-init="init()" ng-click="init()" id="onclick-change-showname">
     <!-- site logo -->
     <a  ng-if="authentication.user.roles[0] != 'commander' && authentication.user.roles[0] != 'agency ' " href="/{{company.shortName}}#!/activities" class="site-logo">
+        <img ng-if="authentication.user.roles[0] != 'commander' && authentication.user.roles[0] != 'agency ' "  src="uploads/{{company.logo}}" height="30px" width="30px">
         <span class="text"  >{{company.showName}}</span>
     </a>
     <a  ng-show="authentication.user.roles[0] == 'commander' || authentication.user.roles[0] == 'agency ' " href="/administrator#!/activities" class="site-logo">
         <i class="ion ion-home" ng-show="authentication.user.roles[0] == 'agency' "></i>
         <i class="ion ion-android-globe" ng-show="authentication.user.roles[0] == 'commander' "></i>
+
         <span class="text" ng-show="authentication.user.roles[0] == 'commander' ">Trụ sở</span>
         <span class="text" ng-show="authentication.user.roles[0] == 'agency' ">Quản trị hệ thống</span>
     </a>

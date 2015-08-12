@@ -144,8 +144,7 @@ exports.updateCompanyAdmin = function(req,res){
 /**
  * */
 exports.uploadLogo = function(req,res){
-
-    if (req.url === '/uploadLogo' && req.method === 'POST') {
+    if (req.url === '/uploads/uploadLogo' && req.method === 'POST') {
         // parse a file upload
         var form = new multiparty.Form();
         var host = req.get('host');
@@ -164,9 +163,9 @@ exports.uploadLogo = function(req,res){
                             if (err) {
                                 res.json(err);
                             } else {
-								gm(this.getImgStream(newPath)).size(function(err, value){
+								/*gm(this.getImgStream(newPath)).size(function(err, value){
 										console.log(value);
-									})
+									})*/
                                 res.send(_filename);
                             }
                         });
@@ -175,6 +174,38 @@ exports.uploadLogo = function(req,res){
         });
 
     }
+};
+exports.uploadImageLogin = function(req,res){
+	if (req.url === '/uploads/uploadImageLogin' && req.method === 'POST') {
+		// parse a file upload
+		var form = new multiparty.Form();
+		var host = req.get('host');
+
+		form.parse(req, function(err, fields, file) {
+			//console.log(files);
+			if(typeof file !== "undefined"){
+				if( typeof  file.file[0] !== "undefined") {
+					var file = file.file[0];
+					var filename = Date.now() + '_' + file.originalFilename;
+					var _filename = filename.split(' ').join('_');
+					fs.readFile(file.path, function (err, data) {
+						var newPath = "./public/uploads/" + _filename;
+						var gm = require('gm');
+						fs.writeFile(newPath, data, function (err) {
+							if (err) {
+								res.json(err);
+							} else {
+								/*gm(this.getImgStream(newPath)).size(function(err, value){
+								 console.log(value);
+								 })*/
+								res.send(_filename);
+							}
+						});
+					});
+				}}
+		});
+
+	}
 };
 exports.createDefaultAccount = function(req,res){
 	var obj = req.body;

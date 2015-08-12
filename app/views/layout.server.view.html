@@ -178,7 +178,7 @@
 
 	<header class="site-head" ng-controller="HeaderController" style="margin:0;width:100%"  data-ng-show="authentication.user"
             id="site-head" ng-class="{'fixedHeader': fixedHeader}" data-ng-include="'/modules/core/views/header.client.view.html'" ></header>
-    <div class="main-container clearfix" ng-class="{true:'', false:'backgroundLogin', '':'backgroundLogin'}[authentication.user]">
+    <div  class="main-container clearfix" ng-class="{true:'', false:'backgroundLogin', '':'backgroundLogin'}[authentication.user]" id="main-container">
         <aside class="nav-wrap"  data-ng-show="authentication.user"
                id="site-nav" custom-scrollbar
                data-ng-include="'/modules/core/views/nav.client.view.html'">

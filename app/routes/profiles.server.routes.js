@@ -21,14 +21,14 @@ module.exports = function(app) {
 
     //app.route('listProfiles').get(profiles.listProfiles);
 
-    app.route('/rootProfile').get(profiles.rootProfile);
+    app.route('/folder/rootProfile').get(profiles.rootProfile);
 
     app.route('/childProfile/:profileId').get(profiles.childProfile);
     app.route('/documentChildProfile/:profileId').get(profiles.documentChildProfile);
 
-    app.route('/uploadProfile').post(profiles.uploadProfile);
+    app.route('/folder/uploadProfile').post(profiles.uploadProfile);
 
-    app.route('/saveViewerProfile').post(profiles.saveViewerProfile);
+    app.route('/folder/saveViewerProfile').post(profiles.saveViewerProfile);
 
 
 

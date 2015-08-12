@@ -200,7 +200,7 @@ exports.downloadDocument = function(req, res){
 var multiparty = require('multiparty');
 var fs = require('fs');
 exports.updateNewVersion = function(req,res){
-    if (req.url === '/updateNewVersion' && req.method === 'POST') {
+    if (req.url === '/documents/updateNewVersion' && req.method === 'POST') {
         // parse a file upload
         var form = new multiparty.Form();
         var host = req.get('host');
@@ -258,7 +258,7 @@ exports.updateNewVersion = function(req,res){
 
 /**/
 exports.documentUpdateVersion = function(req,res){
-    if (req.url === '/documentUpdateVersion' && req.method === 'POST') {
+    if (req.url === '/documents/documentUpdateVersion' && req.method === 'POST') {
         var doc = req.body[0];
         //console.log(doc);
          Document.find({_id:doc.docId}, function (err, old_document) {

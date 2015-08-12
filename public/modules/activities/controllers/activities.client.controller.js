@@ -70,6 +70,10 @@ angular.module('activities').controller('ActivitiesController', ['$scope','$http
 			$http.get('findCompanyByShortName'+ window.location.pathname).success(function(data){
 				//$http.get('findCompany/'+data[0]._id).success(function(data1){
 				    $scope.company = data[0];
+					document.getElementById("main-container").style.backgroundImage = 'url(' +'uploads/'+ data[0].imageLogin + ')';
+					if($scope.authentication.user){
+						document.getElementById("main-container").style.backgroundImage = '';
+					}
 				//});
 			})
         };

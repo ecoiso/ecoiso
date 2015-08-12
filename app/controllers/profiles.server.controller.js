@@ -181,7 +181,7 @@ exports.documentChildProfile = function(req, res) {
 var multiparty = require('multiparty');
 var fs = require('fs');
 exports.uploadProfile = function(req, res) {
-    if (req.url === '/uploadProfile' && req.method === 'POST') {
+    if (req.url === '/folder/uploadProfile' && req.method === 'POST') {
         var form = new multiparty.Form();
         var host = req.get('host');
 

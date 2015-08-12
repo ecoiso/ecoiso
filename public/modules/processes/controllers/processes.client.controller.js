@@ -196,7 +196,7 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
                 },
                 function(isConfirm){
                     if (isConfirm) {
-                        $http.post('/requirePublic',process).success(function(data) {
+                        $http.post('/process/requirePublic',process).success(function(data) {
                             $scope.process = data;
                             $location.path('processes/' + data._id);
                         }, function(errorResponse) {
@@ -224,7 +224,7 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
                 },
                 function(isConfirm){
                     if (isConfirm) {
-                        $http.post('/denyPublic',process).success(function(data) {
+                        $http.post('/process/denyPublic',process).success(function(data) {
                             $scope.process = data;
                             $location.path('processes/' + data._id);
                         }, function(errorResponse) {
@@ -252,7 +252,7 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
                 },
                 function(isConfirm){
                     if (isConfirm) {
-                    $http.post('/acceptPublic',process).success(function(data) {
+                    $http.post('/process/acceptPublic',process).success(function(data) {
                         $scope.process = data;
                         $location.path('processes/' + data._id);
                     }, function(errorResponse) {
@@ -375,7 +375,7 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
             //var obj = [{'filename':filename}];
             //$http.post('/downloadDocument',obj).success(function(data){
                 //window.location.href = '/uploads/'+filename;
-                window.open('/aa/uploads/'+filename,'_blank');
+                window.open('/uploads/'+filename,'_blank');
             //});
         };
         /*$scope.uploadNewVersions = function(){
@@ -427,7 +427,7 @@ angular.module('processes').controller('ModelUploadController', ['$scope','$http
                     var file = files[i];
                     sumBytes += file.size;
                     Upload.upload({
-                        url: '/uploadModel',
+                        url: '/upload/uploadModel',
                         method: "POST",
                         fields: {
                             filename: file.name,
@@ -497,7 +497,7 @@ angular.module('processes').controller('ProcessUploadController', ['$scope','$ht
                     var file = files[i];
                     sumBytes += file.size;
                     Upload.upload({
-                        url: '/uploadProcess',
+                        url: '/upload/uploadProcess',
                         method : "POST",
                         fields:{
                             filename: file.name,
@@ -597,7 +597,7 @@ angular.module('processes').controller('NewVersionUploadController', ['$scope','
                 var file = files[i];
                 sumBytes += file.size;
                 Upload.upload({
-                    url: '/updateNewVersion',
+                    url: '/documents/updateNewVersion',
                     method : "POST",
                     fields:{
                         filename: file.name,
@@ -606,7 +606,7 @@ angular.module('processes').controller('NewVersionUploadController', ['$scope','
                     },
                     file: file
                 }).success(function (data, status, headers, config) {
-                    $http.post('documentUpdateVersion',data).success(function(response){
+                    $http.post('/documents/documentUpdateVersion',data).success(function(response){
                        // $location.path('processes/' + response.process);
                         //window.location.reload();
                     });

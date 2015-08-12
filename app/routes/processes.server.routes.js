@@ -23,14 +23,14 @@ module.exports = function(app) {
     //list publish
     app.route('/process/listPublish').get(processes.listPublish);
     //upload model files
-    app.route('/uploadModel').post(processes.uploadModel);
+    app.route('/upload/uploadModel').post(processes.uploadModel);
     //upload process files
-    app.route('/uploadProcess').post(processes.uploadProcess);
+    app.route('/upload/uploadProcess').post(processes.uploadProcess);
 
-    app.route('/requirePublic').post(processes.requirePublic);
-    app.route('/denyPublic').post(processes.denyPublic);
-    app.route('/acceptPublic').post(processes.acceptPublic);
-    app.route('/searchGlobal').post(processes.searchGlobal);
+    app.route('/process/requirePublic').post(processes.requirePublic);
+    app.route('/process/denyPublic').post(processes.denyPublic);
+    app.route('/process/acceptPublic').post(processes.acceptPublic);
+    app.route('/process/searchGlobal').post(processes.searchGlobal);
 
 
 

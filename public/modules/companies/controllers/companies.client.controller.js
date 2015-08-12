@@ -9,7 +9,7 @@ angular.module('companies').controller('CompaniesController', ['$scope','$http',
         $scope.model = [];
         $scope.logo = '';
         $scope.init = function(){
-            $http.get('findCompanyByShortName'+ window.location.pathname).success(function(data){
+            $http.get('/findCompanyByShortName'+ window.location.pathname).success(function(data){
                 //$http.get('findCompany/'+data[0]._id).success(function(data1){
                 $scope.company = data[0];
                 document.getElementById('site-head').style.backgroundColor = $scope.company.colorBackground;
@@ -191,7 +191,7 @@ angular.module('companies').controller('CompaniesController', ['$scope','$http',
                         var file = file[i];
                         sumBytes += file.size;
                         Upload.upload({
-                            url: '/uploadLogo',
+                            url: '/uploads/uploadLogo',
                             method: "POST",
                             fields: {
                                 filename: file.name
@@ -229,6 +229,56 @@ angular.module('companies').controller('CompaniesController', ['$scope','$http',
                 }
             }
         };
+        $scope.$watch('file_login', function () {
+            $scope.uploadImageLogin($scope.file_login);
+        });
+        $scope.uploadImageLogin = function (file) {
+            if (typeof file !== "undefined") {
+                var sumBytes = 0;
+                if (file && file.length) {
+                    for (var i = 0; i < file.length; i++) {
+                        var file = file[i];
+                        sumBytes += file.size;
+                        Upload.upload({
+                            url: '/uploads/uploadImageLogin',
+                            method: "POST",
+                            fields: {
+                                filename: file.name
+                            },
+                            file: file
+                        }).progress(function (evt) {
+                            /*var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                             $scope.log = 'progress: ' + progressPercentage + '% ' +$scope.log;*/
+                        }).success(function (data, status, headers, config) {
+                            $scope.company.imageLogin = data;
+                        });
+                    }
+                }
+                if(parseInt(sumBytes) > 0){
+                    document.getElementById('loading-screen').style.display = "block";
+                    window.scroll(0,0);
+                    document.body.style.overflow = "hidden";
+                    document.getElementById('processBar').style.display = "block";
+                    var maxTime = sumBytes/1000;
+                    if(sumBytes > 500000) maxTime = 500;
+                    var percent = 0;
+                    var processbar = setInterval(function() {
+                        percent += 1;
+                        document.getElementById("processBar").getElementsByTagName("div")[0].style.width = percent + '%';
+                        document.getElementById("processBar").getElementsByTagName("span")[0].innerHTML = percent;
+                        if(percent == 100) {
+                            document.getElementById('loading-screen').style.display = "none";
+                            document.body.style.overflow = "auto";
+                            document.getElementById('processBar').style.display = "none";
+                            clearInterval(processbar);
+                            swal("", "Tải lên thành công!", "success");
+                            //window.location.reload();
+                        }
+                    },maxTime);
+                }
+            }
+        };
+
         $scope.updateCompanyAdmin = function(){
             var showName = document.getElementById('showName').value;
             var radios = document.getElementsByName('radio');

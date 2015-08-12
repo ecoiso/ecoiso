@@ -67,7 +67,7 @@ angular.module('profiles').controller('ProfilesController', ['$scope', '$statePa
 			});
 		};
         $scope.findLVOne = function(){
-            $http.get('rootProfile').success(function(data){
+            $http.get('/folder/rootProfile').success(function(data){
                 $scope.parentProfile = [];
                 $scope.profiles = data;
             });
@@ -183,7 +183,7 @@ angular.module('profiles').controller('ProfileUploadController', ['$scope','$htt
                     var file = files[i];
                     sumBytes += file.size;
                     Upload.upload({
-                        url: '/uploadProfile',
+                        url: '/folder/uploadProfile',
                         method : "POST",
                         fields:{
                             filename: file.name,
@@ -248,7 +248,7 @@ var ModalConfigProfileController = angular.module('profiles').controller('ModalC
         };*/
         $scope.saveViewerProfile = function(){
             $scope.multipleUser.profileId = document.getElementById('profileIdConfig').value;
-            $http.post('saveViewerProfile',$scope.multipleUser).success(function(data){
+            $http.post('/folder/saveViewerProfile',$scope.multipleUser).success(function(data){
                 $scope.modalClose();
                 sweetAlert("Cấu hình thành công");
             })

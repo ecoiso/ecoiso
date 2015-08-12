@@ -54,16 +54,16 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <span data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" data-ng-controller="ActivitiesController">
                 <li>
-                    <a ng-if="authentication.user.roles[0] != 'agency' && authentication.user.roles[0] != 'commander'" href="/#!/settings/profile">Thay đổi hồ sơ</a>
+                    <a ng-if="authentication.user.roles[0] != 'agency' && authentication.user.roles[0] != 'commander'" href="/{{company.shortName}}#!/settings/profile">Thay đổi hồ sơ</a>
                     <a ng-if="authentication.user.roles[0] == 'agency' || authentication.user.roles[0] == 'commander'" href="/administrator#!/settings/profile">Thay đổi hồ sơ</a>
                 </li>
                 <!--<li>
                     <a href="/#!/settings/accounts">Manage Social Accounts</a>
                 </li>-->
                 <li data-ng-show="authentication.user.provider === 'local'">
-                    <a ng-if="authentication.user.roles[0] != 'agency' && authentication.user.roles[0] != 'commander'" href="/#!/settings/password">Đổi mật khẩu </a>
+                    <a ng-if="authentication.user.roles[0] != 'agency' && authentication.user.roles[0] != 'commander'" href="/{{company.shortName}}#!/settings/password">Đổi mật khẩu </a>
                     <a ng-if="authentication.user.roles[0] == 'agency' || authentication.user.roles[0] == 'commander'" href="/administrator#!/settings/password">Đổi mật khẩu </a>
                 </li>
                 <li class="divider"></li>
