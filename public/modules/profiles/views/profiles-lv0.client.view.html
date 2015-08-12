@@ -26,7 +26,7 @@
                             </fieldset>
                         </form>
                         <form class="form-horizontal right col-lg-4">
-                            <input class="form-control input-sm" placeholder="Tìm kiếm trong trang hiện tại" ng-model="searchTextFilter" type="text">
+                            <input class="form-control input-sm" placeholder="Tìm kiếm mọi thứ trong trang hiện tại..." ng-model="searchTextFilter" type="text">
                         </form>
                     </div>
                     <div class="row" style="padding:30px">
@@ -55,7 +55,7 @@
                                 <button ng-if="authentication.user._id == profile.user" title="Cấu hình" ng-click="configFolder(profile)" style="position: absolute;top:80%;right:18%;height:25px;line-height:25px;padding-top:0;width:38px;text-align:center" md-ink-ripple="" class="btn btn-default " type="button"><i class="ion ion-android-settings"></i><div class="md-ripple-container" style=""></div></button>
                                 <span ng-if="authentication.user._id == profile.user"><button title="Xóa" ng-click="removeProfiles(profile)" style="position: absolute; height:25px;line-height:25px;top:80%;right:40%;padding-top:0;width:38px" md-ink-ripple="" class="btn btn-default btn-gplus" type="button"><i class="ion ion-trash-a"></i><div class="md-ripple-container" style=""></div></button></span>
                             </div>
-                        </div>itle
+                        </div>
                     </div>
                 </div>
 

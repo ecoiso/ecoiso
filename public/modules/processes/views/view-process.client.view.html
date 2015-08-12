@@ -42,12 +42,12 @@
                 </div>
 
                 <div id="button-process-process-2"  ng-if="authentication.user.roles[0] == 'manager' && process.kind[0] != 'publish' ">
-                    <button ng-click="acceptPublic()" type="button" class="btn btn-success btn-icon-inline pull-right" md-ink-ripple="" style="margin:5px 17px">
+                    <button ng-click="acceptPublic()" type="button" title="Phê duyệt và ban hành" class="btn btn-success btn-icon-inline pull-right" md-ink-ripple="" style="margin:5px 17px">
                         <i class="ion ion-paper-airplane"></i>Phê duyệt và ban hành
                         <div style="" class="md-ripple-container"></div>
                         <div class="md-ripple-container" style=""></div>
                     </button>
-                    <button ng-click="denyPublic()" type="button" class="btn btn-danger btn-icon-inline pull-right" md-ink-ripple="" style="margin:5px 17px">
+                    <button ng-click="denyPublic()" type="button" title="Từ chối phê duyệt và ban hành" class="btn btn-danger btn-icon-inline pull-right" md-ink-ripple="" style="margin:5px 17px">
                         <i class="ion ion-paper-airplane"></i>Từ chối phê duyệt và ban hành
                         <div style="" class="md-ripple-container"></div>
                         <div class="md-ripple-container" style=""></div>
@@ -121,7 +121,7 @@
                                     <input type="text" data-ng-model="name" id="name" class="form-control"  required placeholder="Điền tên thư mục chứa hồ sơ...">
                                 </div>
                                 <div class="form-group" style="padding:0;margin:0">
-                                    <button md-ink-ripple="" class="btn btn-line-info btn-icon-inline" type="submit"><i class="ion ion-folder"></i>Tạo thư mục<div class="md-ripple-container" style=""></div></button>
+                                    <button md-ink-ripple="" class="btn btn-line-info btn-icon-inline" title=Tạo thư mục"" type="submit"><i class="ion ion-folder"></i>Tạo thư mục<div class="md-ripple-container" style=""></div></button>
                                 </div>
                             </fieldset>
                         </form>
