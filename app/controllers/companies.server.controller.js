@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Company = mongoose.model('Company'),
 	User = mongoose.model('User'),
+	crypto = require('crypto'),
 	_ = require('lodash');
 var multiparty = require('multiparty');
 var fs = require('fs');
@@ -212,12 +213,42 @@ exports.createDefaultAccount = function(req,res){
 	var client = mongoose.createConnection('mongodb://localhost/'+obj.nameDB);
 	client.on('connected', function() {
 		delete obj.$resolved;
+		delete obj._id;
 		client.collection('companies').save(obj,function(err, company) {
 			if (err) return console.log(err);
 		});
+	var user = new User();
+		user.username = "administrator";
+		user.resetPasswordToken = randomString();
+		user.password = user.resetPasswordToken;
+		user.provider = 'local';
+		user.firstName = 'Quản trị';
+		user.lastName = 'Hệ thống';
+		user.email = 'example@gmail.com';
+		user.roles = ['administrator'];
+		user.displayName = user.firstName + ' ' + user.lastName;
+		user.save(function(err,data) {
+			if (err) return console.log(err);
+			var clone_user = {};
+			clone_user.username = data.username;
+			clone_user.resetPasswordToken = data.resetPasswordToken;
+			clone_user.password = data.password;
+			clone_user.provider = 'local';
+			clone_user.salt = data.salt;
+			clone_user.firstName = 'Quản trị';
+			clone_user.lastName = 'Hệ thống';
+			clone_user.email = 'example@gmail.com';
+			clone_user.roles = ['admin'];
+			clone_user.displayName = user.firstName + ' ' + user.lastName;
+			client.collection('users').save(clone_user,function(err) {
+				if (err) return console.log(err);
+			});
+		});
 	});
 };
-
+function hashPassword(salt,password) {
+	return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+};
 exports.findCompanyByShortName = function(req,res){
 	var shortName = req.params.shortName;
 	Company.find({"shortName":shortName}).exec(function(err, company) {

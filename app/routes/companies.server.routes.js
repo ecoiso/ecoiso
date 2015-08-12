@@ -20,7 +20,7 @@ module.exports = function(app) {
 	app.route('/uploads/uploadLogo').post(companies.uploadLogo);
 	app.route('/uploads/uploadImageLogin').post(companies.uploadImageLogin);
 
-	app.route('/createDefaultAccount').post(companies.createDefaultAccount);
+	app.route('/user/createDefaultAccount').post(companies.createDefaultAccount);
 	app.route('/findCompanyByShortName/:shortName').get(companies.findCompanyByShortName);
 
 	app.route('/findCompany/:companyID').get(companies.findCompany);
