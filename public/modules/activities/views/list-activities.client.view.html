@@ -13,25 +13,28 @@
                         </p>-->
                         <div class="mt20">
                             <p><b>Số thành viên :</b></p>
-                            <p><b>Số văn bản đã ban hành  :</b></p>
-                            <p><b>Số hồ sơ đang quản lý  :</b></p>
+
+                            <p><b>Số văn bản đã ban hành :</b></p>
+
+                            <p><b>Số hồ sơ đang quản lý :</b></p>
                         </div>
                     </div>
                     <div class="right mt10" style="margin-right: 50px">
                         <p>
-                            <img src="uploads/{{company.logo}}" height="200px" width="200px">
+                            <img src="picture/{{company.logo}}" height="200px" width="200px">
                         </p>
                     </div>
                     <div class="clearfix col-md-12 col-xs-12" style="text-align: justify">
-                        <i class="ion ion-quote left"></i>
-                        <div class="left first-text-intro" > {{company.intro | limitTo:1}}</div>
+
+                        <div class="left first-text-intro"> {{company.intro | limitTo:1}}</div>
                         {{company.intro }}
-                        <i class="ion ion-quote"></i>
+
 
                     </div>
                 </div>
             </div>
-        </div> <!-- #end row -->
+        </div>
+        <!-- #end row -->
         <!-- row -->
         <div class="row">
             <!-- profile -->
@@ -39,34 +42,47 @@
                 <div class="panel panel-default mb20 panel-hovered profile-widget">
                     <div class="panel-body">
                         <div class="clearfix mb15 top-info">
-                            <div >
-                                <h3 class="text-light mt0"><b><span data-ng-bind="authentication.user.displayName"></span></b></h3>
+                            <div>
+                                <h3 class="text-light mt0"><b><span
+                                        data-ng-bind="authentication.user.displayName"></span></b></h3>
+
                                 <p><strong>Chức vụ :</strong>
                                     <span ng-if="authentication.user.roles == 'manager'"> Trưởng Ban ISO</span>
                                     <span ng-if="authentication.user.roles == 'staff'"> Cán bộ ISO</span>
                                     <span ng-if="authentication.user.roles == 'user'"> Nhân Viên</span>
 
                                 </p>
-                                <p><strong>Phòng Ban :</strong><span data-ng-bind="authentication.user.department"></span></p>
-                                <p><strong>Thư điện tử :</strong><span data-ng-bind="authentication.user.email"></span></p>
+
+                                <p><strong>Phòng Ban :</strong><span
+                                        data-ng-bind="authentication.user.department"></span></p>
+
+                                <p><strong>Thư điện tử :</strong><span data-ng-bind="authentication.user.email"></span>
+                                </p>
 
                             </div>
                         </div>
                         <ul class="user-badges list-unstyled row">
                             <li class="col-xs-6">
                                 <i class="ion ion-ios-chatboxes-outline text-success"></i>
-                                <a href="/#!/settings/password" style="color:#ffffff"><button class="btn btn-success btn-xs mt15" title="Đổi mật khẩu">Đổi mật khẩu</button></a>
+                                <a href="/#!/settings/password" style="color:#ffffff">
+                                    <button class="btn btn-success btn-xs mt15" title="Đổi mật khẩu">Đổi mật khẩu
+                                    </button>
+                                </a>
                             </li>
                             <li class="col-xs-6">
                                 <i class="ion ion-ios-body text-danger"></i>
-                                <a href="/#!/settings/profile" style="color:#ffffff"><button class="btn btn-primary btn-xs mt15" title="Thay đổi hồ sơ">Thay đổi hồ sơ</button></a>
+                                <a href="/#!/settings/profile" style="color:#ffffff">
+                                    <button class="btn btn-primary btn-xs mt15" title="Thay đổi hồ sơ">Thay đổi hồ sơ
+                                    </button>
+                                </a>
                             </li>
                         </ul>
-                    </div> <!-- #end panel-body -->
+                    </div>
+                    <!-- #end panel-body -->
                 </div>
             </div>
             <div class="col-md-6 col-sm-6">
-                <div  class="panel panel-default mb20 panel-hovered">
+                <div class="panel panel-default mb20 panel-hovered">
                     <div class="panel-heading" style="background: none">Bảng thông báo</div>
                     <div class="panel-body text-center">
 
@@ -75,5 +91,6 @@
             </div>
         </div>
         <!-- #end row -->
-    </div> <!-- #end page-wrap -->
+    </div>
+    <!-- #end page-wrap -->
 </div>
