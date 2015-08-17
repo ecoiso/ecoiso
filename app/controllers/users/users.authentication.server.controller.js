@@ -95,23 +95,30 @@ exports.signupAdmin = function(req,res){
  * Signin after passport authentication
  */
 exports.signin = function(req, res, next) {
-	passport.authenticate('local', function(err, user, info) {
-		if (err || !user) {
-			res.status(400).send(info);
-		} else {
-			// Remove sensitive data before login
-			user.password = undefined;
-			user.salt = undefined;
+	var linkUrl = req.headers.referer;
+	var last = linkUrl.indexOf("/", 8);
+	var originalUrl = linkUrl.substring(last+1,linkUrl.length);
+	if(originalUrl.length == 0){
+		res.status(400).send(info);
+	}else {
+		passport.authenticate('local', function(err, user, info) {
+			if (err || !user) {
+				res.status(400).send(info);
+			} else {
+				// Remove sensitive data before login
+				user.password = undefined;
+				user.salt = undefined;
 
-			req.login(user, function(err) {
-				if (err) {
-					res.status(400).send(err);
-				} else {
-					res.json(user);
-				}
-			});
-		}
-	})(req, res, next);
+				req.login(user, function(err) {
+					if (err) {
+						res.status(400).send(err);
+					} else {
+						res.json(user);
+					}
+				});
+			}
+		})(req, res, next);
+	}
 };
 
 /**

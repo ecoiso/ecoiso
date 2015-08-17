@@ -9,13 +9,30 @@ angular.module('companies').controller('CompaniesController', ['$scope','$http',
         $scope.model = [];
         $scope.logo = '';
         $scope.init = function(){
-            $http.get('/findCompanyByShortName'+ window.location.pathname).success(function(data){
-                //$http.get('findCompany/'+data[0]._id).success(function(data1){
-                $scope.company = data[0];
-                document.getElementById('site-head').style.backgroundColor = $scope.company.colorBackground;
-                document.getElementById('onclick-change-showname').style.backgroundColor = $scope.company.colorBackground;
-                //});
-            })
+            if($scope.authentication.user){
+                $http.get('/user/checkCurrentUser').success(function(data){
+                   if(data != "okie") {
+                       sweetAlert("Truy cập vùng không hợp lệ");
+                       window.location.reload();
+                   };
+                });
+                $http.get('/findCompanyByShortName'+ window.location.pathname).success(function(data){
+                    //$http.get('findCompany/'+data[0]._id).success(function(data1){
+                    $scope.company = data[0];
+                    document.getElementById('site-head').style.backgroundColor = $scope.company.colorBackground;
+                    document.getElementById('onclick-change-showname').style.backgroundColor = $scope.company.colorBackground;
+                    //});
+                });
+            }else{
+                $http.get('/findCompanyByShortName'+ window.location.pathname).success(function(data){
+                    //$http.get('findCompany/'+data[0]._id).success(function(data1){
+                    $scope.company = data[0];
+                    document.getElementById('site-head').style.backgroundColor = $scope.company.colorBackground;
+                    document.getElementById('onclick-change-showname').style.backgroundColor = $scope.company.colorBackground;
+                    //});
+                });
+            }
+
         };
         $scope.init();
 		// Create new Company

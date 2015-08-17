@@ -16,7 +16,7 @@ var fs = require('fs');
  */
 exports.create = function(req, res) {
 	var company = new Company(req.body);
-    //console.log(company);
+    //console.log(req);
 	company.user = req.user;
 	company.save(function(err) {
 		if (err) {
@@ -24,6 +24,14 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
+			var client = mongoose.createConnection('mongodb://localhost/'+company.nameDB);
+			client.on('connected', function() {
+				delete company.$resolved;
+				delete company._id;
+				client.collection('companies').save(company,function(err) {
+					if (err) return console.log(err);
+				});
+			});
 			res.jsonp(company);
 		}
 	});
@@ -209,14 +217,10 @@ exports.uploadImageLogin = function(req,res){
 exports.createDefaultAccount = function(req,res){
 	var obj = req.body;
 	var client = mongoose.createConnection('mongodb://localhost/'+obj.nameDB);
-	client.on('connected', function() {
-		delete obj.$resolved;
-		delete obj._id;
-		client.collection('companies').save(obj,function(err, company) {
-			if (err) return console.log(err);
-		});
+	client.on('connected', function(err) {
+		if (err) return console.log(err);
 	var user = new User();
-		user.username = obj.nameDB+ "_administrator";
+		user.username = obj.shortName+ "administrator";
 		user.resetPasswordToken = randomString();
 		user.password = user.resetPasswordToken;
 		user.provider = 'local';
@@ -224,11 +228,12 @@ exports.createDefaultAccount = function(req,res){
 		user.lastName = 'Hệ thống';
 		user.email = 'example@gmail.com';
 		user.roles = ['administrator'];
+		user.company = obj._id;
 		user.displayName = user.firstName + ' ' + user.lastName;
 		user.save(function(err,data) {
 			if (err) return console.log(err);
 			var clone_user = {};
-			clone_user.username = "administrator";
+			clone_user.username = 'administrator';
 			clone_user.resetPasswordToken = data.resetPasswordToken;
 			clone_user.password = data.password;
 			clone_user.provider = 'local';
@@ -236,11 +241,13 @@ exports.createDefaultAccount = function(req,res){
 			clone_user.firstName = 'Quản trị';
 			clone_user.lastName = 'Hệ thống';
 			clone_user.email = 'example@gmail.com';
-			clone_user.roles = ['admin'];
+			clone_user.roles = ['administrator'];
+			clone_user.company = data.company;
 			clone_user.displayName = user.firstName + ' ' + user.lastName;
 			client.collection('users').save(clone_user,function(err) {
 				if (err) return console.log(err);
 			});
+			res.send('okie');
 		});
 	});
 };
@@ -251,7 +258,7 @@ exports.findCompanyByShortName = function(req,res){
 	var shortName = req.params.shortName;
 	Company.find({"shortName":shortName}).exec(function(err, company) {
 		if (err) return console.log(err);
-		if( company.length == 0) res.render('./home/index');
+		if( company.length == 0) res.json({err:1});
 		else res.json(company);
 		});
 };
@@ -268,4 +275,26 @@ exports.findCompany = function(req,res){
 			res.json(company);
 		}
 	});
+};
+/**
+ * */
+exports.checkCurrentUser = function(req,res){
+	var user = req.user;
+	var linkUrl = req.headers.referer;
+	var last = linkUrl.indexOf("/", 8);
+	var originalUrl = linkUrl.substring(last+1,linkUrl.length);
+	if(user.company == '' && originalUrl == "administrator") res.send("okie");
+	else{
+		Company.find({shortName:originalUrl},function(err,data){
+			if(err || user.company != data._id) {
+				req.logout();
+				res.redirect('/#!/signin');
+			}else{
+				res.send("okie");
+			}
+
+		});
+	}
+
+
 }

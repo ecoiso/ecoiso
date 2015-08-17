@@ -133,16 +133,6 @@ exports.changeCheckAdmin = function(req,res){
  * */
 
 exports.listUserInCompany = function(req,res){
-   /* User.find({"provider" : "local"},function (err, users) {
-        if (err) {
-            return res.status(400).send({
-                message: errorHandler.getErrorMessage(err)
-            });
-        } else {
-            console.log(users);
-            //res.json(users);
-        }
-    });*/
     User.find().exec(function(err, users) {
         if (err) {
             return res.status(400).send({
