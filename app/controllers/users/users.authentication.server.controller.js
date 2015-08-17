@@ -21,6 +21,15 @@ exports.signup = function(req, res) {
 	user.provider = 'local';
 	user.displayName = user.firstName + ' ' + user.lastName;
 
+	var userAdmin = req.user;
+	var linkUrl = req.headers.referer;
+	var last = linkUrl.indexOf("/", 8);
+	var originalUrl = linkUrl.substring(last+1,linkUrl.length);
+	if(userAdmin.company != '' && originalUrl != "administrator") {
+		var originUsername = user.username;
+		var newUsername = originalUrl+originUsername;
+		user.username = newUsername;
+	}
    // console.log(req);
 	// Then save the user 
 	user.save(function(err) {
@@ -29,17 +38,28 @@ exports.signup = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			// Remove sensitive data before login
-			/*user.password = undefined;
-			user.salt = undefined;
+			if(userAdmin.company != '' && originalUrl != "administrator") {
+				var client = mongoose.createConnection('mongodb://localhost/ecoiso-' + originalUrl);
+				client.on('connected', function () {
 
-			req.login(user, function(err) {
-				if (err) {
-					res.status(400).send(err);
-				} else {*/
-					res.json(user);
-				/*}
-			});*/
+					var user_default = {
+						"_id": user._id,
+						'username' : originUsername,
+						"company" : userAdmin.company,
+						"lastName" : user.lastName,
+						"firstName" :  user.firstName,
+						"displayName" : user.displayName,
+						"provider" : "local",
+						"password":user.password,
+						'roles': ['user']
+					};
+					client.collection('users').save(user_default, function (err) {
+						if (err) return console.log(err);
+						else console.log(user);
+					});
+				});
+			}
+			res.json(user);
 		}
 	});
 };

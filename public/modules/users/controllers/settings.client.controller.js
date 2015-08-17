@@ -75,6 +75,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
             if($scope.authentication.user){
                 $http.get('/users/listUserInCompany').success(function(data){
                     $scope.users = data;
+					$scope.shortName = window.location.pathname.substring("1");
                 });
                 //$scope.users = Users.query();
                 $scope.$watch('users', function(users){

@@ -133,7 +133,8 @@ exports.changeCheckAdmin = function(req,res){
  * */
 
 exports.listUserInCompany = function(req,res){
-    User.find().exec(function(err, users) {
+    var companyID = req.user.company;
+    User.find({company:companyID}).exec(function(err, users) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)

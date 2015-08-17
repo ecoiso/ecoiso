@@ -56,6 +56,7 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {{shortName}}
                     <tr data-ng-repeat="user in users | filter:searchTextFilter" style="text-align: center" >
                         <td>
                             <div ng-if="user.roles[0] != 'admin' "  class="ui-checkbox ui-checkbox-primary ml5">
@@ -64,9 +65,9 @@
                             </div>
                         </td>
                         <td><span data-ng-bind="user.displayName"></span></td>
-                        <td><span data-ng-bind="user.username"></span></td>
+                        <td><span data-ng-bind="user.username.replace('{{shortName}}','')"></span></td>
                         <td><span data-ng-bind="user.email"></span></td>
-                        <td ng-if="user.roles[0] == 'admin' ">Quản trị</td>
+                        <td ng-if="user.roles[0] == 'administrator' ">Quản trị hệ thống</td>
                         <td ng-if="user.roles[0] == 'manager' ">Trưởng ban ISO</td>
                         <td ng-if="user.roles[0] == 'staff' ">Cán bộ ISO</td>
                         <td ng-if="user.roles[0] == 'user' ">Nhân viên</td>
