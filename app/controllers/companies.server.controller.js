@@ -258,11 +258,16 @@ function hashPassword(salt,password) {
 };
 exports.findCompanyByShortName = function(req,res){
 	var shortName = req.params.shortName;
-	Company.find({"shortName":shortName}).exec(function(err, company) {
-		if (err) return console.log(err);
-		if( company.length == 0) res.json({err:1});
-		else res.json(company);
+	if(shortName == 'administrator'){
+		res.send('do not care');
+	}else{
+		Company.find({"shortName":shortName}).exec(function(err, company) {
+			if (err) return console.log(err);
+			if( company.length == 0) res.json({err:1});
+			else res.json(company);
 		});
+	}
+
 };
 /**
  * */
@@ -288,9 +293,9 @@ exports.checkCurrentUser = function(req,res){
 	if(user.company == '' && originalUrl == "administrator") res.send("okie");
 	else{
 		Company.find({shortName:originalUrl},function(err,data){
-			if(err || user.company != data._id) {
+			if(err|| data.length == 0 || user.company != data[0]._id) {
 				req.logout();
-				res.redirect('/#!/signin');
+				res.redirect('/'+originalUrl+'#!/signin');
 			}else{
 				res.send("okie");
 			}
