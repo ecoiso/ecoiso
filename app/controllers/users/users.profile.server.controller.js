@@ -144,3 +144,17 @@ exports.listUserInCompany = function(req,res){
         }
     });
 }
+/**
+**/
+exports.totalUserInCompany = function(req,res){
+    var companyID = req.user.company;
+    User.find({company:companyID}).exec(function(err, users) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.send(users.length.toString());
+        }
+    });
+}

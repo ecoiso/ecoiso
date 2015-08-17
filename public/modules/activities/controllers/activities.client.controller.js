@@ -75,7 +75,16 @@ angular.module('activities').controller('ActivitiesController', ['$scope','$http
 						document.getElementById("main-container").style.backgroundImage = '';
 					}
 				//});
-			})
+			});
+			$http.get('/totalUsers/totalUserInCompany').success(function(data){
+				$scope.totalUserInCompany = data[0];
+			});
+			$http.get('/docs/totalDocs').success(function(data1){
+				$scope.totalDocs = data1;
+			});
+			$http.get('/totalProfiles/totalProfiles').success(function(data2){
+				$scope.totalProfiles = data2;
+			});
         };
         $scope.init();
 	}

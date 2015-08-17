@@ -29,6 +29,7 @@ module.exports = function(app) {
     app.route('/folder/uploadProfile').post(profiles.uploadProfile);
 
     app.route('/folder/saveViewerProfile').post(profiles.saveViewerProfile);
+    app.route('/totalProfiles/totalProfiles').get(profiles.totalProfiles);
 
 
 

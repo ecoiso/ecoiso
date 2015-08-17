@@ -363,3 +363,8 @@ function convertToPDf(filename){
     var libreoffice;
     libreoffice = spawn("libreoffice4.4", ['--headless', '--convert-to', 'output.pdf', '--outdir', '/var/www/html/public/uploads/', '/var/www/html/public/uploads/' + filename + '']);
 }
+/**
+ * */
+exports.totalDocs = function(req,res){
+    res.send('10');
+};
