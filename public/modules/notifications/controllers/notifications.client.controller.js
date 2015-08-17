@@ -1,10 +1,12 @@
 'use strict';
 
 // Notifications controller
-angular.module('notifications').controller('NotificationsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Notifications',
-	function($scope, $stateParams, $location, Authentication, Notifications) {
+angular.module('notifications').controller('NotificationsController', ['$scope', '$stateParams', '$location',  'Socket','Authentication', 'Notifications',
+	function($scope, $stateParams, $location,Socket, Authentication, Notifications) {
 		$scope.authentication = Authentication;
-
+		Socket.on('notification.created', function(notification) {
+			console.log(notification);
+		});
 		// Create new Notification
 		$scope.create = function() {
 			// Create new Notification object

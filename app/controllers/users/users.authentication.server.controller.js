@@ -1,11 +1,5 @@
 'use strict';
-
-/**
- * Module dependencies.
- */
-var _ = require('lodash'),
-	errorHandler = require('../errors.server.controller'),
-	mongoose = require('mongoose'),
+var	mongoose = require('mongoose'),
 	passport = require('passport'),
 	Company = mongoose.model('Company'),
 	User = mongoose.model('User');

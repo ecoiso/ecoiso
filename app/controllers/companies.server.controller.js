@@ -218,7 +218,7 @@ exports.createDefaultAccount = function(req,res){
 			if (err) return console.log(err);
 		});
 	var user = new User();
-		user.username = "administrator";
+		user.username = obj.nameDB+ "_administrator";
 		user.resetPasswordToken = randomString();
 		user.password = user.resetPasswordToken;
 		user.provider = 'local';
@@ -230,7 +230,7 @@ exports.createDefaultAccount = function(req,res){
 		user.save(function(err,data) {
 			if (err) return console.log(err);
 			var clone_user = {};
-			clone_user.username = data.username;
+			clone_user.username = "administrator";
 			clone_user.resetPasswordToken = data.resetPasswordToken;
 			clone_user.password = data.password;
 			clone_user.provider = 'local';
@@ -253,7 +253,8 @@ exports.findCompanyByShortName = function(req,res){
 	var shortName = req.params.shortName;
 	Company.find({"shortName":shortName}).exec(function(err, company) {
 		if (err) return console.log(err);
-		res.json(company);
+		if( company.length == 0) res.render('./home/index');
+		else res.json(company);
 		});
 };
 /**

@@ -21,6 +21,8 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
+			var socketio = req.app.get('socketio'); // tacke out socket instance from the app container
+			socketio.sockets.emit('notification.created', notification); // emit an event for all connected clients
 			res.jsonp(notification);
 		}
 	});
