@@ -41,9 +41,7 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var company = req.company ;
-
 	company = _.extend(company , req.body);
-
 	company.save(function(err) {
 		if (err) {
 			return res.status(400).send({

@@ -9,6 +9,7 @@ var mongoose = require('mongoose'),
 	chalk = require('chalk');
 
 exports.index = function(req, res) {
+
 	if(!req.user){
 		var originalUrl = req.originalUrl.substring(1);
 		if(originalUrl.length > 0 ) {
@@ -35,6 +36,7 @@ exports.index = function(req, res) {
 			res.render('./home/index');
 		}
 	}else{
+		console.log(req.companyShortName);
 		res.render('index', {
 			user: req.user || null,
 			request: req
