@@ -76,25 +76,25 @@
                 </li>
             </ul>
         </li>
-        <li class="flags-active" ng-if="authentication.user.roles[0] != 'commander' && authentication.user.roles[0] != 'agency' && authentication.user.roles[0] != 'admin'" onclick="activeNav(this)">
+        <li class="flags-active" ng-if="authentication.user.roles[0] != 'commander' && authentication.user.roles[0] != 'agency' && authentication.user.roles[0] != 'administrator'" onclick="activeNav(this)">
             <a ng-controller="ActivitiesController" href="/{{company.shortName}}#!/listProfiles-lv0" md-ink-ripple>
                 <i class="ion ion-folder"></i>
                 <span class="text">Hồ sơ</span>
             </a>
         </li>
-        <li class="flags-active" ng-if="authentication.user.roles[0] == 'admin'" onclick="activeNav(this)">
+        <li class="flags-active" ng-if="authentication.user.roles[0] == 'administrator'" onclick="activeNav(this)">
             <a ng-controller="ActivitiesController" href="/{{company.shortName}}#!/usersList" md-ink-ripple>
                 <i class="ion ion-person"></i>
                 <span class="text">Tài khoản</span>
             </a>
         </li>
-        <li class="flags-active" ng-if="authentication.user.roles[0] == 'admin'" onclick="activeNav(this)">
+        <li class="flags-active" ng-if="authentication.user.roles[0] == 'administrator'" onclick="activeNav(this)">
             <a ng-controller="ActivitiesController" href="/{{company.shortName}}#!/signup" md-ink-ripple>
                 <i class="ion ion-person-add"></i>
                 <span class="text">Tạo tài khoản</span>
             </a>
         </li>
-        <li class="flags-active" ng-if="authentication.user.roles[0] == 'admin'" onclick="activeNav(this)">
+        <li class="flags-active" ng-if="authentication.user.roles[0] == 'administrator'" onclick="activeNav(this)">
             <a ng-controller="ActivitiesController" href="/{{company.shortName}}#!/companies/{{authentication.user.company}}/edit" md-ink-ripple>
                 <i class="ion ion-android-settings"></i>
                 <span class="text">Cấu hình</span>

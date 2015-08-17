@@ -182,6 +182,8 @@ exports.uploadLogo = function(req,res){
 
     }
 };
+/**
+ * */
 exports.uploadImageLogin = function(req,res){
 	if (req.url === '/uploads/uploadImageLogin' && req.method === 'POST') {
 		// parse a file upload
