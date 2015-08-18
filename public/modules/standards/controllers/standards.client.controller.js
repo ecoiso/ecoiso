@@ -4,7 +4,37 @@
 angular.module('standards').controller('StandardsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Standards',
 	function($scope, $stateParams, $location, Authentication, Standards) {
 		$scope.authentication = Authentication;
+		$scope.init = function(){
+			if($scope.authentication.user){
+				if($scope.authentication.user.roles[0] != "commander" && $scope.authentication.user.roles[0] != "agency"){
+					$http.get('/user/checkCurrentUser').success(function(data){
+						if(data != "okie") {
+							sweetAlert("Truy cập vùng không hợp lệ");
+							window.location.reload();
+						};
+					});
+				}
+				if(window.location.pathname != "/administrator"){
+					$http.get('/findCompanyByShortName'+ window.location.pathname).success(function(data){
+						//$http.get('findCompany/'+data[0]._id).success(function(data1){
+						$scope.company = data[0];
+						document.getElementById('site-head').style.backgroundColor = $scope.company.colorBackground;
+						document.getElementById('onclick-change-showname').style.backgroundColor = $scope.company.colorBackground;
+						//});
+					});
+				}
+			}else{
+				$http.get('/findCompanyByShortName'+ window.location.pathname).success(function(data){
+					//$http.get('findCompany/'+data[0]._id).success(function(data1){
+					$scope.company = data[0];
+					document.getElementById('site-head').style.backgroundColor = $scope.company.colorBackground;
+					document.getElementById('onclick-change-showname').style.backgroundColor = $scope.company.colorBackground;
+					//});
+				});
+			}
 
+		};
+		$scope.init();
 		// Create new Standard
 		$scope.create = function() {
 			// Create new Standard object

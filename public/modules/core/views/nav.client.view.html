@@ -124,7 +124,7 @@
                 <span class="text">Thêm nhà phân phối</span>
             </a>
         </li>
-        <li data-ng-controller="ActivitiesController" class="visible-xs flags-active" onclick="activeNav(this)">
+        <li data-ng-controller="ActivitiesController" class=" flags-active" onclick="activeNav(this)">
             <a ng-if="authentication.user.roles[0] != 'agency' && authentication.user.roles[0] != 'commander'"
                href="/{{company.shortName}}#!/settings/password" md-ink-ripple>
                 <i class="ion ion-asterisk"></i>
@@ -136,7 +136,7 @@
                 <span class="text">Đổi mật khẩu </span>
             </a>
         </li>
-        <li data-ng-controller="ActivitiesController" class="visible-xs flags-active" onclick="activeNav(this)">
+        <li data-ng-controller="ActivitiesController" class=" flags-active" onclick="activeNav(this)">
             <a href="/auth/signout" md-ink-ripple>
                 <i class="ion ion-android-exit"></i>
                 <span class="text">Thoát </span>
