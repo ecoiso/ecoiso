@@ -34,7 +34,7 @@ angular.module('companies').controller('CompaniesController', ['$scope','$http',
 			company.$save(function(response) {
                 sweetAlert('Đã thêm công ty vào hệ thống !');
 
-                $http.post('/createDefaultAccount',response);
+                $http.post('/user/createDefaultAccount',response);
                 $location.path('companies');
 				// Clear form fields
 				//$scope.name = '';

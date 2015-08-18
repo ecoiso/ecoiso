@@ -4,34 +4,40 @@
         <li class="active"><a href="/#!/usersList">Danh sách người dùng</a></li>
     </ol>
     <div class="page-wrap">
-        <div class="row"  data-ng-controller="SettingsController" data-ng-init="find()" data-ng-show="authentication.user" >
-            <div class="panel panel-lined table-responsive panel-hovered mb20" >
+        <div class="row" data-ng-controller="SettingsController" data-ng-init="find()"
+             data-ng-show="authentication.user">
+            <div class="panel panel-lined table-responsive panel-hovered mb20">
                 <div class="panel-heading">Danh sách người dùng
-                    <button data-ng-click="reload()" style="margin-left: 20px" md-ink-ripple="" class="btn ion ion-android-refresh btn-icon-circle icon btn-xs" type="button"><div class="md-ripple-container" style=""></div></button>
+                    <button data-ng-click="reload()" style="margin-left: 20px" md-ink-ripple=""
+                            class="btn ion ion-android-refresh btn-icon-circle icon btn-xs" type="button">
+                        <div class="md-ripple-container" style=""></div>
+                    </button>
                 </div>
                 <div class="panel-body clearfix">
-                    <h5 class="h5">Xử lý các đối tượng đã đánh dấu (<span style="font-style: italic">Đã đánh dấu <b style="color: green">{{count}} </b> đối tượng</span>)</h5>
+                    <h5 class="h5">Xử lý các đối tượng đã đánh dấu (<span style="font-style: italic">Đã đánh dấu <b
+                            style="color: green">{{count}} </b> đối tượng</span>)</h5>
 
                     <form class="form-horizontal left" ng-submit="submit_1()">
                         <select style="height: 30px" ng-model="selectActionChoosen">
-                            <option value="remove">Xóa tài khoản </option>
-                            <option  value="active">Trạng thái: Kích hoạt</option>
+                            <option value="remove">Xóa tài khoản</option>
+                            <option value="active">Trạng thái: Kích hoạt</option>
                             <option value="deactive">Trạng thái : Tạm dừng</option>
                             <option value="manager">Phân quyền : Trưởng ban ISO</option>
-                            <option value="staff">Phân quyền : Cán bộ ISO </option>
-                            <option value="user">Phân quyền : Nhân viên </option>
+                            <option value="staff">Phân quyền : Cán bộ ISO</option>
+                            <option value="user">Phân quyền : Nhân viên</option>
                         </select>
                         <input class="btn btn-primary " type="submit" value="Xác nhận thay đổi"/>
                     </form>
                     <form class="form-horizontal right col-lg-4">
-                        <input class="form-control input-sm" placeholder="Tên người cần tìm kiếm..." ng-model="searchTextFilter" type="text">
+                        <input class="form-control input-sm" placeholder="Tên người cần tìm kiếm..."
+                               ng-model="searchTextFilter" type="text">
                     </form>
                 </div>
                 <!-- data table -->
-                <table class="table table-bordered table-striped" id="searchTextResults" >
+                <table class="table table-bordered table-striped" id="searchTextResults">
                     <thead>
                     <tr>
-                        <th>Chọn </th>
+                        <th>Chọn</th>
                         <th class="col-md-3">
                             Tên người sử dụng
                         </th>
@@ -56,10 +62,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr data-ng-repeat="user in users | filter:searchTextFilter" style="text-align: center" >
+                    <tr data-ng-repeat="user in users | filter:searchTextFilter" style="text-align: center">
                         <td>
-                            <div ng-if="user.roles[0] != 'admin' "  class="ui-checkbox ui-checkbox-primary ml5">
-                                <label><input ng-if="user.roles[0] != 'admin' " type="checkbox"  ng-model="user.checked"><span></span>
+                            <div ng-if="user.roles[0] != 'admin' " class="ui-checkbox ui-checkbox-primary ml5">
+                                <label><input ng-if="user.roles[0] != 'admin' " type="checkbox" ng-model="user.checked"><span></span>
                                 </label>
                             </div>
                         </td>
@@ -72,8 +78,10 @@
                         <td ng-if="user.roles[0] == 'user' ">Nhân viên</td>
                         <td><span data-ng-bind="user.department"></span></td>
                         <td><span data-ng-bind="user.status"></span></td>
-                        <td >
-                            <button ng-show="user.roles[0] != 'admin' " md-ink-ripple="" class="btn btn-gplus ion ion-trash-a icon btn-xs" type="button" title="xóa" ng-click="deleteUser($index,user._id)">
+                        <td>
+                            <button ng-show="user.roles[0] != 'admin' " md-ink-ripple=""
+                                    class="btn btn-gplus ion ion-trash-a icon btn-xs" type="button" title="xóa"
+                                    ng-click="deleteUser($index,user._id)">
                                 <div class="md-ripple-container" style=""></div>
                             </button>
                         </td>
@@ -84,16 +92,16 @@
                 <!-- #end data table -->
                 <!--<div class="panel-footer clearfix">-->
 
-                   <!-- <ul class="pagination pagination-sm">
-                        <li><a href="javascript:;" ng-click="first()">Đầu tiên</a></li>
-                        <li><a href="javascript:;" ng-click="prev()">-</a></li>
-                        <li ng-repeat="page in allPages" ng-class="{ ''   : page != currentpage,'active' : page == currentpage }">
-                            <a href="javascript:;" ng-click="getPage(page)">@{{ page }}</a>
-                        </li>
+                <!-- <ul class="pagination pagination-sm">
+                     <li><a href="javascript:;" ng-click="first()">Đầu tiên</a></li>
+                     <li><a href="javascript:;" ng-click="prev()">-</a></li>
+                     <li ng-repeat="page in allPages" ng-class="{ ''   : page != currentpage,'active' : page == currentpage }">
+                         <a href="javascript:;" ng-click="getPage(page)">@{{ page }}</a>
+                     </li>
 
-                        <li><a href="javascript:;" ng-click="next()">+</a></li>
-                        <li><a href="javascript:;" ng-click="last(user)">Cuối cùng</a></li>
-                    </ul>-->
+                     <li><a href="javascript:;" ng-click="next()">+</a></li>
+                     <li><a href="javascript:;" ng-click="last(user)">Cuối cùng</a></li>
+                 </ul>-->
                 <!--</div>-->
             </div>
         </div>

@@ -1,0 +1,19 @@
+<section data-ng-controller="StandardsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Standards</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="standard in standards" data-ng-href="#!/standards/{{standard._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="standard.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="standard.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="standard.name"></h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!standards.$resolved || standards.length">
+    	No Standards yet, why don't you <a href="/#!/standards/create">create one</a>?
+    </div>
+</section>

@@ -1,16 +1,11 @@
 <div ng-controller="ActivitiesController" class="page page-dashboard ng-scope">
-    <div class="page-wrap">
+    <div class="">
         <div class="row">
             <!-- dashboard header -->
-            <div class="">
+            <div class="col-md-12 col-sm-12">
                 <div class="dash-head clearfix mt15 mb20">
                     <div class="left" style="font-family:Helvetica, Arial, sans-serif;margin-left: 15px;">
                         <h3 class="mb5 text-light"><b>{{company.name}}</b></h3>
-                        <!--<p class="small"><strong><a href="http://ecoit.asia/home">EcoIT</a> + <a href="http://www.iso-ahead.vn/">AHEAD</a></strong> hợp tác sản xuất</p>-->
-                        <!--<p>
-                            <img src="/modules/core/img/ecoit.png" height="30px">
-                            <img src="/modules/core/img/ahead.jpg" height="30px">
-                        </p>-->
                         <div class="mt20">
                             <p><b>Số thành viên :</b></p>
 
@@ -24,10 +19,12 @@
                             <img src="picture/{{company.logo}}" height="200px" width="200px">
                         </p>
                     </div>
-                    <div class="clearfix col-md-12 col-xs-12" style="text-align: justify">
 
-                        <div class="left first-text-intro"> {{company.intro | limitTo:1}}</div>
-                        {{company.intro }}
+                    <div class="clearfix col-md-12 col-xs-12" style="text-align: justify">
+                        <i class="ion ion-quote left"></i>
+                            <div class="left first-text-intro"> {{company.intro | limitTo:1}}</div>
+                            {{company.intro }}
+                        <i class="ion ion-quote"></i>
 
 
                     </div>
@@ -38,7 +35,7 @@
         <!-- row -->
         <div class="row">
             <!-- profile -->
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6 col-sm-6" >
                 <div class="panel panel-default mb20 panel-hovered profile-widget">
                     <div class="panel-body">
                         <div class="clearfix mb15 top-info">

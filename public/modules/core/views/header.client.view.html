@@ -1,12 +1,13 @@
 <ul class="list-unstyled left-elems marginLeft20percent" data-ng-controller="HeaderController">
     <li data-ng-if="menu.shouldRender(authentication.user) && authentication.user.roles[0] != 'administrator' && authentication.user.roles[0] != 'commander' &&  authentication.user.roles[0] != 'agency'">
-        <div style="margin-left: 16px"  class="form-search hidden-xs">
-            <form  id="site-search" action="/#!/search">
+        <div style="margin-left: 16px" class="form-search hidden-xs">
+            <form id="site-search" action="/#!/search">
                 <input type="search" class="form-control" placeholder="Nhập từ khóa cần tìm kiếm...">
-                <button type="submit" class="ion ion-ios-search-strong"></button>
+                <button style="margin-top: 4px;" type="submit" class="glyphicon glyphicon-search"></button>
             </form>
         </div>
-    </li>	<!-- #end search-box -->
+    </li>
+    <!-- #end search-box -->
 
     <!-- site-logo for mobile nav -->
     <!--<li >
@@ -19,21 +20,26 @@
     <!-- #end site-logo -->
     <!-- fullscreen -->
 
-   <!-- <li class="fullscreen hidden-xs" onclick="toggleFullScreen()">
-        <a href><i class="ion ion-qr-scanner"></i></a>
+    <!-- <li class="fullscreen hidden-xs" onclick="toggleFullScreen()">
+         <a href><i class="ion ion-qr-scanner"></i></a>
 
-    </li>-->	<!-- #end fullscreen -->
+     </li>-->    <!-- #end fullscreen -->
 
 </ul>
 <nav class="collapse navbar-collapse right-elems" collapse="!isCollapsed" role="navigation">
     <ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
-        <li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">
+        <li data-ng-repeat="item in menu.items | orderBy: 'position'"
+            data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType"
+            ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}"
+            dropdown="item.menuItemType === 'dropdown'">
             <a ng-switch-when="dropdown" class="dropdown-toggle">
                 <span data-ng-bind="item.title"></span>
                 <b class="caret"></b>
             </a>
             <ul ng-switch-when="dropdown" class="dropdown-menu">
-                <li data-ng-repeat="subitem in item.items | orderBy: 'position'" data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}" ng-class="{active: $uiRoute}">
+                <li data-ng-repeat="subitem in item.items | orderBy: 'position'"
+                    data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}"
+                    ng-class="{active: $uiRoute}">
                     <a href="/#!/{{subitem.link}}" data-ng-bind="subitem.title"></a>
                 </li>
             </ul>
@@ -56,15 +62,19 @@
             </a>
             <ul class="dropdown-menu" data-ng-controller="ActivitiesController">
                 <li>
-                    <a ng-if="authentication.user.roles[0] != 'agency' && authentication.user.roles[0] != 'commander'" href="/{{company.shortName}}#!/settings/profile">Thay đổi hồ sơ</a>
-                    <a ng-if="authentication.user.roles[0] == 'agency' || authentication.user.roles[0] == 'commander'" href="/administrator#!/settings/profile">Thay đổi hồ sơ</a>
+                    <a ng-if="authentication.user.roles[0] != 'agency' && authentication.user.roles[0] != 'commander'"
+                       href="/{{company.shortName}}#!/settings/profile">Thay đổi hồ sơ</a>
+                    <a ng-if="authentication.user.roles[0] == 'agency' || authentication.user.roles[0] == 'commander'"
+                       href="/administrator#!/settings/profile">Thay đổi hồ sơ</a>
                 </li>
                 <!--<li>
                     <a href="/#!/settings/accounts">Manage Social Accounts</a>
                 </li>-->
                 <li data-ng-show="authentication.user.provider === 'local'">
-                    <a ng-if="authentication.user.roles[0] != 'agency' && authentication.user.roles[0] != 'commander'" href="/{{company.shortName}}#!/settings/password">Đổi mật khẩu </a>
-                    <a ng-if="authentication.user.roles[0] == 'agency' || authentication.user.roles[0] == 'commander'" href="/administrator#!/settings/password">Đổi mật khẩu </a>
+                    <a ng-if="authentication.user.roles[0] != 'agency' && authentication.user.roles[0] != 'commander'"
+                       href="/{{company.shortName}}#!/settings/password">Đổi mật khẩu </a>
+                    <a ng-if="authentication.user.roles[0] == 'agency' || authentication.user.roles[0] == 'commander'"
+                       href="/administrator#!/settings/password">Đổi mật khẩu </a>
                 </li>
                 <li class="divider"></li>
                 <li>
