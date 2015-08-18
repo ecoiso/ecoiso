@@ -28,16 +28,12 @@
 </ul>
 <nav class="collapse navbar-collapse right-elems" collapse="!isCollapsed" role="navigation">
     <ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
-<<<<<<< HEAD
         <li data-ng-repeat="item in menu.items | orderBy: 'position'"
             data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType"
             ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}"
             dropdown="item.menuItemType === 'dropdown'">
             <a ng-switch-when="dropdown" class="dropdown-toggle">
-=======
-        <li data-ng-repeat="item in menu.items | orderBy: 'position'" data-ng-if="item.shouldRender(authentication.user);" ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}" ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">
-            <a ng-switch-when="dropdown" class="dropdown-toggle" >
->>>>>>> 25443332d38c6f72937cbed5695a510cdb5d777e
+
                 <span data-ng-bind="item.title"></span>
                 <b class="caret"></b>
             </a>
