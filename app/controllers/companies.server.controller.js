@@ -233,10 +233,7 @@ exports.createDefaultAccount = function(req,res){
 		user.company = obj._id;
 		user.displayName = user.firstName + ' ' + user.lastName;
 		user.save(function(err,data) {
-<<<<<<< HEAD
 
-=======
->>>>>>> 6dcf0d888aa844fb84b261de1a6b25d63d67b8df
 			if (err) return console.log(err);
 			var clone_user = {};
 			clone_user.username = 'administrator';
