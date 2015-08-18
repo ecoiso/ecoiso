@@ -16,7 +16,8 @@ app.controller('HeaderController', ['$scope', 'Authentication', 'Menus',
 		});
 
         $scope.toggleFloatingSidebar = function () {
-            $scope.floatingSidebar = $scope.floatingSidebar ? !1 : !0, console.log('floating-sidebar: ' + $scope.floatingSidebar)
+            //$scope.floatingSidebar = $scope.floatingSidebar ? !1 : !0, console.log('floating-sidebar: ' + $scope.floatingSidebar)
+			document.getElementById('floating-chat').classList.toggle('open');
         };
         $scope.goFullScreen = function () {
             Fullscreen.isEnabled() ? Fullscreen.cancel() : Fullscreen.all()
