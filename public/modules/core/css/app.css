@@ -6248,3 +6248,29 @@ label,
         margin-left:23% !important;
     }
 }
+@media (min-width: 1024px) {
+  #nav-slider {
+    margin-left:50px;
+  }
+  .marginLeft20percent{
+    margin-left: 20% !important;
+  }
+}
+@media (max-width: 1024px) {
+  .marginLeft20percent {
+    margin-left: 0px !important;
+  }
+  #site-nav{
+    right: 0;
+    left: 0;
+    -webkit-transition: 0.25s ease-in;
+    -o-transition: 0.25s ease-in;
+    transition: 0.25s ease-in;
+  }
+  #main-container .open-nav {
+    right :0;
+    left:220px;
+
+  }
+}
+

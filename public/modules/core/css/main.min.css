@@ -3714,8 +3714,8 @@ fieldset[disabled] .btn-youtube.active {
   width: 20%;
 }
 .main-container .content-container {
-  margin-left: 10%;
-  width: 90%;
+    margin-left: 70px;
+   width: calc(100% - 80px);
 }
 .main-container .content-container.nav-expand {
   width: 80%;
@@ -3736,6 +3736,7 @@ fieldset[disabled] .btn-youtube.active {
 .app.body-full #site-nav,
 .app.body-full .site-settings {
   display: none;
+
 }
 .app.body-full .main-container {
   -webkit-transform: translate(0, -50%);
@@ -5431,9 +5432,7 @@ md-input-container {
   background-size: cover;
   height:100%;
 }
-.marginLeft20percent{
-  margin-left: 20%;
-}
+
 .first-text-intro{
   font-size:50px;
   font-family:Times New Roman;

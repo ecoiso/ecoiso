@@ -11,7 +11,3 @@ angular.module('notifications').run(['Menus',
 	}
 <<<<<<< HEAD
 ]);*/
-=======
-]);
-*/
->>>>>>> 25443332d38c6f72937cbed5695a510cdb5d777e

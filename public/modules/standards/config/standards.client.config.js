@@ -1,7 +1,7 @@
 'use strict';
 
 // Configuring the Articles module
-<<<<<<< HEAD
+
 /*
 angular.module('standards').run(['Menus',
 	function(Menus) {
@@ -11,6 +11,4 @@ angular.module('standards').run(['Menus',
 		Menus.addSubMenuItem('topbar', 'standards', 'New Standard', 'standards/create');
 	}
 ]);*/
-=======
-6
->>>>>>> 25443332d38c6f72937cbed5695a510cdb5d777e
+
