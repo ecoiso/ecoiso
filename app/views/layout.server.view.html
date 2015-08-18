@@ -250,6 +250,8 @@
 		normal[i].className = "flags-active";
 	}
 		li.className = li.className + " active open";
+        var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        if(w < 1024) document.getElementById('site-nav').classList.toggle('open-nav');
 	}
 	
 	function selectNewfile(){

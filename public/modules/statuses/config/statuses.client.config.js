@@ -1,6 +1,7 @@
 'use strict';
 
 // Configuring the Articles module
+/*
 angular.module('statuses').run(['Menus',
 	function(Menus) {
 		// Set top bar menu items
@@ -8,4 +9,4 @@ angular.module('statuses').run(['Menus',
 		Menus.addSubMenuItem('topbar', 'statuses', 'List Statuses', 'statuses');
 		Menus.addSubMenuItem('topbar', 'statuses', 'New Status', 'statuses/create');
 	}
-]);
+]);*/
