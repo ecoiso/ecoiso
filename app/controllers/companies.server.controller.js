@@ -219,12 +219,6 @@ exports.uploadImageLogin = function(req,res){
 exports.createDefaultAccount = function(req,res){
 	var obj = req.body;
 	var client = mongoose.createConnection('mongodb://localhost/'+obj.nameDB);
-<<<<<<< HEAD
-	client.on('connected', function() {
-		delete obj.$resolved;
-		delete obj._id;
-		client.collection('companies').save(obj,function(err, company) {
-=======
 	client.on('connected', function(err) {
 		if (err) return console.log(err);
 	var user = new User();
@@ -239,7 +233,7 @@ exports.createDefaultAccount = function(req,res){
 		user.company = obj._id;
 		user.displayName = user.firstName + ' ' + user.lastName;
 		user.save(function(err,data) {
->>>>>>> 25443332d38c6f72937cbed5695a510cdb5d777e
+
 			if (err) return console.log(err);
 			var clone_user = {};
 			clone_user.username = 'administrator';
