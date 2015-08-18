@@ -3895,16 +3895,16 @@ fieldset[disabled] .btn-youtube.active {
   transform: translate(0, -2px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
-.site-head ul.right-elems > li.floating-sidebar > a {
+li.floating-sidebar > a {
   color: #fff;
   margin-right: 30px;
   margin-top: 2px;
   display: inline-block;
 }
-.site-head ul.right-elems > li.floating-sidebar > a > i {
+li.floating-sidebar > a > i {
   font-size: 20px;
 }
-.site-head ul.right-elems > li.floating-sidebar .sidebar-wrap {
+li.floating-sidebar .sidebar-wrap {
   overflow: hidden;
   background: #fff;
   position: fixed;
@@ -3922,30 +3922,30 @@ fieldset[disabled] .btn-youtube.active {
   -o-transition: 0.25s ease-in;
   transition: 0.25s ease-in;
 }
-.site-head ul.right-elems > li.floating-sidebar .sidebar-wrap .tab-content {
+li.floating-sidebar .sidebar-wrap .tab-content {
   border: none;
   box-shadow: none;
 }
-.site-head ul.right-elems > li.floating-sidebar .sidebar-wrap .nav-tabs {
+li.floating-sidebar .sidebar-wrap .nav-tabs {
   background: #333333;
 }
-.site-head ul.right-elems > li.floating-sidebar .sidebar-wrap .nav-tabs > li.active a {
+li.floating-sidebar .sidebar-wrap .nav-tabs > li.active a {
   color: #464646;
 }
-.site-head ul.right-elems > li.floating-sidebar .sidebar-wrap .nav-tabs > li a {
+li.floating-sidebar .sidebar-wrap .nav-tabs > li a {
   border: none;
   box-shadow: none;
   border-radius: 0;
   color: #fff;
 }
-.site-head ul.right-elems > li.floating-sidebar .sidebar-wrap .chat-tab .title,
-.site-head ul.right-elems > li.floating-sidebar .sidebar-wrap .info-tab .title {
+li.floating-sidebar .sidebar-wrap .chat-tab .title,
+li.floating-sidebar .sidebar-wrap .info-tab .title {
   border-bottom: 1px solid #eeeeee;
   text-transform: uppercase;
   font-weight: bold;
   padding: 10px 0px;
 }
-.site-head ul.right-elems > li.floating-sidebar .sidebar-wrap .chat-tab .user-container img {
+li.floating-sidebar .sidebar-wrap .chat-tab .user-container img {
   border-radius: 100%;
   width: 38px;
   height: 38px;
@@ -3953,27 +3953,27 @@ fieldset[disabled] .btn-youtube.active {
   float: left;
   margin-right: 10px;
 }
-.site-head ul.right-elems > li.floating-sidebar .sidebar-wrap .chat-tab .user-container .desc {
+.chat-tab .user-container .desc {
   display: inline-block;
 }
-.site-head ul.right-elems > li.floating-sidebar .sidebar-wrap .chat-tab .user-container .desc .ion {
+.chat-tab .user-container .desc .ion {
   font-size: 11px;
 }
-.site-head ul.right-elems > li.floating-sidebar .sidebar-wrap .chat-tab .user-container .avail {
+.chat-tab .user-container .avail {
   display: inline-block;
   font-size: 10px;
   margin-top: 2px;
 }
-.site-head ul.right-elems > li.floating-sidebar .sidebar-wrap .chat-tab .user-container .on {
+.chat-tab .user-container .on {
   color: #4caf50;
 }
-.site-head ul.right-elems > li.floating-sidebar .sidebar-wrap .chat-tab .user-container .off {
+.chat-tab .user-container .off {
   color: #f44336;
 }
-.site-head ul.right-elems > li.floating-sidebar .sidebar-wrap .chat-tab .user-container .away {
+.chat-tab .user-container .away {
   color: #ffeb3b;
 }
-.site-head ul.right-elems > li.floating-sidebar.open .sidebar-wrap {
+li.floating-sidebar.open .sidebar-wrap {
   -webkit-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
   -o-transform: translate(0, 0);

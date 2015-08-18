@@ -27,6 +27,7 @@ module.exports = function(app) {
     app.route('/documents/updateNewVersion').post(documents.updateNewVersion);
     app.route('/documents/documentUpdateVersion').post(documents.documentUpdateVersion);
     app.route('/documents/createImageThumb').post(documents.createImageThumb);
+    app.route('/docs/totalDocs').get(documents.totalDocs);
 
     //app.route('/removeDocument').post(documents.removeDocument);
 };

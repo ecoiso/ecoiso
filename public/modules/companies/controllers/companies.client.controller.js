@@ -8,14 +8,36 @@ angular.module('companies').controller('CompaniesController', ['$scope','$http',
         $scope.usersInCompany = [];
         $scope.model = [];
         $scope.logo = '';
+        $scope.company = {};
         $scope.init = function(){
-            $http.get('/findCompanyByShortName'+ window.location.pathname).success(function(data){
-                //$http.get('findCompany/'+data[0]._id).success(function(data1){
-                $scope.company = data[0];
-                document.getElementById('site-head').style.backgroundColor = $scope.company.colorBackground;
-                document.getElementById('onclick-change-showname').style.backgroundColor = $scope.company.colorBackground;
-                //});
-            })
+            if($scope.authentication.user){
+                if($scope.authentication.user.roles[0] != "commander" && $scope.authentication.user.roles[0] != "agency"){
+                    $http.get('/user/checkCurrentUser').success(function(data){
+                       if(data != "okie") {
+                           sweetAlert("Truy cập vùng không hợp lệ");
+                           window.location.reload();
+                       };
+                    });
+                }
+                if(window.location.pathname != "/administrator"){
+                    $http.get('/findCompanyByShortName'+ window.location.pathname).success(function(data){
+                        //$http.get('findCompany/'+data[0]._id).success(function(data1){
+                        $scope.company = data[0];
+                        document.getElementById('site-head').style.backgroundColor = $scope.company.colorBackground;
+                        document.getElementById('onclick-change-showname').style.backgroundColor = $scope.company.colorBackground;
+                        //});
+                    });
+                }
+            }else{
+                $http.get('/findCompanyByShortName'+ window.location.pathname).success(function(data){
+                    //$http.get('findCompany/'+data[0]._id).success(function(data1){
+                    $scope.company = data[0];
+                    document.getElementById('site-head').style.backgroundColor = $scope.company.colorBackground;
+                    document.getElementById('onclick-change-showname').style.backgroundColor = $scope.company.colorBackground;
+                    //});
+                });
+            }
+
         };
         $scope.init();
 		// Create new Company
@@ -97,25 +119,23 @@ angular.module('companies').controller('CompaniesController', ['$scope','$http',
         $scope.modalAnim = "default";
         $scope.openModal = function (event){
             var companyId = event.target.attributes.data.value;
-            var company = Companies.get({
-                companyId: companyId
+            $http.get('/companies/'+companyId).success(function(data){
+                //$scope.company = data;
+                $modal.open({
+                    templateUrl: "/modules/companies/views/modalCompany.client.view.html",
+                    size: "lg",
+                    controller: 'ModalCompanyController',
+                    resolve: {
+                        company: function () {
+                            return data;
+                        }
+                    },
+                    windowClass: $scope.modalAnim
+                });
+                $scope.modalCloseCompany = function () {
+                    $scope.$close();
+                };
             });
-
-            $modal.open({
-                templateUrl: "/modules/companies/views/modalCompany.client.view.html",
-                size: "lg",
-                controller: 'ModalCompanyController',
-                resolve: {
-                    company: function () {
-                        return company;
-                    }
-                },
-                windowClass: $scope.modalAnim
-            });
-            $scope.modalCloseCompany = function () {
-                $scope.$close();
-            };
-
         };
         $scope.showTabs = function(){
           var firstTab = document.getElementById('tabsModal').getElementsByTagName('li')[0];

@@ -24,5 +24,6 @@ module.exports = function(app) {
 	app.route('/findCompanyByShortName/:shortName').get(companies.findCompanyByShortName);
 
 	app.route('/findCompany/:companyID').get(companies.findCompany);
+	app.route('/user/checkCurrentUser').get(companies.checkCurrentUser);
 
 };

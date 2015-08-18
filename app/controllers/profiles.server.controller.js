@@ -238,3 +238,8 @@ exports.saveViewerProfile = function(req,res){
         }
     });
 };
+/**
+ * */
+exports.totalProfiles = function(req,res){
+    res.send('20');
+};

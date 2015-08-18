@@ -75,6 +75,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
             if($scope.authentication.user){
                 $http.get('/users/listUserInCompany').success(function(data){
                     $scope.users = data;
+					$scope.shortName = window.location.pathname.substring("1");
                 });
                 //$scope.users = Users.query();
                 $scope.$watch('users', function(users){
@@ -88,20 +89,6 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
                     })
                 }, true);
             }
-           /*$http.get('listUserInCompany').success(function(data){
-                $scope.users = data;
-                $scope.$watch('users', function(users){
-                    $scope.count = 0;
-                    $scope.dataSelected = [];
-                    angular.forEach(users, function(user){
-                        if(user.checked){
-                            $scope.count += 1;
-                            $scope.dataSelected.push(user._id);
-                        }
-                    })
-                }, true);
-            });*/
-
         };
         //Delete User
         $scope.deleteUser = function(idx,$id){

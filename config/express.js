@@ -10,6 +10,7 @@ var fs = require('fs'),
 	morgan = require('morgan'),
 	bodyParser = require('body-parser'),
 	session = require('express-session'),
+	socketio = require('socket.io'),
 	compress = require('compression'),
 	methodOverride = require('method-override'),
 	cookieParser = require('cookie-parser'),
@@ -158,7 +159,11 @@ module.exports = function(db) {
 		// Return HTTPS server instance
 		return httpsServer;
 	}
-
+	// Attach Socket.io
+	/*var server = http.createServer(app);
+	var io = socketio.listen(server);
+	app.set('socketio', io);
+	app.set('server', server);*/
 	// Return Express server instance
 	return app;
 };
