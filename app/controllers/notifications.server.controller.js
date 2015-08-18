@@ -23,7 +23,10 @@ exports.create = function(req, res) {
 		} else {
 			var socketio = req.app.get('socketio'); // tacke out socket instance from the app container
 			socketio.sockets.emit('notification.created', notification); // emit an event for all connected clients
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6dcf0d888aa844fb84b261de1a6b25d63d67b8df
 			res.jsonp(notification);
 		}
 	});
