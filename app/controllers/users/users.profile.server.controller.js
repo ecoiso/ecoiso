@@ -33,6 +33,20 @@ exports.update = function(req, res) {
 					message: errorHandler.getErrorMessage(err)
 				});
 			} else {
+                Company.find({_id: user.company},function(err,data){
+                    var client = mongoose.createConnection('mongodb://localhost/ecoiso-' + data[0].nameDB);
+                    client.on('connected', function () {
+                        client.collection('users').update({_id:user._id},{$set:{
+                            firstName:user.firstName,
+                            lastName:user.lastName,
+                            displayName:user.displayName,
+                            mail:user.mail,
+                            department:user.department
+                        }},function(err) {
+                            if (err) return console.log(err);
+                        });
+                    });
+                });
 				req.login(user, function(err) {
 					if (err) {
 						res.status(400).send(err);
@@ -76,12 +90,19 @@ exports.list = function(req, res) {
  */
 exports.removeUser = function(req, res) {
     var user = User.find({'_id': req.params.id});
+    Company.find({_id: user.company},function(err,data){
+        var client = mongoose.createConnection('mongodb://localhost/ecoiso-' + data[0].nameDB);
+        client.on('connected', function () {
+            client.collection('users').remove({_id:user._id});
+        });
+    });
     user.remove().exec(function(err){
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
+
             res.json({'status':1});
         }
     });

@@ -64,7 +64,7 @@
                     <tbody>
                     <tr data-ng-repeat="user in users | filter:searchTextFilter" style="text-align: center">
                         <td>
-                            <div ng-if="user.roles[0] != 'admin' " class="ui-checkbox ui-checkbox-primary ml5">
+                            <div ng-if="user.roles[0] != 'administrator' " class="ui-checkbox ui-checkbox-primary ml5">
                                 <label><input ng-if="user.roles[0] != 'admin' " type="checkbox" ng-model="user.checked"><span></span>
                                 </label>
                             </div>
@@ -79,7 +79,7 @@
                         <td><span data-ng-bind="user.department"></span></td>
                         <td><span data-ng-bind="user.status"></span></td>
                         <td>
-                            <button ng-show="user.roles[0] != 'admin' " md-ink-ripple=""
+                            <button ng-show="user.roles[0] != 'administrator' " md-ink-ripple=""
                                     class="btn btn-gplus ion ion-trash-a icon btn-xs" type="button" title="xóa"
                                     ng-click="deleteUser($index,user._id)">
                                 <div class="md-ripple-container" style=""></div>

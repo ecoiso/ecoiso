@@ -4,7 +4,9 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
+    ObjectId = mongoose.Types.ObjectId,
 	Process = mongoose.model('Process'),
+    Company = mongoose.model('Company'),
 	_ = require('lodash');
 
 /**
@@ -13,8 +15,28 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var process = new Process(req.body);
 	process.user = req.user;
-
-	process.save(function(err) {
+    Company.find({"_id": req.user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                var _process =
+                    {
+                        user: process.user,
+                        kind: [ 'draft' ],
+                        name: process.name
+                    };
+                client.collection('processes').save(_process,function(err,process_done) {
+                    if (err) return console.log(err);
+                    else res.jsonp(process_done);
+                });
+            });
+        }
+    });
+	/*process.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -22,7 +44,7 @@ exports.create = function(req, res) {
 		} else {
 			res.jsonp(process);
 		}
-	});
+	});*/
 };
 
 /**
@@ -39,8 +61,18 @@ exports.update = function(req, res) {
 	var process = req.process ;
 
 	process = _.extend(process , req.body);
-
-	process.save(function(err) {
+    Company.find({"_id": user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+            });
+        }
+    });
+	/*process.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -48,7 +80,7 @@ exports.update = function(req, res) {
 		} else {
 			res.jsonp(process);
 		}
-	});
+	});*/
 };
 
 /**
@@ -86,13 +118,24 @@ exports.list = function(req, res) {
 /**
  * Process middleware
  */
-exports.processByID = function(req, res, next, id) { 
-	Process.findById(id).populate('user', 'displayName').exec(function(err, process) {
-		if (err) return next(err);
-		if (! process) return next(new Error('Failed to load Process ' + id));
-		req.process = process ;
-		next();
-	});
+exports.processByID = function(req, res, next, id) {
+    Company.find({"_id": req.user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                client.collection('processes').find({_id : ObjectId(id)}).toArray(function(err, process) {
+                    if (err) return next(err);
+                    if (! process) return next(new Error('Failed to load Process ' + id));
+                    req.process = process[0] ;
+                    next();
+                });
+            });
+        }
+    });
 };
 
 /**

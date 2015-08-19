@@ -10,7 +10,6 @@ var mongoose = require('mongoose'),
 
 exports.index = function(req, res) {
 	if(!req.user){
-		console.log(req);
 		var originalUrl = req.originalUrl.substring(1);
 		if(originalUrl.length > 0 ) {
 			if(originalUrl == 'administrator'){

@@ -26,9 +26,24 @@ exports.create = function(req, res) {
 		} else {
 			var client = mongoose.createConnection('mongodb://localhost/'+company.nameDB);
 			client.on('connected', function() {
-				delete company.$resolved;
-				delete company._id;
-				client.collection('companies').save(company,function(err) {
+				var company_clone = {};
+				company_clone._id = company._id;
+				company_clone.name = company.name;
+				company_clone.user = company.user;
+				company_clone.shortName = company.shortName;
+				company_clone.status = company.status;
+				company_clone.address = company.address;
+				company_clone.phone = company.phone;
+				company_clone.mail = company.mail;
+				company_clone.checkAdmin = company.checkAdmin;
+				company_clone.showName = company.showName;
+				company_clone.logo = company.logo;
+				company_clone.imageLogin = company.imageLogin;
+				company_clone.intro = company.intro;
+				company_clone.nameDB = company.nameDB;
+				company_clone.string = company.string;
+				company_clone.colorBackground = company.colorBackground;
+				client.collection('companies').save(company_clone,function(err) {
 					if (err) return console.log(err);
 				});
 			});
@@ -143,6 +158,23 @@ exports.updateCompanyAdmin = function(req,res){
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
+			Company.find({_id :req.user.company},function(err,data){
+				var client = mongoose.createConnection('mongodb://localhost/'+data[0].nameDB);
+				client.on('connected', function() {
+					client.collection('companies').update({_id:data[0]._id},
+						{$set:{
+							showName : data[0].showName,
+							logo : data[0].logo ,
+							imageLogin : data[0].imageLogin,
+							intro : data[0].intro,
+							colorBackground : data[0].colorBackground
+						}}
+						,function(err) {
+							if (err) return console.log(err);
+						});
+				});
+			});
+
 			res.json(data);
 		}
 	});
@@ -170,9 +202,6 @@ exports.uploadLogo = function(req,res){
                             if (err) {
                                 res.json(err);
                             } else {
-								/*gm(this.getImgStream(newPath)).size(function(err, value){
-										console.log(value);
-									})*/
                                 res.send(_filename);
                             }
                         });
@@ -204,9 +233,6 @@ exports.uploadImageLogin = function(req,res){
 							if (err) {
 								res.json(err);
 							} else {
-								/*gm(this.getImgStream(newPath)).size(function(err, value){
-								 console.log(value);
-								 })*/
 								res.send(_filename);
 							}
 						});
@@ -221,64 +247,37 @@ exports.createDefaultAccount = function(req,res){
 	var client = mongoose.createConnection('mongodb://localhost/'+obj.nameDB);
 	client.on('connected', function(err) {
 		if (err) return console.log(err);
-	var user = new User();
-		user.username = obj.shortName+ "administrator";
-		user.resetPasswordToken = randomString();
-		user.password = user.resetPasswordToken;
-		user.provider = 'local';
-		user.firstName = 'Quản trị';
-		user.lastName = 'Hệ thống';
-		user.email = 'example@gmail.com';
-		user.roles = ['administrator'];
-		user.company = obj._id;
-		user.displayName = user.firstName + ' ' + user.lastName;
-		user.save(function(err,data) {
-
-			if (err) return console.log(err);
-			var clone_user = {};
-			clone_user.username = 'administrator';
-			clone_user.resetPasswordToken = data.resetPasswordToken;
-			clone_user.password = data.password;
-			clone_user.provider = 'local';
-			clone_user.salt = data.salt;
-			clone_user.firstName = 'Quản trị';
-			clone_user.lastName = 'Hệ thống';
-			clone_user.email = 'example@gmail.com';
-			clone_user.roles = ['administrator'];
-			clone_user.company = data.company;
-			clone_user.displayName = user.firstName + ' ' + user.lastName;
-			client.collection('users').save(clone_user,function(err) {
+		var user = new User();
+			user.username = obj.shortName+ "administrator";
+			user.resetPasswordToken = randomString();
+			user.password = user.resetPasswordToken;
+			user.provider = 'local';
+			user.firstName = 'Quản trị';
+			user.lastName = 'Hệ thống';
+			user.email = 'example@gmail.com';
+			user.roles = ['administrator'];
+			user.company = obj._id;
+			user.displayName = user.firstName + ' ' + user.lastName;
+			user.save(function(err,data) {
 				if (err) return console.log(err);
+				var clone_user = {};
+				clone_user._id = data._id;
+				clone_user.username = 'administrator';
+				clone_user.resetPasswordToken = data.resetPasswordToken;
+				clone_user.password = data.password;
+				clone_user.provider = 'local';
+				clone_user.salt = data.salt;
+				clone_user.firstName = 'Quản trị';
+				clone_user.lastName = 'Hệ thống';
+				clone_user.email = 'example@gmail.com';
+				clone_user.roles = ['administrator'];
+				clone_user.company = data.company;
+				clone_user.displayName = user.firstName + ' ' + user.lastName;
+				client.collection('users').save(clone_user,function(err) {
+					if (err) return console.log(err);
+				});
+				res.send('okie');
 			});
-			res.send('okie');
-		});
-	var user = new User();
-		user.username = "administrator";
-		user.resetPasswordToken = randomString();
-		user.password = user.resetPasswordToken;
-		user.provider = 'local';
-		user.firstName = 'Quản trị';
-		user.lastName = 'Hệ thống';
-		user.email = 'example@gmail.com';
-		user.roles = ['administrator'];
-		user.displayName = user.firstName + ' ' + user.lastName;
-		user.save(function(err,data) {
-			if (err) return console.log(err);
-			var clone_user = {};
-			clone_user.username = data.username;
-			clone_user.resetPasswordToken = data.resetPasswordToken;
-			clone_user.password = data.password;
-			clone_user.provider = 'local';
-			clone_user.salt = data.salt;
-			clone_user.firstName = 'Quản trị';
-			clone_user.lastName = 'Hệ thống';
-			clone_user.email = 'example@gmail.com';
-			clone_user.roles = ['admin'];
-			clone_user.displayName = user.firstName + ' ' + user.lastName;
-			client.collection('users').save(clone_user,function(err) {
-				if (err) return console.log(err);
-			});
-		});
 	});
 };
 function hashPassword(salt,password) {

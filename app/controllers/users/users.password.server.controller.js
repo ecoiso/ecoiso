@@ -10,6 +10,7 @@ var _ = require('lodash'),
 	User = mongoose.model('User'),
 	config = require('../../../config/config'),
 	nodemailer = require('nodemailer'),
+	Company = mongoose.model('Company'),
 	async = require('async'),
 	crypto = require('crypto');
 
@@ -205,6 +206,18 @@ exports.changePassword = function(req, res) {
 										message: errorHandler.getErrorMessage(err)
 									});
 								} else {
+									var linkUrl = req.headers.referer;
+									var last = linkUrl.indexOf("/", 8);
+									var originalUrl = linkUrl.substring(last+1,linkUrl.length);
+									if(user.company != '' && originalUrl != "administrator") {
+										Company.find({shortName:originalUrl},function(err,data) {
+											var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
+											client.collection('users').update({_id:user._id},{$set:{password:user.password}},function(err) {
+												if (err) return console.log(err);
+											});
+										});
+									};
+
 									req.login(user, function(err) {
 										if (err) {
 											res.status(400).send(err);

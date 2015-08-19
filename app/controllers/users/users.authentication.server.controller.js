@@ -99,7 +99,8 @@ exports.signupAdmin = function(req,res){
 							"company" : user.company,
 							"provider" : "local",
 							"password":user.password,
-							"resetPasswordToken" : user.resetPasswordToken
+							"resetPasswordToken" : user.resetPasswordToken,
+							'roles': ['user']
 						};
 						client.collection('users').save(user_default,function(err) {
 							if (err) return console.log(err);
