@@ -152,7 +152,23 @@ exports.hasAuthorization = function(req, res, next) {
  *
  */
 exports.listDraft = function(req, res) {
-    Process.find({$and : [{ "kind": ['draft'] },{$or:[{'user': req.user.id},{'userProcess._id': req.user.id}] } ] }, function (err, drafts) {
+    Company.find({"_id": req.user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                client.collection('processes').find({$and : [{ "kind": ['draft'] },{$or:[{'user': req.user._id},{'userProcess._id': req.user._id}] } ] }).toArray(function(err, process) {
+                    if (err) return next(err);
+                    if (! process) return next(new Error('Failed to load Process ' + id));
+                    res.json(process);
+                });
+            });
+        }
+    });
+    /*Process.find({$and : [{ "kind": ['draft'] },{$or:[{'user': req.user.id},{'userProcess._id': req.user.id}] } ] }, function (err, drafts) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -160,14 +176,30 @@ exports.listDraft = function(req, res) {
         } else {
             res.json(drafts);
         }
-    });
+    });*/
 };
 /**
  * List waitings
  *
  */
 exports.listWaitingPublish = function(req, res) {
-    Process.find({$and : [{ "kind": ['waitingPublish'] },{$or:[{'user': req.user.id},{'userProcess._id': req.user.id}] } ] }, function (err, waitings) {
+    Company.find({"_id": req.user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                client.collection('processes').find({$and : [{ "kind": ['waitingPublish'] },{$or:[{'user': req.user._id},{'userProcess._id': req.user._id}] } ] }).toArray(function(err, process) {
+                    if (err) return next(err);
+                    if (! process) return next(new Error('Failed to load Process ' + id));
+                    res.json(process);
+                });
+            });
+        }
+    });
+    /*Process.find({$and : [{ "kind": ['waitingPublish'] },{$or:[{'user': req.user._id},{'userProcess._id': req.user._id}] } ] }, function (err, waitings) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -175,14 +207,30 @@ exports.listWaitingPublish = function(req, res) {
         } else {
             res.json(waitings);
         }
-    });
+    });*/
 };
 /**
  * List publishs
  *
  */
 exports.listPublish = function(req, res) {
-    Process.find({ $and: [{ "kind": ['publish'] }]}, function (err, publish) {
+    Company.find({"_id": req.user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                client.collection('processes').find({ "kind": ['publish'] }).toArray(function(err, process) {
+                    if (err) return next(err);
+                    if (! process) return next(new Error('Failed to load Process ' + id));
+                    res.json(process);
+                });
+            });
+        }
+    });
+   /* Process.find({ $and: [{ "kind": ['publish'] }]}, function (err, publish) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -190,34 +238,72 @@ exports.listPublish = function(req, res) {
         } else {
             res.json(publish);
         }
-    });
+    });*/
 };
 /**
  * Require Publish
  *
  */
 exports.requirePublic = function(req,res){
-    Process.findOne({_id:req.body._id}, function(err, process){
+    Company.find({"_id": req.user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                client.collection('processes').find({_id:ObjectId(req.body._id)}).toArray(function(err, process) {
+                    if (err) return next(err);
+                    if (! process) return next(new Error('Failed to load Process ' + id));
+                    client.collection('processes').update({_id:ObjectId(req.body._id)},{$set:{kind:['waitingPublish']}},function(err,data){
+                        if (err) { return console.log(err); }
+                    });
+                    client.collection('processes').find({_id:ObjectId(req.body._id)}).toArray(function(err, process) {
+                        if (err) return next(err);
+                        if (! process) return next(new Error('Failed to load Process ' + id));
+                        res.json(process);
+                    });
+                });
+            });
+        }
+    });
+    /*Process.findOne({_id:req.body._id}, function(err, process){
         if (err) { return next(err); }
         process.kind = ['waitingPublish'];
         process.save(function(err) {
             if (err) { return next(err); }
             else res.json(process);
         });
-    });
+    });*/
 }
 /**
  * Require Publish
  *
  */
 exports.acceptPublic = function(req,res){
-    Process.findOne({_id:req.body._id}, function(err, process){
-        if (err) { return next(err); }
-        process.kind = ['publish'];
-        process.save(function(err) {
-            if (err) { return next(err); }
-            else res.json(process);
-        });
+    Company.find({"_id": req.user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                client.collection('processes').find({_id:ObjectId(req.body._id)}).toArray(function(err, process) {
+                    if (err) return next(err);
+                    if (! process) return next(new Error('Failed to load Process ' + id));
+                    client.collection('processes').update({_id:ObjectId(req.body._id)},{$set:{kind:['publish']}},function(err,data){
+                        if (err) { return console.log(err); }
+                    });
+                    client.collection('processes').find({_id:ObjectId(req.body._id)}).toArray(function(err, process) {
+                        if (err) return next(err);
+                        if (! process) return next(new Error('Failed to load Process ' + id));
+                        res.json(process);
+                    });
+                });
+            });
+        }
     });
 }
 /**
@@ -225,15 +311,30 @@ exports.acceptPublic = function(req,res){
  *
  */
 exports.denyPublic = function(req,res){
-    Process.findOne({_id:req.body._id}, function(err, process){
-        if (err) { return next(err); }
-        process.kind = ['draft'];
-        process.save(function(err) {
-            if (err) { return next(err); }
-            else res.json(process);
-        });
+    Company.find({"_id": req.user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                client.collection('processes').find({_id:ObjectId(req.body._id)}).toArray(function(err, process) {
+                    if (err) return next(err);
+                    if (! process) return next(new Error('Failed to load Process ' + id));
+                    client.collection('processes').update({_id:ObjectId(req.body._id)},{$set:{kind:['draft']}},function(err,data){
+                        if (err) { return console.log(err); }
+                    });
+                    client.collection('processes').find({_id:ObjectId(req.body._id)}).toArray(function(err, process) {
+                        if (err) return next(err);
+                        if (! process) return next(new Error('Failed to load Process ' + id));
+                        res.json(process);
+                    });
+                });
+            });
+        }
     });
-}
+};
 var multiparty = require('multiparty');
 var fs = require('fs');
 

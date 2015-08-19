@@ -228,8 +228,8 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
                 function(isConfirm){
                     if (isConfirm) {
                         $http.post('/process/requirePublic',process).success(function(data) {
-                            $scope.process = data;
-                            $location.path('processes/' + data._id);
+                            $scope.process = data[0];
+                            $location.path('processes/' + data[0]._id);
                         }, function(errorResponse) {
                             $scope.error = errorResponse.data.message;
                         });
@@ -256,8 +256,8 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
                 function(isConfirm){
                     if (isConfirm) {
                         $http.post('/process/denyPublic',process).success(function(data) {
-                            $scope.process = data;
-                            $location.path('processes/' + data._id);
+                            $scope.process = data[0];
+                            $location.path('processes/' + data[0]._id);
                         }, function(errorResponse) {
                             $scope.error = errorResponse.data.message;
                         });
@@ -284,8 +284,8 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
                 function(isConfirm){
                     if (isConfirm) {
                     $http.post('/process/acceptPublic',process).success(function(data) {
-                        $scope.process = data;
-                        $location.path('processes/' + data._id);
+                        $scope.process = data[0];
+                        $location.path('processes/' + data[0]._id);
                     }, function(errorResponse) {
                         $scope.error = errorResponse.data.message;
                     });
