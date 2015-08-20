@@ -1,6 +1,6 @@
 <div class="page page-forms-wizard" data-ng-controller="ProcessesController" data-ng-init="findOne()" data-ng-show="authentication.user">
     <ol class="breadcrumb breadcrumb-small">
-        <li><a href="/#!/activities">Trang chủ</a></li>
+        <li><a href="javascript:;">Trang chủ</a></li>
         <li class="active">
             <a href="javascript:;" ng-if="process.kind[0] == 'draft'">Bộ quy trình dự thảo</a>
             <a href="javascript:;" ng-if="process.kind[0] == 'waitingPublish'">Bộ quy trình đang chờ duyệt</a>
@@ -15,8 +15,8 @@
                 <a md-ink-ripple="" href="javascript:;" class="btn-tag btn-tag-purple">{{process.name}}
                     <div class="md-ripple-container" style=""></div>
                 </a>
-                <div  class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == process.user._id)) && authentication.user.roles[0] == 'manager' ">
-                    <a ng-if="process.kind[0] != 'publish'" title="Sửa tên bộ quy trình " class="btn btn-primary" href="/#!/processes/{{process._id}}/edit">
+                <div  class="pull-right" data-ng-show="authentication.user && authentication.user.roles[0] == 'manager' ">
+                    <a ng-if="process.kind[0] != 'publish'" title="Sửa tên bộ quy trình " ng-controller="ActivitiesController" class="btn btn-primary" href="/{{company.shortName}}#!/processes/{{process._id}}/edit">
                         <i class="glyphicon glyphicon-edit"></i>
                     </a>
                     <a title="Xóa bộ quy trình " class="btn btn-primary" data-ng-click="remove();">

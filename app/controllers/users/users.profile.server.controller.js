@@ -8,6 +8,7 @@ var _ = require('lodash'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	Company = mongoose.model('Company'),
+    ObjectId = mongoose.Types.ObjectId,
 	User = mongoose.model('User');
 
 /**
@@ -34,14 +35,15 @@ exports.update = function(req, res) {
 				});
 			} else {
                 Company.find({_id: user.company},function(err,data){
-                    var client = mongoose.createConnection('mongodb://localhost/ecoiso-' + data[0].nameDB);
+                    var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
                     client.on('connected', function () {
-                        client.collection('users').update({_id:user._id},{$set:{
+                        client.collection('users').update({_id:ObjectId(user._id)},{$set:{
                             firstName:user.firstName,
                             lastName:user.lastName,
                             displayName:user.displayName,
                             mail:user.mail,
-                            department:user.department
+                            department:user.department,
+                            roles:user.roles
                         }},function(err) {
                             if (err) return console.log(err);
                         });
@@ -91,9 +93,9 @@ exports.list = function(req, res) {
 exports.removeUser = function(req, res) {
     var user = User.find({'_id': req.params.id});
     Company.find({_id: user.company},function(err,data){
-        var client = mongoose.createConnection('mongodb://localhost/ecoiso-' + data[0].nameDB);
+        var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
         client.on('connected', function () {
-            client.collection('users').remove({_id:user._id});
+            client.collection('users').remove({_id:ObjectId(user._id)});
         });
     });
     user.remove().exec(function(err){

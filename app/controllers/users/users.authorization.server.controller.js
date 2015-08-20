@@ -5,6 +5,7 @@
  */
 var _ = require('lodash'),
 	mongoose = require('mongoose'),
+	ObjectId = mongoose.Types.ObjectId,
 	User = mongoose.model('User');
 
 /**

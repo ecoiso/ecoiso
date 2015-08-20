@@ -2,6 +2,7 @@
 var	mongoose = require('mongoose'),
 	passport = require('passport'),
 	Company = mongoose.model('Company'),
+	ObjectId = mongoose.Types.ObjectId,
 	User = mongoose.model('User');
 
 /**
@@ -286,6 +287,12 @@ function removeMultipleUser(data){
         var id = data[i];
         var user = User.find({'_id': id});
         if(user){
+			Company.find({_id: user.company},function(err,data){
+				var client = mongoose.createConnection('mongodb://localhost/ecoiso-' + data[0].nameDB);
+				client.on('connected', function () {
+					client.collection('users').remove({_id:user._id});
+				});
+			});
             user.remove().exec(function(err){
                 if (err) {
                     return err;
@@ -302,6 +309,13 @@ function activeMultipleUser(data){
         var id = data[i];
         var user = User.find({'_id': id});
         if(user){
+			Company.find({_id: user.company},function(err,data){
+				var client = mongoose.createConnection('mongodb://localhost/ecoiso-' + data[0].nameDB);
+				client.on('connected', function () {
+					client.collection('users').update({_id:user._id}, {$set: {status: ['on'] }});
+				});
+			});
+
             user.update({_id:id}, {$set: {status: ['on'] }}).exec(function(err){
                 if (err) {
                     return err;
@@ -318,6 +332,12 @@ function deactiveMultipleUser(data){
         var id = data[i];
         var user = User.find({'_id': id});
         if(user){
+			Company.find({_id: user.company},function(err,data){
+				var client = mongoose.createConnection('mongodb://localhost/ecoiso-' + data[0].nameDB);
+				client.on('connected', function () {
+					client.collection('users').update({_id:user._id}, {$set: {status: ['off'] }});
+				});
+			});
             user.update({_id:id}, {$set: {status: ['off'] }}).exec(function(err){
                 if (err) {
                     return err;
@@ -333,6 +353,12 @@ function assignManagerMultipleUser(data){
         var id = data[i];
         var user = User.find({'_id': id});
         if(user){
+			Company.find({_id: user.company},function(err,data){
+				var client = mongoose.createConnection('mongodb://localhost/ecoiso-' + data[0].nameDB);
+				client.on('connected', function () {
+					client.collection('users').update({_id:user._id}, {$set: {roles: ['manager'] }});
+				});
+			});
             user.update({_id:id}, {$set: {roles: ['manager'] }}).exec(function(err){
                 if (err) {
                     return err;
@@ -348,6 +374,12 @@ function assignStaffMultipleUser(data){
         var id = data[i];
         var user = User.find({'_id': id});
         if(user){
+			Company.find({_id: user.company},function(err,data){
+				var client = mongoose.createConnection('mongodb://localhost/ecoiso-' + data[0].nameDB);
+				client.on('connected', function () {
+					client.collection('users').update({_id:user._id}, {$set: {roles: ['staff'] }});
+				});
+			});
             user.update({_id:id}, {$set: {roles: ['staff'] }}).exec(function(err){
                 if (err) {
                     return err;
@@ -363,6 +395,12 @@ function assignUserMultipleUser(data){
         var id = data[i];
         var user = User.find({'_id': id});
         if(user){
+			Company.find({_id: user.company},function(err,data){
+				var client = mongoose.createConnection('mongodb://localhost/ecoiso-' + data[0].nameDB);
+				client.on('connected', function () {
+					client.collection('users').update({_id:user._id}, {$set: {roles: ['user'] }});
+				});
+			});
             user.update({_id:id}, {$set: {roles: ['user'] }}).exec(function(err){
                 if (err) {
                     return err;

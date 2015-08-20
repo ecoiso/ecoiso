@@ -61,6 +61,8 @@ exports.update = function(req, res) {
 	var process = req.process ;
 
 	process = _.extend(process , req.body);
+    var nameProcess = req.body.name;
+    var user = req.user;
     Company.find({"_id": user.company}, function (err, company) {
         if (err) {
             return res.status(400).send({
@@ -69,6 +71,17 @@ exports.update = function(req, res) {
         } else {
             var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
             client.on('connected', function () {
+                client.collection('processes').update({_id:ObjectId(process._id)},{$set:{name:nameProcess}},function(err){
+                    if (err) return console.log(err);
+                    else{
+                        client.collection('processes').find({_id : ObjectId(process._id)}).toArray(function(err, process_done) {
+                            console.log(process_done);
+                            if (err) return console.log(err);
+                            res.jsonp(process_done[0]);
+                        });
+                    }
+                });
+
             });
         }
     });
@@ -88,8 +101,19 @@ exports.update = function(req, res) {
  */
 exports.delete = function(req, res) {
 	var process = req.process ;
-
-	process.remove(function(err) {
+    var user =req.user;
+    Company.find({_id: user.company},function(err,data){
+        var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
+        client.on('connected', function () {
+            client.collection('processes').remove({_id:ObjectId(process._id)},function(err){
+                if(err) console.log(err);
+                else {
+                        res.jsonp(process);
+                }
+            });
+        });
+    });
+	/*process.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -97,7 +121,7 @@ exports.delete = function(req, res) {
 		} else {
 			res.jsonp(process);
 		}
-	});
+	});*/
 };
 
 /**

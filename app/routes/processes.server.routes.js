@@ -11,8 +11,8 @@ module.exports = function(app) {
 
 	app.route('/processes/:processId')
 		.get(processes.read)
-		.put(users.requiresLogin, processes.hasAuthorization, processes.update)
-		.delete(users.requiresLogin, processes.hasAuthorization, processes.delete);
+		.put(users.requiresLogin, processes.update)
+		.delete(users.requiresLogin, processes.delete);
 
 	// Finish by binding the Process middleware
 	app.param('processId', processes.processByID);
