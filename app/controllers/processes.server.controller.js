@@ -75,7 +75,6 @@ exports.update = function(req, res) {
                     if (err) return console.log(err);
                     else{
                         client.collection('processes').find({_id : ObjectId(process._id)}).toArray(function(err, process_done) {
-                            console.log(process_done);
                             if (err) return console.log(err);
                             res.jsonp(process_done[0]);
                         });

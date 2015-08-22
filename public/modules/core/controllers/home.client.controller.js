@@ -18,7 +18,7 @@
                         thumb_image = thumb_image.replace('-0.jpg','');
                         //alert(thumb_image);
                         var obj = [{0:thumb_image}];
-                        $http.post('createImageThumb',obj).success(function (data) {
+                        $http.post('/documents/createImageThumb',obj).success(function (data) {
                             if(data == '0' ){
 
                             }
@@ -35,7 +35,7 @@
                                         thumb_image = thumb_image.replace('-0.jpg', '');
                                         //alert(thumb_image);
                                         var obj = [{0: thumb_image}];
-                                        $http.post('createImageThumb', obj).success(function (data) {
+                                        $http.post('/documents/createImageThumb', obj).success(function (data) {
                                             if (data == '0') {
 
                                             }
@@ -52,7 +52,7 @@
                                                         thumb_image = thumb_image.replace('-0.jpg', '');
                                                         //alert(thumb_image);
                                                         var obj = [{0: thumb_image}];
-                                                        $http.post('createImageThumb', obj).success(function (data) {
+                                                        $http.post('/documents/createImageThumb', obj).success(function (data) {
                                                             if (data == '0') {
 
                                                             }
@@ -69,7 +69,7 @@
                                                                         thumb_image = thumb_image.replace('-0.jpg', '');
                                                                         //alert(thumb_image);
                                                                         var obj = [{0: thumb_image}];
-                                                                        $http.post('createImageThumb', obj).success(function (data) {
+                                                                        $http.post('/documents/createImageThumb', obj).success(function (data) {
                                                                             if (data == '0') {
 
                                                                             }

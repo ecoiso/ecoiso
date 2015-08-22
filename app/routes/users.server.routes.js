@@ -62,7 +62,6 @@ module.exports = function(app) {
     app.route('/user/doAction').post(users.doAction);
     //list staffs
     app.route('/user/listStaffs').get(users.listStaffs);
-    app.route('/user/listStaffs').get(users.listStaffs);
     //
     app.route('/signupAdmin').post(users.signupAdmin);
     app.route('/changeCheckAdmin/:companyId').get(users.changeCheckAdmin);

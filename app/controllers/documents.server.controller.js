@@ -6,6 +6,8 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Document = mongoose.model('Document'),
+    ObjectId = mongoose.Types.ObjectId,
+    Company = mongoose.model('Company'),
 	_ = require('lodash');
 
 /**
@@ -25,28 +27,31 @@ exports.create = function(req, res) {
     imageick.on('close', function(code) {
         console.log('closing imageick code: ' + code);
     });
-	var document = new Document();
-	document.user = req.user;
-    document.name = doc[0].name;
-    document.kind = doc[0].kind;
-    document.size = doc[0].size;
-    document.versions = doc[0].versions;
-    document.number_versions = doc[0].number_versions;
-    document.process = id;
-    document.folder = doc[0].folder;
-    document.user_update = '';
-    document.thumb_image = doc[0].thumb_image;
-    document.urlPdf = doc[0].urlPdf;
-    document.textContent = doc[0].textContent;
-	document.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(document);
-		}
-	});
+	var document = {};
+    var user =req.user;
+    Company.find({_id: user.company},function(err,data){
+        var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
+        client.on('connected', function () {
+            document.user = req.user;
+            document.name = doc[0].name;
+            document.kind = doc[0].kind;
+            document.size = doc[0].size;
+            document.versions = doc[0].versions;
+            document.number_versions = doc[0].number_versions;
+            document.process = id;
+            document.folder = doc[0].folder;
+            document.user_update = '';
+            document.thumb_image = doc[0].thumb_image;
+            document.urlPdf = doc[0].urlPdf;
+            document.textContent = doc[0].textContent;
+            client.collection('documents').save(document,function(err,document_done){
+                if(err) console.log(err);
+                else {
+                    res.jsonp(document_done);
+                }
+            });
+        });
+    });
 };
 
 /**
@@ -80,8 +85,19 @@ exports.update = function(req, res) {
  */
 exports.delete = function(req, res) {
 	var document = req.document ;
-
-	document.remove(function(err) {
+    var user =req.user;
+    Company.find({_id: user.company},function(err,data){
+        var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
+        client.on('connected', function () {
+            client.collection('documents').remove(document,function(err){
+                if(err) console.log(err);
+                else {
+                    res.jsonp(document);
+                }
+            });
+        });
+    });
+	/*document.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -89,7 +105,7 @@ exports.delete = function(req, res) {
 		} else {
 			res.jsonp(document);
 		}
-	});
+	});*/
 };
 
 /**
@@ -134,7 +150,17 @@ exports.hasAuthorization = function(req, res, next) {
 * */
 exports.documentProcess = function(req,res){
     var processid = req.params.processId;
-    Document.find({$and:[{'kind': "process" },{'process': processid}]}, function (err, documents) {
+    var user =req.user;
+    Company.find({_id: user.company},function(err,data) {
+        var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
+        client.on('connected', function () {
+            client.collection('documents').find({$and:[{'kind': "process" },{'process': ObjectId(processid)}]}).toArray(function(err, document_done) {
+                if (err) return console.log(err);
+                res.jsonp(document_done[0]);
+            });
+        });
+    });
+   /* Document.find({$and:[{'kind': "process" },{'process': processid}]}, function (err, documents) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -142,7 +168,7 @@ exports.documentProcess = function(req,res){
         } else {
             res.json(documents);
         }
-    });
+    });*/
 };
 /**
  * Documents of Model
@@ -150,7 +176,17 @@ exports.documentProcess = function(req,res){
  * */
 exports.documentModel = function(req,res){
     var processid = req.params.processId;
-    Document.find({$and:[{'kind': "model" },{'process': processid}]}, function (err, documents) {
+    var user =req.user;
+    Company.find({_id: user.company},function(err,data) {
+        var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
+        client.on('connected', function () {
+            client.collection('documents').find({$and:[{'kind': "model" },{'process': ObjectId(processid)}]}).toArray(function(err, document_done) {
+                if (err) return console.log(err);
+                res.jsonp(document_done[0]);
+            });
+        });
+    });
+    /*Document.find({$and:[{'kind': "model" },{'process': processid}]}, function (err, documents) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -158,7 +194,7 @@ exports.documentModel = function(req,res){
         } else {
             res.json(documents);
         }
-    });
+    });*/
 };
 /**
 * remove document process
@@ -295,6 +331,31 @@ exports.documentUpdateVersion = function(req,res){
                     urlPdf : doc.urlPdf
                 }},function(err,data){
                     res.json(data);
+                });
+                //
+                var user =req.user;
+                Company.find({_id: user.company},function(err,data) {
+                    var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
+                    client.on('connected', function () {
+                        client.collection('documents').update({_id:ObjectId(old_document[0]._id)},{$set:{
+                            number_versions:numbers,
+                            versions:vers,
+                            size:doc.size,
+                            user_update : req.user._id,
+                            last_updated :Date.now(),
+                            thumb_image : doc.thumb_image,
+                            urlPdf : doc.urlPdf
+                        }},function(err){
+                            if(err) console.log(err);
+                        });
+                        //
+                        client.collection('documents').find({_id:ObjectId(old_document[0]._id)}).toArray(function(err, document) {
+                            if (err) return next(err);
+                            if (! document) return next(new Error('Failed to load Process ' + id));
+                            res.json(document);
+                        });
+
+                    });
                 });
             }
         });
