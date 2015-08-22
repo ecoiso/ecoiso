@@ -27,24 +27,27 @@ exports.create = function(req, res) {
     imageick.on('close', function(code) {
         console.log('closing imageick code: ' + code);
     });
-	var document = {};
+
     var user =req.user;
-    Company.find({_id: user.company},function(err,data){
+    Company.find({_id: ObjectId(user.company)},function(err,data){
         var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
         client.on('connected', function () {
-            document.user = req.user;
-            document.name = doc[0].name;
-            document.kind = doc[0].kind;
-            document.size = doc[0].size;
-            document.versions = doc[0].versions;
-            document.number_versions = doc[0].number_versions;
-            document.process = id;
-            document.folder = doc[0].folder;
-            document.user_update = '';
-            document.thumb_image = doc[0].thumb_image;
-            document.urlPdf = doc[0].urlPdf;
-            document.textContent = doc[0].textContent;
-            client.collection('documents').save(document,function(err,document_done){
+            var document1 = {
+                user : req.user._id,
+                name : doc[0].name,
+                kind : doc[0].kind,
+                size : doc[0].size,
+                versions : doc[0].versions,
+                number_versions : doc[0].number_versions,
+                process : id,
+                folder : doc[0].folder,
+                user_update : '',
+                thumb_image : doc[0].thumb_image,
+                urlPdf : doc[0].urlPdf,
+                textContent : doc[0].textContent
+            };
+            /**/
+            client.collection('documents').save(document1,function(err,document_done){
                 if(err) console.log(err);
                 else {
                     res.jsonp(document_done);
@@ -69,7 +72,7 @@ exports.update = function(req, res) {
 
 	document = _.extend(document , req.body);
 
-	document.save(function(err) {
+	save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -97,7 +100,7 @@ exports.delete = function(req, res) {
             });
         });
     });
-	/*document.remove(function(err) {
+	/*remove(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -112,7 +115,7 @@ exports.delete = function(req, res) {
  * List of Documents
  */
 exports.list = function(req, res) { 
-	Document.find().sort('-created').populate('user', 'displayName').exec(function(err, documents) {
+	find().sort('-created').populate('user', 'displayName').exec(function(err, documents) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -127,7 +130,7 @@ exports.list = function(req, res) {
  * Document middleware
  */
 exports.documentByID = function(req, res, next, id) { 
-	Document.findById(id).populate('user', 'displayName').exec(function(err, document) {
+	findById(id).populate('user', 'displayName').exec(function(err, document) {
 		if (err) return next(err);
 		if (! document) return next(new Error('Failed to load Document ' + id));
 		req.document = document ;
@@ -139,7 +142,7 @@ exports.documentByID = function(req, res, next, id) {
  * Document authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.document.user.id !== req.user.id) {
+	if (req.user.id !== req.user.id) {
 		return res.status(403).send('User is not authorized');
 	}
 	next();
@@ -160,7 +163,7 @@ exports.documentProcess = function(req,res){
             });
         });
     });
-   /* Document.find({$and:[{'kind': "process" },{'process': processid}]}, function (err, documents) {
+   /* find({$and:[{'kind': "process" },{'process': processid}]}, function (err, documents) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -186,7 +189,7 @@ exports.documentModel = function(req,res){
             });
         });
     });
-    /*Document.find({$and:[{'kind': "model" },{'process': processid}]}, function (err, documents) {
+    /*find({$and:[{'kind': "model" },{'process': processid}]}, function (err, documents) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -297,7 +300,7 @@ exports.documentUpdateVersion = function(req,res){
     if (req.url === '/documents/documentUpdateVersion' && req.method === 'POST') {
         var doc = req.body[0];
         //console.log(doc);
-         Document.find({_id:doc.docId}, function (err, old_document) {
+         find({_id:doc.docId}, function (err, old_document) {
             if (err) {
                 return res.status(400).send({
                     message: errorHandler.getErrorMessage(err)
@@ -321,7 +324,7 @@ exports.documentUpdateVersion = function(req,res){
                 }
 
                 ///update
-                Document.update({_id:old_document[0]._id},{$set:{
+                update({_id:old_document[0]._id},{$set:{
                     number_versions:numbers,
                     versions:vers,
                     size:doc.size,
