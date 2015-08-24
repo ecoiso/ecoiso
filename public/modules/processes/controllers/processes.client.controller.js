@@ -181,7 +181,6 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
         $scope.findProcessDocument = function($processId){
             $scope.success = $scope.error = null;
             $http.get('/documentProcess/'+ $processId ).success(function(response) {
-                //alert(response.toSource());
                 $scope.fileProgresses = response;
                 $scope.success = true;
             }).error(function(response) {
@@ -193,7 +192,6 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
         $scope.findProcessModel = function($processId){
             $scope.success = $scope.error = null;
             $http.get('/documentModel/'+ $processId ).success(function(response) {
-                //alert(response.toSource());
                 $scope.fileProgressModel = response;
                 $scope.success = true;
             }).error(function(response) {
@@ -381,7 +379,7 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
                         if (isConfirm) {
                             Documents.remove({
                                 documentId: documentId
-                            })
+                            });
                             $scope.findOne();
                             swal("", "Văn bản đã xóa", "success");
                         } else {
@@ -470,7 +468,7 @@ angular.module('processes').controller('ModelUploadController', ['$scope','$http
                          $scope.log = 'progress: ' + progressPercentage + '% ' +$scope.log;*/
                     }).success(function (data, status, headers, config) {
                         $http.post('documents', data).success(function (response) {
-                            $scope.fileProgressModel.push(response);
+                            //$scope.fileProgressModel.push(response);
                             //$location.path('processes/' + response.process);
                         });
                         $timeout(function () {
@@ -537,7 +535,7 @@ angular.module('processes').controller('ProcessUploadController', ['$scope','$ht
                         file: file
                     }).success(function (data, status, headers, config) {
                         $http.post('documents',data).success(function(response){
-                            $scope.fileProgresses.push(response);
+                           // $scope.fileProgresses.push(response);
                         });
                         $timeout(function() {
                             //$scope.log = 'file: ' + config.file.name + ', Response: ' + JSON.stringify(data) + '\n' + $scope.log;

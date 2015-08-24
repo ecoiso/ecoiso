@@ -118,6 +118,18 @@
                 <span class="text">Danh sách nhà phân phối</span>
             </a>
         </li>
+        <li class="flags-active" onclick="activeNav(this)">
+            <a href="/{{company.shortName}}#!/standards/create" md-ink-ripple>
+                <i class="ion ion-arrow-graph-up-right"></i>
+                <span class="text">tao tieu chuan</span>
+            </a>
+        </li>
+        <li class="flags-active" onclick="activeNav(this)">
+            <a href="/{{company.shortName}}#!/standards" md-ink-ripple>
+                <i class="ion ion-home"></i>
+                <span class="text">danh sach tieu chuan</span>
+            </a>
+        </li>
         <li class="flags-active" ng-if=" authentication.user.roles[0] == 'commander'" onclick="activeNav(this)">
             <a href="/administrator#!/agency/create" md-ink-ripple>
                 <i class="ion ion-plus"></i>

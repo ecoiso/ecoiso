@@ -11,8 +11,8 @@ module.exports = function(app) {
 
 	app.route('/documents/:documentId')
 		.get(documents.read)
-		.put(users.requiresLogin, documents.hasAuthorization, documents.update)
-		.delete(users.requiresLogin, documents.hasAuthorization, documents.delete);
+		.put(users.requiresLogin,  documents.update)
+		.delete(users.requiresLogin,  documents.delete);
 
 	// Finish by binding the Document middleware
 	app.param('documentId', documents.documentByID);

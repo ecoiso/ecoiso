@@ -115,7 +115,7 @@ exports.delete = function(req, res) {
  * List of Documents
  */
 exports.list = function(req, res) { 
-	find().sort('-created').populate('user', 'displayName').exec(function(err, documents) {
+	/*find().sort('-created').populate('user', 'displayName').exec(function(err, documents) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -123,19 +123,31 @@ exports.list = function(req, res) {
 		} else {
 			res.jsonp(documents);
 		}
-	});
+	});*/
 };
 
 /**
  * Document middleware
  */
-exports.documentByID = function(req, res, next, id) { 
-	findById(id).populate('user', 'displayName').exec(function(err, document) {
+exports.documentByID = function(req, res, next, id) {
+    var user =req.user;
+    Company.find({_id: user.company},function(err,data){
+        var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
+        client.on('connected', function () {
+            client.collection('documents').find({_id:ObjectId(id)}).toArray(function(err, document_done) {
+                if (err) return console.log(err);
+                req.document = document_done[0];
+                next();
+            });
+
+        });
+    });
+	/*findById(id).populate('user', 'displayName').exec(function(err, document) {
 		if (err) return next(err);
 		if (! document) return next(new Error('Failed to load Document ' + id));
 		req.document = document ;
 		next();
-	});
+	});*/
 };
 
 /**
@@ -157,9 +169,9 @@ exports.documentProcess = function(req,res){
     Company.find({_id: user.company},function(err,data) {
         var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
         client.on('connected', function () {
-            client.collection('documents').find({$and:[{'kind': "process" },{'process': ObjectId(processid)}]}).toArray(function(err, document_done) {
+            client.collection('documents').find({$and:[{'kind': "process" },{'process': processid}]}).toArray(function(err, document_done) {
                 if (err) return console.log(err);
-                res.jsonp(document_done[0]);
+                res.json(document_done);
             });
         });
     });
@@ -183,9 +195,9 @@ exports.documentModel = function(req,res){
     Company.find({_id: user.company},function(err,data) {
         var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
         client.on('connected', function () {
-            client.collection('documents').find({$and:[{'kind': "model" },{'process': ObjectId(processid)}]}).toArray(function(err, document_done) {
+            client.collection('documents').find({$and:[{'kind': "model" },{'process': processid}]}).toArray(function(err, document_done) {
                 if (err) return console.log(err);
-                res.jsonp(document_done[0]);
+                res.json(document_done);
             });
         });
     });

@@ -69,7 +69,7 @@
                                 Thả tệp có đuôi pdf , doc, docx , xls, xlsx hoặc nháy chuột <br/> ( Chọn tối đa 10 tệp/ 1 lần ) </div>
                             <div ngf-no-file-drop>Kéo/thả tập tin không được trình duyệt này hỗ trợ </div>
                         </div>
-                        <div ng-repeat='fileProgress in fileProgresses'  class=" pull-left col-sm-2 img-hover" style="text-align: center;margin-bottom: 10px">
+                        <div ng-repeat='fileProgress in fileProgresses track by $index'  class=" pull-left col-sm-2 img-hover" style="text-align: center;margin-bottom: 10px">
                             <label class="label label-info label-fix" tooltip="{{fileProgress.name}}" style="display:block;width:78%;overflow:hidden;margin-left:11%">{{fileProgress.name}}</label>
                             <img check-image ng-src="/uploads/{{fileProgress.thumb_image}}-0.jpg" tooltip="{{fileProgress.name}}" class="col-sm-10 img-thumb-document" data="{{ fileProgress._id }}" ng-click="openModalView($event)" style="width:100%;padding:0 10%;height: 178px !important;"/>
                             <button tooltip="Tải về" data="{{fileProgress.versions[0]}}" ng-click="download($event)" style="position: absolute;top:80%;right:18%;height:25px;line-height:25px;padding-top:0;width:38px;text-align:center" md-ink-ripple="" class="btn btn-default btn-facebook" type="button"><i class="ion ion-ios-cloud-download-outline"></i><div class="md-ripple-container" style=""></div></button>
@@ -94,7 +94,7 @@
                                 Thả tệp có đuôi pdf , doc, docx , xls, xlsx hoặc nháy chuột <br/> (  Chọn tối đa 10 tệp/ 1 lần )</div>
                             <div ngf-no-file-drop>Kéo/thả tập tin không được trình duyệt này hỗ trợ </div>
                         </div>
-                        <div ng-repeat='fileProgressModel in fileProgressModel' class=" pull-left col-sm-2 img-hover" style="text-align: center;margin-bottom: 10px">
+                        <div ng-repeat='fileProgressModel in fileProgressModel track by $index' class=" pull-left col-sm-2 img-hover" style="text-align: center;margin-bottom: 10px">
                             <label class="label label-info label-fix" tooltip="{{fileProgressModel.name}}" style="display:block;width:78%;overflow:hidden;margin-left:11%">{{fileProgressModel.name}}</label>
                             <img check-image ng-src="/uploads/{{fileProgressModel.thumb_image}}-0.jpg" tooltip="{{fileProgressModel.name}}" class="col-sm-10 img-thumb-document" data="{{ fileProgressModel._id }}" ng-click="openModalView($event)" style="width:100%;padding:0 10%;height: 178px !important;"/>
                             <button tooltip="Tải về" data="{{fileProgressModel.versions[0]}}" ng-click="download($event)" style="position: absolute;top:80%;right:18%;height:25px;line-height:25px;padding-top:0;width:38px;text-align:center" md-ink-ripple="" class="btn btn-default btn-facebook" type="button"><i class="ion ion-ios-cloud-download-outline"></i><div class="md-ripple-container" style=""></div></button>

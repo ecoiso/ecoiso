@@ -423,12 +423,6 @@ exports.uploadProcess = function (req, res) {
                                 var spawn = require('child_process').spawn;
                                 var libreoffice;
                                 libreoffice = spawn("libreoffice4.4", ['--headless', '--convert-to', 'output.pdf', '--outdir', '/var/www/html/public/uploads/', '/var/www/html/public/uploads/' + _filename + '']);
-                                libreoffice.stdout.on('data', function (data) {
-                                    console.log('stdout: ' + data);
-                                });
-                                libreoffice.on('close', function (code) {
-                                    console.log('closing libreoffice code: ' + code);
-                                });
                             }
                             var urlPdf = '';
                             if (fileExt != 'pdf') {
