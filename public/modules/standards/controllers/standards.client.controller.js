@@ -1,8 +1,8 @@
 'use strict';
 
 // Standards controller
-angular.module('standards').controller('StandardsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Standards',
-	function($scope, $stateParams, $location, Authentication, Standards) {
+angular.module('standards').controller('StandardsController', ['$scope','$http', '$stateParams', '$location', 'Authentication', 'Standards',
+	function($scope,$http, $stateParams, $location, Authentication, Standards) {
 		$scope.authentication = Authentication;
 		$scope.init = function(){
 			if($scope.authentication.user){
@@ -39,7 +39,8 @@ angular.module('standards').controller('StandardsController', ['$scope', '$state
 		$scope.create = function() {
 			// Create new Standard object
 			var standard = new Standards ({
-				name: this.name
+				name: this.name,
+				description:this.description
 			});
 
 			// Redirect after save
@@ -48,6 +49,7 @@ angular.module('standards').controller('StandardsController', ['$scope', '$state
 
 				// Clear form fields
 				$scope.name = '';
+				$scope.description='';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

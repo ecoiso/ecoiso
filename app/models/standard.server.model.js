@@ -16,6 +16,11 @@ var StandardSchema = new Schema({
 		required: 'Please fill Standard name',
 		trim: true
 	},
+	description: {
+		type: String,
+		default: '',
+		trim: true
+	},
 	created: {
 		type: Date,
 		default: Date.now

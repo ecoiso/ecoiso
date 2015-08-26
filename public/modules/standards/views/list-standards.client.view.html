@@ -1,5 +1,36 @@
 <section data-ng-controller="StandardsController" data-ng-init="find()">
     <div class="page-header">
+        <h1>Tiêu Chuẩn</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="standard in standards" data-ng-href="#!/standards/{{standard._id}}"
+           class="list-group-item col-xs-6 col-sm-4">
+            <h4 class="text-center">
+                <i style="font-size: 100px;" class="glyphicon glyphicon-list text-info "></i>
+            </h4>
+            <h4>{{standard.name}}</h4>
+            <small class="list-group-item-text">
+                Đăng vào
+                <span data-ng-bind="standard.created | date:'medium'"></span>
+                bởi
+                <span data-ng-bind="standard.user.displayName"></span>
+                <span class="pull-right">
+                    <button title="xóa" class="btn btn-primary btn-xs" data-ng-click="remove(standard);">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                    <button title="chỉnh sửa" class="btn btn-primary btn-xs" href="/#!/standards/{{standard._id}}/edit">
+                        <i class="glyphicon glyphicon-edit"></i>
+                    </button>
+                </span>
+
+            </small>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!standards.$resolved || standards.length">
+        chưa có tiêu chuẩn nào được khởi tạo ! hãy khởi tạo tiêu chuẩn mới ! <a href="/#!/standards/create">khởi tạo
+        tiêu chuẩn</a>?
+    </div>
+   <!-- <div class="page-header">
         <h1>Standards</h1>
     </div>
     <div class="list-group">
@@ -15,5 +46,5 @@
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!standards.$resolved || standards.length">
     	No Standards yet, why don't you <a href="/#!/standards/create">create one</a>?
-    </div>
+    </div>-->
 </section>
