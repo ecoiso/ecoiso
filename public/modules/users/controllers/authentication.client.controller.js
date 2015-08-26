@@ -20,6 +20,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 						$scope.company = data[0];
 						document.getElementById('site-head').style.backgroundColor = $scope.company.colorBackground;
 						document.getElementById('onclick-change-showname').style.backgroundColor = $scope.company.colorBackground;
+						document.getElementById('main-container').style.backgroundImage =  '';
 						//});
 					});
 				}
@@ -29,6 +30,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 					$scope.company = data[0];
 					document.getElementById('site-head').style.backgroundColor = $scope.company.colorBackground;
 					document.getElementById('onclick-change-showname').style.backgroundColor = $scope.company.colorBackground;
+					document.getElementById('main-container').style.backgroundImage =  'url(uploads/' + $scope.company.imageLogin + ')';
 					//});
 				});
 			}
@@ -52,6 +54,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		$scope.signin = function() {
 					var path = window.location.pathname;
 					var originPath = path.substring(1,path.length);
+					var oldName = $scope.credentials.username;
 					if(originPath.length > 0 && originPath != "administrator"){
 						var newUsername = originPath+$scope.credentials.username;
 						$scope.credentials.username = newUsername;
@@ -63,6 +66,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 						$location.path('/activities');
 					}).error(function(response) {
 						$scope.error = response.message;
+						$scope.credentials.username = oldName;
 					});
 		};
 	}

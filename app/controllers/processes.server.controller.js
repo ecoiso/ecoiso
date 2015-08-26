@@ -27,7 +27,8 @@ exports.create = function(req, res) {
                     {
                         user: process.user,
                         kind: [ 'draft' ],
-                        name: process.name
+                        name: process.name,
+                        created : Date.now()
                     };
                 client.collection('processes').save(_process,function(err,process_done) {
                     if (err) return console.log(err);

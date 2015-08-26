@@ -82,6 +82,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope','$http
 						$scope.company = data[0];
 						document.getElementById('site-head').style.backgroundColor = $scope.company.colorBackground;
 						document.getElementById('onclick-change-showname').style.backgroundColor = $scope.company.colorBackground;
+						document.getElementById('main-container').style.backgroundImage =  '';
 						//});
 					});
 				}
@@ -91,6 +92,7 @@ angular.module('activities').controller('ActivitiesController', ['$scope','$http
 					$scope.company = data[0];
 					document.getElementById('site-head').style.backgroundColor = $scope.company.colorBackground;
 					document.getElementById('onclick-change-showname').style.backgroundColor = $scope.company.colorBackground;
+					document.getElementById('main-container').style.backgroundImage =  'url(uploads/' + $scope.company.imageLogin + ')';
 					//});
 				});
 			}

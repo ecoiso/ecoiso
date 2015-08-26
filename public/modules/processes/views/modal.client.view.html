@@ -43,7 +43,7 @@
                     <ul style="list-style: none">
                         <li>
                             <label class="label label-primary">Tác giả :</label><br>
-                            <input type="text" value="{{model.document.user.displayName}}" readonly
+                            <input type="text" value="{{model.user_created}}" readonly
                                        style="border: none; ">
                         </li>
                         <li>
@@ -64,7 +64,7 @@
                         </li>
                         <li>
                            <label class="label label-primary">Cán bộ cập nhật :</label><br>
-                            <input type="text" value="" readonly style="border: none;width: 85%" >
+                            <input type="text" value="{{model.user_updated}}" readonly style="border: none;width: 85%" >
                         </li>
                         <li>
                            <label class="label label-primary">Loại văn bản :</label><br>

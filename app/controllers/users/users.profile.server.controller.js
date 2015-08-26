@@ -92,12 +92,6 @@ exports.list = function(req, res) {
  */
 exports.removeUser = function(req, res) {
     var user = User.find({'_id': req.params.id});
-    Company.find({_id: user.company},function(err,data){
-        var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
-        client.on('connected', function () {
-            client.collection('users').remove({_id:ObjectId(user._id)});
-        });
-    });
     user.remove().exec(function(err){
         if (err) {
             return res.status(400).send({
@@ -108,6 +102,13 @@ exports.removeUser = function(req, res) {
             res.json({'status':1});
         }
     });
+    Company.find({_id: user.company},function(err,data){
+        var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
+        client.on('connected', function () {
+            client.collection('users').remove({_id:ObjectId(user._id)});
+        });
+    });
+
 };
 /**
 * List staffs
@@ -166,7 +167,7 @@ exports.listUserInCompany = function(req,res){
             res.json(users);
         }
     });
-}
+};
 /**
 **/
 exports.totalUserInCompany = function(req,res){
@@ -180,4 +181,27 @@ exports.totalUserInCompany = function(req,res){
             res.send(users.length.toString());
         }
     });
-}
+};
+/**
+ * */
+exports.userDisplayName = function(req,res){
+    var clientUserId =  req.params.clientUserId;
+    /*Company.find({_id: user.company},function(err,data){
+        var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
+        client.on('connected', function () {
+            client.collection('users').find({_id:ObjectId(clientUserId)}).toArray(function (err, user) {
+                if (err) return next(err);
+                res.send(user[0].displayName.toString());
+            });
+        });
+    });*/
+   User.find({_id:ObjectId(clientUserId)}).exec(function(err, user) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.send(user[0].displayName);
+        }
+   });
+};

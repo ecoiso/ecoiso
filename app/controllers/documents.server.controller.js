@@ -44,7 +44,8 @@ exports.create = function(req, res) {
                 user_update : '',
                 thumb_image : doc[0].thumb_image,
                 urlPdf : doc[0].urlPdf,
-                textContent : doc[0].textContent
+                textContent : doc[0].textContent,
+                created : Date.now()
             };
             /**/
             client.collection('documents').save(document1,function(err,document_done){
@@ -71,7 +72,14 @@ exports.update = function(req, res) {
 	var document = req.document ;
 
 	document = _.extend(document , req.body);
+    console.log(document);
+    /*var user =req.user;
+    Company.find({_id: ObjectId(user.company)},function(err,data) {
+        var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
+        client.on('connected', function () {
 
+        });
+    });
 	save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -80,7 +88,7 @@ exports.update = function(req, res) {
 		} else {
 			res.jsonp(document);
 		}
-	});
+	});*/
 };
 
 /**
@@ -251,7 +259,7 @@ exports.downloadDocument = function(req, res){
 var multiparty = require('multiparty');
 var fs = require('fs');
 exports.updateNewVersion = function(req,res){
-    if (req.url === '/documents/updateNewVersion' && req.method === 'POST') {
+    if (req.url === '/document/updateNewVersion' && req.method === 'POST') {
         // parse a file upload
         var form = new multiparty.Form();
         var host = req.get('host');
@@ -309,74 +317,61 @@ exports.updateNewVersion = function(req,res){
 
 /**/
 exports.documentUpdateVersion = function(req,res){
-    if (req.url === '/documents/documentUpdateVersion' && req.method === 'POST') {
+    if (req.url === '/document/documentUpdateVersion' && req.method === 'POST') {
         var doc = req.body[0];
-        //console.log(doc);
-         find({_id:doc.docId}, function (err, old_document) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
-                });
-            } else {
-                var numbers = [];
-                var vers = [];
-                numbers.push(Cut2FirstLastChar(doc.number_versions));
-                if(old_document[0].number_versions.length > 1){
-                    for(var n=0 ;n < old_document[0].number_versions.length;n++)
-                        numbers.push(old_document[0].number_versions[n]);
-                }else{
-                    numbers.push(Cut2FirstLastChar(old_document[0].number_versions));
-                }
-                vers.push(CutFirstLastChar(doc.versions));
-                if(old_document[0].versions.length > 1){
-                    for(var m=0 ;m < old_document[0].versions.length;m++)
-                        vers.push(old_document[0].versions[m]);
-                }else {
-                    vers.push(Cut2FirstLastChar(old_document[0].versions));
-                }
-
-                ///update
-                update({_id:old_document[0]._id},{$set:{
-                    number_versions:numbers,
-                    versions:vers,
-                    size:doc.size,
-                    user_update : req.user._id,
-                    last_updated :Date.now(),
-                    thumb_image : doc.thumb_image,
-                    urlPdf : doc.urlPdf
-                }},function(err,data){
-                    res.json(data);
-                });
-                //
-                var user =req.user;
-                Company.find({_id: user.company},function(err,data) {
-                    var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
-                    client.on('connected', function () {
-                        client.collection('documents').update({_id:ObjectId(old_document[0]._id)},{$set:{
-                            number_versions:numbers,
-                            versions:vers,
-                            size:doc.size,
-                            user_update : req.user._id,
-                            last_updated :Date.now(),
-                            thumb_image : doc.thumb_image,
-                            urlPdf : doc.urlPdf
-                        }},function(err){
-                            if(err) console.log(err);
+        var id = doc.docId.toString();
+        //console.log(id.toString());
+        var user = req.user;
+        Company.find({_id: user.company}, function (err, data) {
+            var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
+            client.on('connected', function () {
+                client.collection('documents').find({_id: ObjectId(id.toString())}).toArray(function (err, old_document) {
+                    if (err) {
+                        return res.status(400).send({
+                            message: errorHandler.getErrorMessage(err)
                         });
-                        //
-                        client.collection('documents').find({_id:ObjectId(old_document[0]._id)}).toArray(function(err, document) {
+                    } else {
+                        var numbers = [];
+                        var vers = [];
+                        numbers.push(Cut2FirstLastChar(doc.number_versions));
+                        if (old_document[0].number_versions.length > 1) {
+                            for (var n = 0; n < old_document[0].number_versions.length; n++)
+                                numbers.push(old_document[0].number_versions[n]);
+                        } else {
+                            numbers.push(Cut2FirstLastChar(old_document[0].number_versions));
+                        }
+                        vers.push(CutFirstLastChar(doc.versions));
+                        if (old_document[0].versions.length > 1) {
+                            for (var m = 0; m < old_document[0].versions.length; m++)
+                                vers.push(old_document[0].versions[m]);
+                        } else {
+                            vers.push(Cut2FirstLastChar(old_document[0].versions));
+                        }
+
+                        ///update
+                        client.collection('documents').update({_id: ObjectId(id.toString())}, {
+                            $set: {
+                                number_versions: numbers,
+                                versions: vers,
+                                size: doc.size,
+                                user_update: req.user._id,
+                                last_updated: Date.now(),
+                                thumb_image: doc.thumb_image,
+                                urlPdf: doc.urlPdf
+                            }
+                        }, function (err, data) {
+                            if (err) console.log(err);
+                        });
+                        client.collection('documents').find({_id: ObjectId(id.toString())}).toArray(function (err, document) {
                             if (err) return next(err);
-                            if (! document) return next(new Error('Failed to load Process ' + id));
+                            if (!document) return next(new Error('Failed to load Document '));
                             res.json(document);
                         });
-
-                    });
+                    };
                 });
-            }
+            });
         });
-
-
-    }
+    };
 };
 /**/
 function CutFirstLastChar(chars){
@@ -408,7 +403,7 @@ exports.createImageThumb = function(req,res){
         // had been thumb images
         res.send('0');
     }else{
-        sleep(10000);
+        //sleep(10000);
         if(fs.existsSync('/var/www/html/public/uploads/'+thumb_image+'.output.pdf')){
             /// create image thumb
             var spawn_ = require('child_process').spawn;

@@ -24,6 +24,7 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
                         $scope.company = data[0];
                         document.getElementById('site-head').style.backgroundColor = $scope.company.colorBackground;
                         document.getElementById('onclick-change-showname').style.backgroundColor = $scope.company.colorBackground;
+                        document.getElementById('main-container').style.backgroundImage =  '';
                         //});
                     });
                 }
@@ -33,6 +34,7 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
                     $scope.company = data[0];
                     document.getElementById('site-head').style.backgroundColor = $scope.company.colorBackground;
                     document.getElementById('onclick-change-showname').style.backgroundColor = $scope.company.colorBackground;
+                    document.getElementById('main-container').style.backgroundImage =  'url(uploads/' + $scope.company.imageLogin + ')';
                     //});
                 });
             }
@@ -299,27 +301,43 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
         $scope.modalAnim = "default";
         $scope.openModalView = function (event){
             var documentId = event.target.attributes.data.value;
-            var document = Documents.get({
-                documentId: documentId
+            $http.get('/documents/'+documentId).success(function(data){
+                var document = data;
+                var user_created = '';
+                var user_updated = '';
+                $http.get('/userDisplayName/'+ document.user.toString()).success(function(data2){
+                    user_created = data2;
+                });
+                if(document.user_update.length >0 ){
+                    $http.get('/userDisplayName/'+ document.user_update.toString()).success(function(data3){
+                        user_updated = data3;
+                    });
+                };
+                $modal.open({
+                    templateUrl: "/modules/processes/views/modal.client.view.html",
+                    size: "lg",
+                    controller: 'ModalsController',
+                    resolve: {
+                        document: function () {
+                            return document;
+                        },
+                        process: function () {
+                            return $scope.process;
+                        },
+                        user_created: function () {
+                            return user_created;
+                        },
+                        user_updated: function () {
+                            return user_updated;
+                        }
+                    },
+                    windowClass: $scope.modalAnim
+                });
+                $scope.modalClose = function () {
+                    $scope.$close();
+                }
             });
 
-            $modal.open({
-                templateUrl: "/modules/processes/views/modal.client.view.html",
-                size: "lg",
-                controller: 'ModalsController',
-                resolve: {
-                    document: function () {
-                        return document;
-                    },
-                    process: function () {
-                        return $scope.process;
-                    }
-                },
-                windowClass: $scope.modalAnim
-            });
-            $scope.modalClose = function () {
-                $scope.$close();
-            }
         };
         $scope.loading = false;
         $scope.oldValue = [];
@@ -348,7 +366,7 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
 
         $scope.modalClose = function () {
             $scope.$close();
-            window.location.reload();
+           // window.location.reload();
         };
 
         $scope.saveChangeNameDocument = function (document) {
@@ -382,6 +400,7 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
                             });
                             $scope.findOne();
                             swal("", "Văn bản đã xóa", "success");
+                            window.location.reload();
                         } else {
                             swal("Hủy bỏ", "Văn bản vẫn an toàn :)", "error");
                         }
@@ -573,15 +592,14 @@ angular.module('processes').controller('ProcessUploadController', ['$scope','$ht
 }]);
 'use strict';
 //modals controller
-var ModalsController = angular.module('processes').controller('ModalsController',['$scope','$http', '$stateParams', '$location', 'Documents','document','Processes','process',
-    function($scope,$http, $stateParams, $location, Documents,document,Processes,process) {
-
+var ModalsController = angular.module('processes').controller('ModalsController',['$scope','$http', '$stateParams', '$location', 'Documents','document','Processes','process','user_created','user_updated',
+    function($scope,$http, $stateParams, $location, Documents,document,Processes,process,user_created,user_updated) {
         $scope.model = {
             document : document,
-            process:process
+            process:process,
+            user_created : user_created,
+            user_updated : user_updated
         };
-
-
     }
 
 ]);
@@ -626,7 +644,7 @@ angular.module('processes').controller('NewVersionUploadController', ['$scope','
                 var file = files[i];
                 sumBytes += file.size;
                 Upload.upload({
-                    url: '/documents/updateNewVersion',
+                    url: '/document/updateNewVersion',
                     method : "POST",
                     fields:{
                         filename: file.name,
@@ -635,7 +653,7 @@ angular.module('processes').controller('NewVersionUploadController', ['$scope','
                     },
                     file: file
                 }).success(function (data, status, headers, config) {
-                    $http.post('/documents/documentUpdateVersion',data).success(function(response){
+                    $http.post('/document/documentUpdateVersion',data).success(function(response){
                        // $location.path('processes/' + response.process);
                         //window.location.reload();
                     });

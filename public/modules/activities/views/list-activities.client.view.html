@@ -57,19 +57,33 @@
                             </div>
                         </div>
                         <ul class="user-badges list-unstyled row">
-                            <li class="col-xs-6">
+                            <li class="col-xs-6" ng-if="authentication.user && ( authentication.user.roles[0] == 'commander' || authentication.user.roles[0] == 'agency')">
                                 <i class="ion ion-ios-chatboxes-outline text-success"></i>
-                                <a href="/#!/settings/password" style="color:#ffffff">
+                                <a href="/administrator#!/settings/password" style="color:#ffffff">
                                     <button class="btn btn-success btn-xs mt15" title="Đổi mật khẩu">Đổi mật khẩu
                                     </button>
                                 </a>
                             </li>
-                            <li class="col-xs-6">
+                            <li class="col-xs-6" ng-if="authentication.user && ( authentication.user.roles[0] == 'commander' || authentication.user.roles[0] == 'agency')">
                                 <i class="ion ion-ios-body text-danger"></i>
-                                <a href="/#!/settings/profile" style="color:#ffffff">
+                                <a href="/administrator#!/settings/profile" style="color:#ffffff">
                                     <button class="btn btn-primary btn-xs mt15" title="Thay đổi hồ sơ">Thay đổi hồ sơ
                                     </button>
                                 </a>
+                            </li>
+                            <li class="col-xs-6" ng-if="authentication.user && (  authentication.user.roles[0] != 'commander' && authentication.user.roles[0] != 'agency')">
+                                <i class="ion ion-ios-chatboxes-outline text-success"></i>
+                                <a href="/{{company.shortName}}#!/settings/password" style="color:#ffffff">
+                                    <button class="btn btn-success btn-xs mt15" title="Đổi mật khẩu">Đổi mật khẩu
+                                    </button>
+                                </a>
+                            </li>
+                            <li class="col-xs-6" ng-if="authentication.user && ( authentication.user.roles[0] != 'commander' && authentication.user.roles[0] != 'agency')">
+                                <i class="ion ion-ios-body text-danger"></i>
+                                <a href="/{{company.shortName}}#!/settings/profile" style="color:#ffffff">
+                                <button class="btn btn-primary btn-xs mt15" title="Thay đổi hồ sơ">Thay đổi hồ sơ
+                                </button>
+                            </a>
                             </li>
                         </ul>
                     </div>

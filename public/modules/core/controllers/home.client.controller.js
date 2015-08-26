@@ -18,7 +18,7 @@
                         thumb_image = thumb_image.replace('-0.jpg','');
                         //alert(thumb_image);
                         var obj = [{0:thumb_image}];
-                        $http.post('/documents/createImageThumb',obj).success(function (data) {
+                        $http.post('/document/createImageThumb',obj).success(function (data) {
                             if(data == '0' ){
 
                             }
@@ -35,7 +35,7 @@
                                         thumb_image = thumb_image.replace('-0.jpg', '');
                                         //alert(thumb_image);
                                         var obj = [{0: thumb_image}];
-                                        $http.post('/documents/createImageThumb', obj).success(function (data) {
+                                        $http.post('/document/createImageThumb', obj).success(function (data) {
                                             if (data == '0') {
 
                                             }
@@ -52,7 +52,7 @@
                                                         thumb_image = thumb_image.replace('-0.jpg', '');
                                                         //alert(thumb_image);
                                                         var obj = [{0: thumb_image}];
-                                                        $http.post('/documents/createImageThumb', obj).success(function (data) {
+                                                        $http.post('/document/createImageThumb', obj).success(function (data) {
                                                             if (data == '0') {
 
                                                             }
@@ -69,13 +69,13 @@
                                                                         thumb_image = thumb_image.replace('-0.jpg', '');
                                                                         //alert(thumb_image);
                                                                         var obj = [{0: thumb_image}];
-                                                                        $http.post('/documents/createImageThumb', obj).success(function (data) {
-                                                                            if (data == '0') {
+                                                                        $http.post('/document/createImageThumb', obj).success(function (data) {
+                                                                            /*if (data == '0') {
 
                                                                             }
-                                                                            if (data == '1') {
+                                                                            if (data == '1') {*/
                                                                                 window.location.reload();
-                                                                            }
+                                                                            /*}*/
                                                                         });
                                                                     });
                                                                 }, 5000);
@@ -90,8 +90,6 @@
                             }
 
                         });
-
-
                         element.attr('src', '/uploads/'+thumb_image+'.jpg'); // set default image
                     });
                 });

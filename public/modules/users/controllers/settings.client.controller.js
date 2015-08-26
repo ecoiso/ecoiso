@@ -113,13 +113,14 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
             $http.post('/user/doAction', obj ).success(function(response) {
                 // If successful show success message and clear form
                 //alert(response.toSource());
-                $scope.reload();
                 $scope.selectActionChoosen = '';
                 $scope.dataSelected = [];
                 $scope.success = true;
             }).error(function(response) {
                 $scope.error = response.message;
+
             });
+			$scope.reload();
         };
 
 }]);

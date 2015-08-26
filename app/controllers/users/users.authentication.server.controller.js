@@ -278,6 +278,33 @@ exports.removeOAuthProvider = function(req, res, next) {
 		});
 	}
 };
+exports.doAction = function(req,res){
+	var action = req.body[0].choose;
+	var data = req.body[0].data;
+	var check = false;
+	//console.log(JSON.stringify(req.body[0].choose));
+	if (action == 'remove'){
+		check = removeMultipleUser(data);
+	}
+	else if(action == 'active'){
+		check = activeMultipleUser(data);
+	}
+	else if(action =='deactive'){
+		check = deactiveMultipleUser(data);
+	}
+	else if(action == 'manager'){
+		check = assignManagerMultipleUser(data);
+	}
+	else if(action =='staff'){
+		check = assignStaffMultipleUser(data);
+	}
+	else if(action =='user'){
+		check = assignUserMultipleUser(data);
+	}
+
+	if(check) res.json({'status':1});
+	else res.json(check);
+}
 /**
  * delete , change status, change permission
  */
@@ -303,7 +330,7 @@ function removeMultipleUser(data){
         }
     }
 
-}
+};
 function activeMultipleUser(data){
     for (var i in data) {
         var id = data[i];
@@ -326,7 +353,7 @@ function activeMultipleUser(data){
         }
     }
 
-}
+};
 function deactiveMultipleUser(data){
     for (var i in data) {
         var id = data[i];
@@ -347,7 +374,7 @@ function deactiveMultipleUser(data){
             });
         }
     }
-}
+};
 function assignManagerMultipleUser(data){
     for (var i in data) {
         var id = data[i];
@@ -368,7 +395,7 @@ function assignManagerMultipleUser(data){
             });
         }
     }
-}
+};
 function assignStaffMultipleUser(data){
     for (var i in data) {
         var id = data[i];
@@ -389,7 +416,7 @@ function assignStaffMultipleUser(data){
             });
         }
     }
-}
+};
 function assignUserMultipleUser(data){
     for (var i in data) {
         var id = data[i];
@@ -410,34 +437,8 @@ function assignUserMultipleUser(data){
             });
         }
     }
-}
-exports.doAction = function(req,res){
-    var action = req.body[0].choose;
-    var data = req.body[0].data;
-    var check = false;
-    //console.log(JSON.stringify(req.body[0].choose));
-    if (action == 'remove'){
-        check = removeMultipleUser(data);
-    }
-    else if(action == 'active'){
-        check = activeMultipleUser(data);
-    }
-    else if(action =='deactive'){
-        check = deactiveMultipleUser(data);
-    }
-    else if(action == 'manager'){
-        check = assignManagerMultipleUser(data);
-    }
-    else if(action =='staff'){
-        check = assignStaffMultipleUser(data);
-    }
-    else if(action =='user'){
-        check = assignUserMultipleUser(data);
-    }
+};
 
-    if(check) res.json({'status':1});
-    else res.json(check);
-}
 /**/
 function randomString(){
     var text = "";

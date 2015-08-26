@@ -66,5 +66,7 @@ module.exports = function(app) {
     app.route('/signupAdmin').post(users.signupAdmin);
     app.route('/changeCheckAdmin/:companyId').get(users.changeCheckAdmin);
     app.route('/users/listUserInCompany').get(users.listUserInCompany);
+    app.route('/userDisplayName/:clientUserId').get(users.userDisplayName);
     app.route('/totalUsers/totalUserInCompany').get(users.totalUserInCompany);
+
 };
