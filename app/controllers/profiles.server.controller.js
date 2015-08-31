@@ -6,7 +6,9 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Profile = mongoose.model('Profile'),
+    Company = mongoose.model('Company'),
     Document = mongoose.model('Document'),
+    ObjectId = mongoose.Types.ObjectId,
 	_ = require('lodash');
 
 /**
@@ -14,19 +16,35 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
     //console.log(req);
-	var profile = new Profile(req.body);
-	profile.user = req.user;
-    profile.company = req.user.company;
+    var profile = new Profile(req.body);
+    var user = req.user;
+    Company.find({"_id": user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                console.log(company);
+                var _profile =
+                {
+                    user: req.user._id,
+                    company: req.user.company,
+                    created : Date.now(),
+                    name: profile.name,
+                    parent: profile.parent,
+                    viewer: profile.viewer
 
-	profile.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(profile);
-		}
-	});
+                };
+                client.collection('profiles').save(_profile,function(err,profile_done) {
+                    if (err) return console.log(err);
+                    else res.jsonp(profile_done);
+                });
+            });
+        };
+    });
+
 };
 
 /**
@@ -59,7 +77,20 @@ exports.update = function(req, res) {
  * Delete an Profile
  */
 exports.delete = function(req, res) {
-	var profile = req.profile ;
+    var profile = req.profile ;
+    var user =req.user;
+    Company.find({_id: user.company},function(err,data){
+        var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
+        client.on('connected', function () {
+            client.collection('profiles').remove({_id:ObjectId(profile._id)},function(err){
+                if(err) console.log(err);
+                else {
+                    res.jsonp(profile);
+                }
+            });
+        });
+    });
+	/*var profile = req.profile ;
 
 	profile.remove(function(err) {
 		if (err) {
@@ -69,7 +100,7 @@ exports.delete = function(req, res) {
 		} else {
 			res.jsonp(profile);
 		}
-	});
+	});*/
 };
 
 /**
@@ -90,13 +121,31 @@ exports.list = function(req, res) {
 /**
  * Profile middleware
  */
-exports.profileByID = function(req, res, next, id) { 
-	Profile.findById(id).populate('user', 'displayName').exec(function(err, profile) {
+exports.profileByID = function(req, res, next, id) {
+    var user = req.user;
+    Company.find({"_id": user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                client.collection('profiles').find({_id:ObjectId(id)}).toArray(function(err,profiles) {
+                    if (err) return next(err);
+                    if (! profiles) return next(new Error('Failed to load Profile ' + id));
+                    req.profile = profiles[0] ;
+                    next();
+                });
+            });
+        };
+    });
+	/*Profile.findById(id).populate('user', 'displayName').exec(function(err, profile) {
 		if (err) return next(err);
 		if (! profile) return next(new Error('Failed to load Profile ' + id));
 		req.profile = profile ;
 		next();
-	});
+	});*/
 };
 
 /**
@@ -113,7 +162,29 @@ exports.hasAuthorization = function(req, res, next) {
  * Profile in this Process
  */
 exports.profilesProcess = function(req, res){
+    var user = req.user;
     var processid = req.params.processId;
+    Company.find({"_id": user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                client.collection('profiles').find({'process': processid}).toArray(function(err,profiles) {
+                    if (err) {
+                        return res.status(400).send({
+                            message: errorHandler.getErrorMessage(err)
+                        });
+                    } else {
+                        res.json(profiles[0]);
+                    }
+                });
+            });
+        };
+    });
+    /*var processid = req.params.processId;
     Profile.find({'process': processid}, function (err, profiles) {
         if (err) {
             return res.status(400).send({
@@ -122,7 +193,7 @@ exports.profilesProcess = function(req, res){
         } else {
             res.json(profiles);
         }
-    });
+    });*/
 };
 /**
  *
@@ -132,8 +203,24 @@ exports.listProfiles = function(req, res) {}
  *
  **/
 exports.rootProfile = function(req, res) {
-    console.log(req.user._id);
-    Profile.find( {$and : [{'company': req.user.company},{'parent':[]},{$or:[{'user':req.user._id},{'viewer' : {$elemMatch: {"_id":req.user._id.toString()}}}] }] }, function (err, profiles) {
+    var user = req.user;
+    Company.find({"_id": user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                client.collection('profiles').find( {$and : [{'company': user.company},{'parent':[]},{$or:[{'user':user._id},{'viewer' : {$elemMatch: {"_id":user._id}}}] }] }).toArray(function(err,profiles) {
+                    if (err) return next(err);
+                    if (! profiles) return next(new Error('Failed to load profiles ' + id));
+                    res.json(profiles);
+                });
+            });
+        };
+    });
+    /*Profile.find( {$and : [{'company': req.user.company},{'parent':[]},{$or:[{'user':req.user._id},{'viewer' : {$elemMatch: {"_id":req.user._id.toString()}}}] }] }, function (err, profiles) {
     //Profile.find( {'viewer' : {$elemMatch: {"_id":req.user._id.toString()}}}, function (err, profiles) {
         if (err) {
             return res.status(400).send({
@@ -142,28 +229,64 @@ exports.rootProfile = function(req, res) {
         } else {
             res.json(profiles);
         }
-    });
+    });*/
 }
 /**
  *
  * */
 
 exports.childProfile = function(req, res) {
-    console.log(req.user._id);
+    var user = req.user;
     var obj = [];
     obj.push(req.profile._id.toString());
-    Profile.find({$and : [{'company': req.user.company},{'parent':obj},{$or:[{'user':req.user._id},{'viewer' : {$elemMatch: {"_id":req.user._id.toString()}}} ] } ]}, function (err, profiles) {
+    Company.find({"_id": user.company}, function (err, company) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
             });
         } else {
-            res.json(profiles);
-        }
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                client.collection('profiles').find({$and : [{'company': req.user.company},{'parent':obj},{$or:[{'user':req.user._id},{'viewer' : {$elemMatch: {"_id":req.user._id.toString()}}} ] } ]}).toArray(function (err, profiles) {
+                    if (err) return next(err);
+                    if (! profiles) return next(new Error('Failed to load profiles ' + id));
+                    res.json(profiles);
+                });
+            });
+        };
     });
+    /*console.log(req.user._id);
+    var obj = [];
+    obj.push(req.profile._id.toString());
+    Profile.find({$and : [{'company': req.user.company},{'parent':obj},{$or:[{'user':req.user._id},{'viewer' : {$elemMatch: {"_id":req.user._id.toString()}}} ] } ]}).toArray(function (err, profiles) {
+        if (err) return next(err);
+        if (! profiles) return next(new Error('Failed to load profiles ' + id));
+        res.json(profiles);
+    });*/
 };
 exports.documentChildProfile = function(req, res) {
-    Document.find({'folder':req.profile._id}, function (err, documents) {
+    var user = req.user;
+    Company.find({"_id": user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                client.collection('documents').find({'folder':req.profile._id.toString()}).toArray(function (err, document) {
+                    if (err) {
+                        return res.status(400).send({
+                            message: errorHandler.getErrorMessage(err)
+                        });
+                    } else {
+                        res.json(document);
+                    }
+                });
+            });
+        };
+    });
+    /*Document.find({'folder':req.profile._id}, function (err, documents) {
         if (err) {
             return res.status(400).send({
                 message: errorHandler.getErrorMessage(err)
@@ -171,7 +294,7 @@ exports.documentChildProfile = function(req, res) {
         } else {
             res.json(documents);
         }
-    });
+    });*/
 };
 
 /**
@@ -222,8 +345,29 @@ exports.uploadProfile = function(req, res) {
  * */
 exports.saveViewerProfile = function(req,res){
     //console.log(req.body);
-
-    var obj = [];
+    var user = req.user;
+    Company.find({"_id": user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                client.collection('profiles').update({_id:ObjectId( req.body.profileId)},{$set:{'viewer':obj}},function(err){
+                    if (err) return console.log(err);
+                    else{
+                        /*client.collection('processes').find({_id : ObjectId(process._id)}).toArray(function(err, process_done) {
+                            if (err) return console.log(err);
+                            res.jsonp(process_done[0]);
+                        });*/
+                        res.send('1');
+                    }
+                });
+            });
+        };
+    });
+    /*var obj = [];
     for(var i in req.body.users){
         obj.push({'_id':req.body.users[i]._id});
     }
@@ -236,7 +380,7 @@ exports.saveViewerProfile = function(req,res){
 
             res.send('1');
         }
-    });
+    });*/
 };
 /**
  * */

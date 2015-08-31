@@ -147,8 +147,16 @@ exports.signin = function(req, res, next) {
  * Signout
  */
 exports.signout = function(req, res) {
+	var user = req.user;
 	req.logout();
-    res.redirect('/#!/signin');
+	if(user.company.length > 0){
+		Company.find({"_id": user.company}, function (err, company) {
+
+			res.redirect('/'+company[0].shortName+'#!/signin');
+		});
+
+	}
+    else res.redirect('/#!/signin');
 };
 
 /**

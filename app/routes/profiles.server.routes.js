@@ -11,8 +11,8 @@ module.exports = function(app) {
 
 	app.route('/profiles/:profileId')
 		.get(profiles.read)
-		.put(users.requiresLogin, profiles.hasAuthorization, profiles.update)
-		.delete(users.requiresLogin, profiles.hasAuthorization, profiles.delete);
+		.put(users.requiresLogin,  profiles.update)
+		.delete(users.requiresLogin, profiles.delete);
 
 	// Finish by binding the Profile middleware
 	app.param('profileId', profiles.profileByID);
