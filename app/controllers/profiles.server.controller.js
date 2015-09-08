@@ -59,18 +59,30 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var profile = req.profile ;
-
 	profile = _.extend(profile , req.body);
+    var nameProfile = req.body.name;
+    var user = req.user;
+    Company.find({"_id": user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                client.collection('profiles').update({_id:ObjectId(profile._id)},{$set:{name:nameProfile}},function(err){
+                    if (err) return console.log(err);
+                    else{
+                        client.collection('profiles').find({_id : ObjectId(profile._id)}).toArray(function(err, process_done) {
+                            if (err) return console.log(err);
+                            res.jsonp(process_done[0]);
+                        });
+                    }
+                });
 
-	profile.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(profile);
-		}
-	});
+            });
+        }
+    });
 };
 
 /**
@@ -344,7 +356,10 @@ exports.uploadProfile = function(req, res) {
  *
  * */
 exports.saveViewerProfile = function(req,res){
-    //console.log(req.body);
+    var obj = [];
+    for(var i in req.body.users){
+        obj.push({'_id':req.body.users[i]._id});
+    }
     var user = req.user;
     Company.find({"_id": user.company}, function (err, company) {
         if (err) {
@@ -357,10 +372,6 @@ exports.saveViewerProfile = function(req,res){
                 client.collection('profiles').update({_id:ObjectId( req.body.profileId)},{$set:{'viewer':obj}},function(err){
                     if (err) return console.log(err);
                     else{
-                        /*client.collection('processes').find({_id : ObjectId(process._id)}).toArray(function(err, process_done) {
-                            if (err) return console.log(err);
-                            res.jsonp(process_done[0]);
-                        });*/
                         res.send('1');
                     }
                 });

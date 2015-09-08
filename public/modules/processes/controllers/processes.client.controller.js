@@ -371,11 +371,7 @@ var Processes = angular.module('processes').controller('ProcessesController', ['
 
         $scope.saveChangeNameDocument = function (document) {
             var document = document.document;
-            document.$update(function(data) {
-
-            }, function(errorResponse) {
-                $scope.error = errorResponse.data.message;
-            });
+            $http.put('/documents/'+document._id,document);
         };
         // Remove existing document Process
         $scope.removeDocument = function(event) {
@@ -482,16 +478,10 @@ angular.module('processes').controller('ModelUploadController', ['$scope','$http
                             process: process._id
                         },
                         file: file
-                    }).progress(function (evt) {
-                        /*var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                         $scope.log = 'progress: ' + progressPercentage + '% ' +$scope.log;*/
                     }).success(function (data, status, headers, config) {
                         $http.post('documents', data).success(function (response) {
                             //$scope.fileProgressModel.push(response);
                             //$location.path('processes/' + response.process);
-                        });
-                        $timeout(function () {
-                            //$scope.log = 'file: ' + config.file.name + ', Response: ' + JSON.stringify(data) + '\n' + $scope.log;
                         });
                     });
                 }
@@ -535,9 +525,6 @@ angular.module('processes').controller('ProcessUploadController', ['$scope','$ht
         if(typeof files !== "undefined"){
             var sumBytes = 0;
             if (files && files.length) {
-                /*document.getElementById('loading-screen').style.display = "block";
-                window.scroll(0,0);
-                document.body.style.overflow = "hidden";*/
                 var length = 0;
                 if(files.length < 11) length = files.length;
                 else length = 10;

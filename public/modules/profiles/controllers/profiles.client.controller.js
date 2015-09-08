@@ -184,13 +184,22 @@ angular.module('profiles').controller('ProfilesController', ['$scope', '$statePa
             }
 
         };
+        $scope.modalAnim = "default";
+        $scope.createFolderPopup = function(){
+            $modal.open({
+                templateUrl: "/modules/profiles/views/createFolder.client.view.html",
+                size: "xs",
+                controller: 'ModalCreateProfileController',
+                windowClass: $scope.modalAnim
+            });
+            $scope.modalClose = function () {
+                $scope.$close();
+            }
+
+        };
         $scope.modalClose = function () {
             $scope.$close();
-        }
-
-
-
-
+        };
 	}
 ]);
 'use strict';
@@ -263,6 +272,15 @@ angular.module('profiles').controller('ProfileUploadController', ['$scope','$htt
 }]);
 'use strict';
 //modals controller
+var ModalCreateProfileController = angular.module('profiles').controller('ModalCreateProfileController',['$scope','$http', '$stateParams', '$location','Authentication',
+    function($scope,$http, $stateParams, $location,Authentication) {
+        $scope.modalClose = function () {
+            $scope.$close();
+        }
+    }
+]);
+'use strict';
+//modals controller
 var ModalConfigProfileController = angular.module('profiles').controller('ModalConfigProfileController',['$scope','$http', '$stateParams', '$location','Profiles','profile','Authentication',
     function($scope,$http, $stateParams, $location,Profiles,profile,Authentication) {
 
@@ -277,6 +295,10 @@ var ModalConfigProfileController = angular.module('profiles').controller('ModalC
                 $scope.availableUsers = data;
             })
 
+        };
+        $scope.saveChangeNameProfile = function (data) {
+            var profile_ = data.profile;
+            $http.put('/profiles/'+profile_._id,profile_);
         };
         $scope.saveViewerProfile = function(){
             $scope.multipleUser.profileId = document.getElementById('profileIdConfig').value;

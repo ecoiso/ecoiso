@@ -3,14 +3,14 @@
     app.config(function($httpProvider){
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
     });
-    app.directive('checkImage', function($http) {
+    /*app.directive('checkImage', function($http) {
         return {
             restrict: 'A',
             link: function(scope, element, attrs) {
                 attrs.$observe('ngSrc', function(ngSrc) {
                     $http.get(ngSrc).success(function(){
-                       /* document.getElementById('loading-screen').style.display = "none";
-                        document.body.style.overflow = "auto";*/
+                       /!* document.getElementById('loading-screen').style.display = "none";
+                        document.body.style.overflow = "auto";*!/
                     }).error(function(){
                         //alert('image not exist');
                         var thumb_image ="";
@@ -37,14 +37,10 @@
                                         var obj = [{0: thumb_image}];
                                         $http.post('/document/createImageThumb', obj).success(function (data) {
                                             if (data == '0') {
-
                                             }
                                             if (data == '1') {
-
-
                                                 setTimeout(function(){
                                                     $http.get(ngSrc).success(function(){
-
                                                     }).error(function() {
                                                         //alert('image not exist');
                                                         var thumb_image = "";
@@ -54,11 +50,8 @@
                                                         var obj = [{0: thumb_image}];
                                                         $http.post('/document/createImageThumb', obj).success(function (data) {
                                                             if (data == '0') {
-
                                                             }
                                                             if (data == '1') {
-
-
                                                                 setTimeout(function(){
                                                                     $http.get(ngSrc).success(function(){
 
@@ -70,12 +63,12 @@
                                                                         //alert(thumb_image);
                                                                         var obj = [{0: thumb_image}];
                                                                         $http.post('/document/createImageThumb', obj).success(function (data) {
-                                                                            /*if (data == '0') {
+                                                                            /!*if (data == '0') {
 
                                                                             }
-                                                                            if (data == '1') {*/
+                                                                            if (data == '1') {
                                                                                 window.location.reload();
-                                                                            /*}*/
+                                                                            }*!/
                                                                         });
                                                                     });
                                                                 }, 5000);
@@ -95,7 +88,7 @@
                 });
             }
         };
-    });
+    });*/
     app.controller('HomeController', ['$rootScope','$scope', 'Authentication', '$timeout','$http',
 	function($rs,$scope, Authentication,$timeout,$http) {
         $scope.keyword ='';

@@ -8,56 +8,66 @@
     <div class="page-wrap">
         <div>
             <div class="panel mb20 panel-hovered">
-                <div class="panel-heading">
+                <div class="panel-body">
+                    <div class="panel-heading">
 
-                    <div class="row">
-                        <a md-ink-ripple="" href="javascript:;" class="btn-tag btn-tag-info">Hồ sơ ghi nhận và xử lý<div class="md-ripple-container" style=""></div></a>
-                    </div>
-                    <div class="row">
-                        <form name="profileForm" data-ng-submit="create()" class="col-sm-5 form-horizontal" novalidate autocomplete="off" ng-if="authentication.user.roles[0] == 'manager'">
-                            <fieldset>
-                                <div class="form-group col-md-12" style="padding:0;margin:0;display:inline-flex">
-                                    <button md-ink-ripple="" class="btn btn-line-info btn-icon-inline" type="submit"><i class="ion ion-folder"></i>Tạo thư mục<div class="md-ripple-container" style=""></div></button>
-                                    <i><input style="width: 300px;" type="text" placeholder="Điền tên thư mục chứa hồ sơ..." required="" class="form-control ng-dirty ng-valid ng-valid-required " id="name" data-ng-model="name"></i>
-                                </div>
-                                <div data-ng-show="error" class=" form-group text-center text-danger">
-                                    <strong style="margin-left: 100px" data-ng-bind="error"></strong>
-                                </div>
-                            </fieldset>
-                        </form>
-                        <i class="form-horizontal right col-lg-4">
-                           <i></i> <input class="form-control input-sm" placeholder="Tìm kiếm mọi thứ trong trang hiện tại..." ng-model="searchTextFilter" type="text"></i>
-                        </form>
-                    </div>
-                    <div class="row" style="padding:30px">
-                        <button class="btn  btn-xs btn-default mb10 mr5" ng-click="findLVOne()">Thư mục gốc</button>
-                        <button class="btn  btn-xs btn-default mb10 mr5" ng-repeat="parent in parentProfile"  ng-click="openProfile(parent)"> {{parent.name}}</button>
-                    </div>
-                </div>
-                <div class="panel-body" style="margin-top: 20px">
-                    <div ng-if="parentProfile.length > 0" tooltip="Thả tập pdf , doc, docx , xls, xlsx hoặc nháy chuột " ng-controller="ProfileUploadController" class="col-sm-2" style="text-align: center; margin-bottom: 10px; height: 185px;">
-                        <div ngf-drop ngf-select ng-model="files" class="drop-box" style="height: 100%"
-                             ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
-                             accept="application/msword,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-                            Thả tập pdf , doc, docx , xls, xlsx hoặc nháy chuột ( Tối đa 10 tệp/ 1 lần ) </div>
-                        <div ngf-no-file-drop>Kéo/thả tập tin không được trình duyệt này hỗ trợ </div>
-                    </div>
-                    <div class="col-sm-2" style="text-align: center;margin-bottom: 10px"  ng-repeat='profile in profiles | filter:searchTextFilter' >
-                            <div ng-if="profile.kind == 'profile' ">
-                                <label class="label label-info label-fix" tooltip="{{profile.name}}" style="display:block;width:78%;overflow:hidden;margin-left:11%">{{profile.name}}</label>
-                                <img ng-src="/modules/core/img/document.png" tooltip="{{profile.name}}" class="col-sm-10 img-thumb-document" style="width:67%;margin-left:16%"/>
-                                <button ng-controller="ProcessesController" tooltip="Tải về" data="{{profile.versions[0]}}" ng-click="download($event)" style="position: absolute;top:80%;right:18%;height:25px;line-height:25px;padding-top:0;width:38px;text-align:center" md-ink-ripple="" class="btn btn-default btn-facebook" type="button"><i class="ion ion-ios-cloud-download-outline"></i><div class="md-ripple-container" style=""></div></button>
-                                <span ng-if="authentication.user._id == profile.user "><button tooltip="Xóa" ng-controller="ProcessesController"  data="{{ profile._id }}"  ng-click="removeDocument($event)"  style="position: absolute; height:25px;line-height:25px;top:80%;right:40%;padding-top:0;width:38px" md-ink-ripple="" class="btn btn-default btn-gplus" type="button"><i class="ion ion-trash-a"></i><div class="md-ripple-container" style=""></div></button></span>
-                            </div>
-                            <div ng-if="profile.kind != 'profile' ">
-                                <label class="label label-info label-fix" tooltip="{{profile.name}}" style="display:block;width:78%;overflow:hidden;margin-left:11%">{{profile.name}}</label>
-                                <img src="/modules/core/img/file-folder.png" style="width: 50%" tooltip="{{profile.name}}" ng-click="openProfile(profile)"/>
-                                <button ng-if="authentication.user._id == profile.user" title="Cấu hình" ng-click="configFolder(profile)" style="position: absolute;top:80%;right:18%;height:25px;line-height:25px;padding-top:0;width:38px;text-align:center" md-ink-ripple="" class="btn btn-default " type="button"><i class="ion ion-android-settings"></i><div class="md-ripple-container" style=""></div></button>
-                                <span ng-if="authentication.user._id == profile.user"><button title="Xóa" ng-click="removeProfiles(profile)" style="position: absolute; height:25px;line-height:25px;top:80%;right:40%;padding-top:0;width:38px" md-ink-ripple="" class="btn btn-default btn-gplus" type="button"><i class="ion ion-trash-a"></i><div class="md-ripple-container" style=""></div></button></span>
-                            </div>
+                        <div class="row">
+                            <a md-ink-ripple="" href="javascript:;" class="btn-tag btn-tag-info">Hồ sơ ghi nhận và xử lý<div class="md-ripple-container" style=""></div></a>
+                            <i class="form-horizontal right col-lg-4"><input class="form-control input-sm " placeholder="Tìm kiếm trong trang hiện tại..." ng-model="searchTextFilter" type="text"></i>
+                        </div>
+                        <!--<div class="row">-->
+                        <!--<form name="profileForm" data-ng-submit="create()" class="col-sm-5 form-horizontal" novalidate autocomplete="off" ng-if="authentication.user.roles[0] == 'manager'">
+                                <fieldset>
+                                    <div class="form-group col-md-12" style="padding:0;margin:0;display:inline-flex">
+                                        <button md-ink-ripple="" class="btn btn-line-info btn-icon-inline" type="submit"><i class="ion ion-folder"></i>Tạo thư mục<div class="md-ripple-container" style=""></div></button>
+                                        <i><input style="width: 300px;" type="text" placeholder="Điền tên thư mục chứa hồ sơ..." required="" class="form-control ng-dirty ng-valid ng-valid-required " id="name" data-ng-model="name"></i>
+                                    </div>
+                                    <div data-ng-show="error" class=" form-group text-center text-danger">
+                                        <strong style="margin-left: 100px" data-ng-bind="error"></strong>
+                                    </div>
+                                </fieldset>
+                            </form>-->
+                           <!-- <i class="form-horizontal right col-lg-4">
+
+                        </div>-->
+                        <div class="row" >
+                            <button class="btn  btn-xs btn-default mb10 mr5" ng-click="findLVOne()">Thư mục gốc</button>
+                            <button class="btn  btn-xs btn-default mb10 mr5" ng-repeat="parent in parentProfile"  ng-click="openProfile(parent)"> {{parent.name}}</button>
                         </div>
                     </div>
+                    <div class="panel-body" style="padding: 0">
+                        <div ng-if="parentProfile.length > 0" tooltip="Thả tập pdf , doc, docx , xls, xlsx hoặc nháy chuột " ng-controller="ProfileUploadController" class="col-sm-2" style="text-align: center; margin-bottom: 10px; height: 185px;">
+                            <div ngf-drop ngf-select ng-model="files" class="drop-box" style="height: 100%"
+                                 ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
+                                 accept="application/msword,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                                Thả tập pdf , doc, docx , xls, xlsx hoặc nháy chuột ( Tối đa 10 tệp/ 1 lần ) </div>
+                            <div ngf-no-file-drop>Kéo/thả tập tin không được trình duyệt này hỗ trợ </div>
+                        </div>
+                        <div class="col-sm-2" style="text-align: center;margin-bottom: 10px;padding: 0"  ng-repeat='profile in profiles | filter:searchTextFilter' >
+                                <div ng-if="profile.kind == 'profile' ">
+                                    <img ng-src="/modules/profiles/img/file-folder-bg.png" tooltip="{{profile.name}}" class="col-sm-10 img-thumb-document" style="width:67%;margin-left:16%"/>
+                                    <button ng-controller="ProcessesController" tooltip="Tải về" data="{{profile.versions[0]}}" ng-click="download($event)" style="position: absolute;top:0;right:18%;height:25px;line-height:25px;padding-top:0;width:25px;text-align:center" md-ink-ripple="" class="btn btn-default btn-facebook" type="button"><i class="ion ion-ios-cloud-download-outline"></i><div class="md-ripple-container" style=""></div></button>
+                                    <span ng-if="authentication.user._id == profile.user "><button tooltip="Xóa" ng-controller="ProcessesController"  data="{{ profile._id }}"  ng-click="removeDocument($event)"  style="position: absolute; height:25px;line-height:25px;top:0;right:31%;padding-top:0;width:25px" md-ink-ripple="" class="btn btn-default btn-gplus" type="button"><i class="ion ion-trash-a" style="margin-left: -5px;"></i><div class="md-ripple-container" style=""></div></button></span>
+                                    <span tooltip="{{profile.name}}" style="display:block;width:78%;overflow:hidden;margin-left:11%;margin-top:5px">{{profile.name}}</span>
+                                </div>
+                                <div ng-if="profile.kind != 'profile' ">
+                                    <img src="/modules/profiles/img/file-folder-bg.png" style="width: 35%;background-color: #795548" tooltip="{{profile.name}}" ng-click="openProfile(profile)"/>
+                                    <button ng-if="authentication.user._id == profile.user" title="Cấu hình" ng-click="configFolder(profile)" style="position: absolute;top:0;right:18%;height:25px;line-height:25px;padding-top:0;width:25px;text-align:center" md-ink-ripple="" class="btn btn-default " type="button"><i class="ion ion-android-settings" style="margin-left: -6px;"></i><div class="md-ripple-container" style=""></div></button>
+                                    <span ng-if="authentication.user._id == profile.user"><button title="Xóa" ng-click="removeProfiles(profile)" style="position: absolute; height:25px;line-height:25px;top:0;right:31%;padding-top:0;width:25px" md-ink-ripple="" class="btn btn-default btn-gplus" type="button"><i class="ion ion-trash-a" style="margin-left: -5px;"></i><div class="md-ripple-container" style=""></div></button></span>
+                                   <!--class="label label-info label-fix" --> <span tooltip="{{profile.name}}" style="display:block;width:78%;overflow:hidden;margin-left:11%;margin-top:5px">{{profile.name}}</span>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-2" style="text-align: center;margin-bottom: 10px;padding: 0">
+                                <div ng-if="profile.kind != 'profile' ">
+                                    <img src="/modules/profiles/img/file-folder-bg.png" style="width: 35%;border:1px dashed #999;" ng-click="createFolderPopup()"/>
+                                    <button style="position: absolute; height:25px;line-height:25px;top:0;right:30%;padding-top:0;width:0px;border-radius: 13px" md-ink-ripple="" class="btn btn-default btn-success" type="button"><i class="ion ion-plus" style="margin-left: -6px;"></i><div class="md-ripple-container" style=""></div></button>
+                                    <span tooltip="Tạo mới" style="display:block;width:78%;overflow:hidden;margin-left:11%;margin-top:5px">Tạo mới</span>
+                                </div>
+                            </div>
+                        </div>
                 </div>
+            </div>
 
             </div>
         </div>

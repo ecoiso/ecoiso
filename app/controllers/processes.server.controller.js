@@ -22,13 +22,18 @@ exports.create = function(req, res) {
             });
         } else {
             var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            var user_process_val = '';
+            if(typeof process.userProcess != 'undefined'){
+                user_process_val = process.userProcess._id;
+            };
             client.on('connected', function () {
                 var _process =
                     {
                         user: process.user,
                         kind: [ 'draft' ],
                         name: process.name,
-                        created : Date.now()
+                        created : Date.now(),
+                        userProcess:user_process_val
                     };
                 client.collection('processes').save(_process,function(err,process_done) {
                     if (err) return console.log(err);
@@ -184,7 +189,7 @@ exports.listDraft = function(req, res) {
         } else {
             var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
             client.on('connected', function () {
-                client.collection('processes').find({$and : [{ "kind": ['draft'] },{$or:[{'user': req.user._id},{'userProcess._id': req.user._id}] } ] }).toArray(function(err, process) {
+                client.collection('processes').find({$and : [{ "kind": ['draft'] },{$or:[{'user': req.user._id},{'userProcess': req.user._id.toString()}] } ] }).toArray(function(err, process) {
                     if (err) return next(err);
                     if (! process) return next(new Error('Failed to load Process ' + id));
                     res.json(process);
@@ -366,37 +371,6 @@ var fs = require('fs');
  * Upload files to Processes
  *
  */
-function convertDoc2Pdf(_filename){
-    var spawn = require('child_process').spawn;
-    var libreoffice;
-    libreoffice = spawn("libreoffice4.4",['--headless','--convert-to', ' pdf','--outdir','/var/www/html/public/uploads/','/var/www/html/public/uploads/'+_filename+'']);
-    libreoffice.stdout.on('data', function (data) {
-        console.log('stdout: ' + data);
-    });
-
-    libreoffice.stderr.on('data', function (data) {
-        console.log('stderr: ' + data);
-    });
-
-    libreoffice.on('close', function (code) {
-        if (code !== 0) {
-            console.log(' process exited with code ' + code);
-        }
-    });
-    return 1;
-}
-exports.createPdf2Jpg = function(req, res){
-    var output = req.body[0].output;
-
-    var spawn_ = require('child_process').spawn;
-    var imageick;
-    imageick = spawn_("convert",['-thumbnail',' x150','/var/www/html/public/uploads/'+output+'.pdf','/var/www/html/public/uploads/'+output+'.jpg']);
-    imageick.stdout.on('data', function (data) {
-        console.log('stdout: ' + data);
-    });
-
-    res.end("convert success");
-}
 exports.uploadProcess = function (req, res) {
     if (req.url === '/upload/uploadProcess' && req.method === 'POST') {
         // parse a file upload
@@ -419,12 +393,16 @@ exports.uploadProcess = function (req, res) {
                             var fileExt = _filename.split('.').pop();
                             var input = _filename;
                             var output = input.substr(0, input.lastIndexOf('.')) || input;
-                            if (fileExt != 'pdf') {
-                                //convertDoc2Pdf(_filename);
+                            /*if (fileExt != 'pdf') {
                                 var spawn = require('child_process').spawn;
-                                var libreoffice;
-                                libreoffice = spawn("libreoffice4.4", ['--headless', '--convert-to', 'output.pdf', '--outdir', '/var/www/html/public/uploads/', '/var/www/html/public/uploads/' + _filename + '']);
-                            }
+                                var libre = spawn("libreoffice4.4", ['--headless', '--convert-to', 'output.pdf', '--outdir', '/var/www/html/public/uploads/', '/var/www/html/public/uploads/' + _filename + '']);
+                            }else{
+                                /// create image thumb
+                                var spawn_ = require('child_process').spawn;
+                                var imageick;
+                                imageick = spawn_("convert",['-thumbnail',' x150','/var/www/html/public/uploads/'+output+'.pdf','/var/www/html/public/uploads/'+output+'.jpg']);
+                            }*/
+
                             var urlPdf = '';
                             if (fileExt != 'pdf') {
                                 urlPdf = "/ViewerJS/index.html#/uploads/" + output + ".output.pdf";
@@ -478,17 +456,16 @@ exports.uploadModel = function(req, res) {
                             var fileExt = _filename.split('.').pop();
                             var input = _filename;
                             var output = input.substr(0, input.lastIndexOf('.')) || input;
-                            if (fileExt != 'pdf') {
+                            /*if (fileExt != 'pdf') {
                                 var spawn = require('child_process').spawn;
                                 var libreoffice;
                                 libreoffice = spawn("libreoffice4.4", ['--headless', '--convert-to', 'output.pdf', '--outdir', '/var/www/html/public/uploads/', '/var/www/html/public/uploads/' + _filename + '']);
-                                libreoffice.stdout.on('data', function (data) {
-                                    console.log('stdout: ' + data);
-                                });
-                                libreoffice.on('close', function (code) {
-                                    console.log('closing libreoffice code: ' + code);
-                                });
-                            }
+                            }else{
+                                /// create image thumb
+                                var spawn_ = require('child_process').spawn;
+                                var imageick;
+                                imageick = spawn_("convert",['-thumbnail',' x150','/var/www/html/public/uploads/'+output+'.pdf','/var/www/html/public/uploads/'+output+'.jpg']);
+                            }*/
                             var urlPdf = '';
                             if (fileExt != 'pdf') {
                                 urlPdf = "/ViewerJS/index.html#/uploads/" + output + ".output.pdf";

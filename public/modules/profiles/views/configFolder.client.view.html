@@ -2,7 +2,7 @@
     <div class="modal-header clearfix">
         <form id="data-upload-name-onchage-button" method="post" ng-submit="saveChangeNameProfile(model)" >
             <input type="hidden" style="display: none" name="doc_id" value="{{ model.profile._id }}"/>
-            <h4  class="modal-title h3" id="nameOfDocument"><input onclick="showReloadName()" id="name-main-profile" ng-model="model.profile.name"
+            <h4  class="modal-title h3" id="nameOfDocument"><input onclick="showReloadName()" id="name-main-document" ng-model="model.profile.name"
                                                                    name="nameProfile"
                                                                    style="width: 80%;border: 0px;float: left;"
                                                                    value="{{ model.profile.name }}" readonly/></h4>
