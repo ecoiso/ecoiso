@@ -42,23 +42,41 @@ angular.module('profiles').controller('ProfilesController', ['$scope', '$statePa
 		// Create new Profile
 		$scope.create = function() {
 			// Create new Profile object
-			var profile = new Profiles ({
-				name: this.name
-			});
-            if($scope.parentProfile.length > 0){
-                var obj = [];
-                obj.push($scope.parentProfile[$scope.parentProfile.length -1]._id);
-                profile.parent = obj;
-            }
+            var radios = document.getElementsByName('radio');
+            var idParent = document.getElementById('idParent').value;
+            var colorBackground = "";
+            for (var i = 0, length = radios.length; i < length; i++) {
+                if (radios[i].checked) {
+                    // do whatever you want with the checked radio
+                    colorBackground = radios[i].value;
+                    // only one radio can be logically checked, don't check the rest
+                    break;
+                }
+            };
 
-			// Redirect after save
-			profile.$save(function(response) {
-                $scope.error = '';
-                $scope.profiles.push(response);
-				$scope.name = '';
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
+			var profile = new Profiles ({
+				name: this.name,
+                color:colorBackground,
+                viewer:$scope.multipleUser.users,
+                inherit:this.inherit
 			});
+             $http.get('/profiles/'+idParent).success(function(data){
+                 profile.parent = data;
+                 profile.$save(function(response) {
+                     $scope.profiles.push(response);
+                 }, function(errorResponse) {
+                     $scope.error = errorResponse.data.message;
+                 });
+             });
+            /*f($scope.parentProfile.length > 0){
+                var obj = [];
+                obj.push($scope.parentProfile[$scope.parentProfile.length -1]);
+                profile.parent = obj;
+            }*/
+            //alert( x.toSource());
+			// Redirect after save
+
+
 		};
 
 		// Remove existing Profile
@@ -80,12 +98,17 @@ angular.module('profiles').controller('ProfilesController', ['$scope', '$statePa
 
 		// Update existing Profile
 		$scope.update = function() {
-			var profile = $scope.profile;
-			profile.$update(function() {
-				$location.path('profiles/' + profile._id);
+
+			var profile = $scope.model.profile;
+            profile.viewer = $scope.multipleUser.users;
+            $http.put('/profiles/'+profile._id,profile).success(function(data){
+                sweetAlert("Cấu hình thành công");
+            });
+			/*profile.$update(function() {
+				//$location.path('profiles/' + profile._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
-			});
+			});*/
 		};
 
 		// Find a list of Profiles
@@ -185,11 +208,16 @@ angular.module('profiles').controller('ProfilesController', ['$scope', '$statePa
 
         };
         $scope.modalAnim = "default";
-        $scope.createFolderPopup = function(){
+        $scope.createFolderPopup = function(parentProfile){
             $modal.open({
                 templateUrl: "/modules/profiles/views/createFolder.client.view.html",
                 size: "xs",
                 controller: 'ModalCreateProfileController',
+                resolve: {
+                    parentProfile: function () {
+                        return parentProfile;
+                    }
+                },
                 windowClass: $scope.modalAnim
             });
             $scope.modalClose = function () {
@@ -200,6 +228,15 @@ angular.module('profiles').controller('ProfilesController', ['$scope', '$statePa
         $scope.modalClose = function () {
             $scope.$close();
         };
+        $scope.availableUsers = [];
+        $scope.multipleUser = {};
+        $scope.listUserInCompany = function(){
+            $http.get('/users/listUserInCompany/').success(function(data){
+                $scope.availableUsers = data;
+            })
+
+        };
+
 	}
 ]);
 'use strict';
@@ -272,8 +309,9 @@ angular.module('profiles').controller('ProfileUploadController', ['$scope','$htt
 }]);
 'use strict';
 //modals controller
-var ModalCreateProfileController = angular.module('profiles').controller('ModalCreateProfileController',['$scope','$http', '$stateParams', '$location','Authentication',
-    function($scope,$http, $stateParams, $location,Authentication) {
+var ModalCreateProfileController = angular.module('profiles').controller('ModalCreateProfileController',['$scope','$http', '$stateParams', '$location','Authentication','parentProfile',
+    function($scope,$http, $stateParams, $location,Authentication,parentProfile) {
+        $scope.idParent = parentProfile._id;
         $scope.modalClose = function () {
             $scope.$close();
         }
@@ -287,9 +325,10 @@ var ModalConfigProfileController = angular.module('profiles').controller('ModalC
         $scope.model = {
             profile:profile
         };
+        $scope.authentication = Authentication;
+
         $scope.availableUsers = [];
         $scope.multipleUser = {};
-        $scope.authentication = Authentication;
         $scope.listUserInCompany = function(){
             $http.get('/users/listUserInCompany/').success(function(data){
                 $scope.availableUsers = data;
@@ -302,11 +341,12 @@ var ModalConfigProfileController = angular.module('profiles').controller('ModalC
         };
         $scope.saveViewerProfile = function(){
             $scope.multipleUser.profileId = document.getElementById('profileIdConfig').value;
-            $http.post('/folder/saveViewerProfile',$scope.multipleUser).success(function(data){
+            //alert($scope.multipleUser.toSource());
+            /*$http.post('/folder/saveViewerProfile',$scope.multipleUser).success(function(data){
                 $scope.modalClose();
                 sweetAlert("Cấu hình thành công");
             })
-            ;
+            ;*/
         };
         $scope.modalClose = function () {
             $scope.$close();

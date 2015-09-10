@@ -60,7 +60,8 @@
                             </div>
                             <div class="col-sm-2" style="text-align: center;margin-bottom: 10px;padding: 0">
                                 <div ng-if="profile.kind != 'profile' ">
-                                    <img src="/modules/profiles/img/file-folder-bg.png" style="width: 35%;border:1px dashed #999;" ng-click="createFolderPopup()"/>
+                                    <img ng-if="parentProfile.length == 0" src="/modules/profiles/img/file-folder-bg.png" style="width: 35%;border:1px dashed #999;" ng-click="createFolderPopup()"/>
+                                    <img ng-if="parentProfile.length > 0" src="/modules/profiles/img/file-folder-bg.png" style="width: 35%;border:1px dashed #999;" ng-click="createFolderPopup(parentProfile[parentProfile.length -1])"/>
                                     <button style="position: absolute; height:25px;line-height:25px;top:0;right:30%;padding-top:0;width:0px;border-radius: 13px" md-ink-ripple="" class="btn btn-default btn-success" type="button"><i class="ion ion-plus" style="margin-left: -6px;"></i><div class="md-ripple-container" style=""></div></button>
                                     <span tooltip="Tạo mới" style="display:block;width:78%;overflow:hidden;margin-left:11%;margin-top:5px">Tạo mới</span>
                                 </div>
