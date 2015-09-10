@@ -1,22 +1,30 @@
 <div class="modal-style" >
     <div class="modal-header clearfix">
-        <form id="data-upload-name-onchage-button" method="post" ng-submit="saveChangeNameProfile(model)" >
-            <input type="hidden" style="display: none" name="doc_id" value="{{ model.profile._id }}"/>
-            <h4  class="modal-title h3" id="nameOfDocument"><input onclick="showReloadName()" id="name-main-document" ng-model="model.profile.name"
-                                                                   name="nameProfile"
-                                                                   style="width: 80%;border: 0px;float: left;"
-                                                                   value="{{ model.profile.name }}" readonly/></h4>
-            <button ng-if="model.process.kind[0] != 'publish'" class="btn btn-success btn-xs " style="float: left;display: none;margin-right: 20px"
-                    id="reload-name-button" type="submit" onclick="hiddenReloadName()"><span
-                    class="ion ion-checkmark"></span></button>
-            <span ng-if="model.process.kind[0] != 'publish'" type="button" class="btn btn-danger btn-xs ion ion-refresh" style="float: left;height:24px"
-                  onclick="showReloadName()"></span>
-        </form>
+        <h4>Cấu hình hồ sơ</h4>
         <span class="close ion ion-android-close" ng-click="modalClose()"></span>
     </div>
-    <div class="modal-body" ng-init="listUserInCompany()">
-        <form method="post" ng-submit="saveViewerProfile()" >
+    <div class="modal-body" data-ng-controller="ProfilesController">
+        <form method="post" ng-submit="update()" >
             <div class="form-group">
+                <label class="control-label">Tên hồ sơ</label>
+                <div class="controls">
+                    <input type="text" data-ng-model="model.profile.name" id="name" class="form-control" placeholder="{{model.profile.name}}" required>
+                </div>
+                <!--<form id="data-upload-name-onchage-button" method="post" ng-submit="saveChangeNameProfile(model)" >
+                    <input type="hidden" style="display: none" name="doc_id" value="{{ model.profile._id }}"/>
+                    <h5  class="modal-title h3" id="nameOfDocument">
+                        <input onclick="showReloadName()" id="name-main-document" ng-model="model.profile.name"
+                               name="nameProfile"
+                               style="width: 80%;border: 0px;float: left;"
+                               value="{{ model.profile.name }}" readonly/></h5>
+                    <button ng-if="model.process.kind[0] != 'publish'" class="btn btn-success btn-xs " style="float: left;display: none;margin-right: 20px"
+                            id="reload-name-button" type="submit" onclick="hiddenReloadName()"><span
+                            class="ion ion-checkmark"></span></button>
+                <span ng-if="model.process.kind[0] != 'publish'" type="button" class="btn btn-danger btn-xs ion ion-refresh" style="float: left;height:24px"
+                      onclick="showReloadName()"></span>
+                </form>-->
+            </div>
+            <div class="form-group" ng-init="listUserInCompany()"  >
                 <label class="control-label">Người được quyền xem và xử lý</label>
                 <ui-select multiple ng-model="multipleUser.users" theme="select2" ng-disabled="disabled" class="col-sm-12">
                     <ui-select-match placeholder="Chọn người có quyền xử lý">{{$item.displayName}}</ui-select-match>
@@ -25,6 +33,7 @@
                     </ui-select-choices>
                 </ui-select>
             </div>
+
             <input type="hidden" style="display: none" name="doc_id" value="{{ model.profile._id }}" id="profileIdConfig"/>
             <div class="form-group" style="margin-top: 70px;margin-bottom: 30px">
                 <input type="submit" value="Xác nhận cấu hình" class="btn btn-primary col-md-offset-8">

@@ -1,22 +1,93 @@
 <div class="modal-style" >
     <div class="modal-header clearfix">
-        Taọ mới thư mục
+        <h4>Taọ mới thư mục</h4>
         <span class="close ion ion-android-close" ng-click="modalClose()"></span>
     </div>
     <div class="modal-body"  data-ng-controller="ProfilesController" >
-        <form name="profileForm" data-ng-submit="create()" class="col-sm-5 form-horizontal" novalidate autocomplete="off" ng-if="authentication.user.roles[0] == 'manager'">
-            <fieldset>
-                <div class="form-group col-md-12" style="padding:0;margin:0;display:inline-flex">
-                    <button md-ink-ripple="" class="btn btn-line-info btn-icon-inline" type="submit"><i class="ion ion-folder"></i>Tạo thư mục<div class="md-ripple-container" style=""></div></button>
-                    <i><input style="width: 300px;" type="text" placeholder="Điền tên thư mục chứa hồ sơ..." required="" class="form-control ng-dirty ng-valid ng-valid-required " id="name" data-ng-model="name"></i>
+        <form name="profileForm" data-ng-submit="create()">
+            <div class="form-group">
+                <label class="control-label">Tên hồ sơ</label>
+                <div class="controls">
+                    <input type="text" placeholder="Điền tên thư mục chứa hồ sơ..." required="" class="form-control ng-dirty ng-valid ng-valid-required " id="name" ng-model="name">
                 </div>
+            </div>
+            <div class="form-group">
+                <label class=" control-label">Màu sắc</label>
+                <div >
+                    <div class="pull-left box-color">
+                        <input type="radio" id="radio05" name="radio" value="#75B5D1"/>
+                        <label for="radio05" style="background-color: #75B5D1" ><span></span></label>
+                    </div>
+                    <div class="pull-left box-color">
+                        <input type="radio" id="radio08" name="radio" value="#CB3F2E"/>
+                        <label for="radio08" style="background-color: #CB3F2E" ><span></span></label>
+                    </div>
+                    <div class="pull-left box-color">
+                        <input type="radio" id="radio01" name="radio" value="#F2D50F"/>
+                        <label for="radio01" style="background-color: #F2D50F"><span></span></label>
+                    </div>
+                    <div class="pull-left box-color">
+                        <input type="radio" id="radio03" name="radio" value="#61AE46"/>
+                        <label for="radio03" style="background-color: #61AE46" ><span></span></label>
+                    </div>
+                    <div class="pull-left box-color">
+                        <input type="radio" id="radio07" name="radio" value="#722983"/>
+                        <label for="radio07" style="background-color: #722983" ><span></span></label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-init="listUserInCompany()">
+                <label class="control-label">Người được quyền xem và xử lý</label>
+                <ui-select multiple ng-model="multipleUser.users" theme="select2" ng-disabled="disabled" class="col-sm-12">
+                    <ui-select-match placeholder="Chọn người có quyền xử lý">{{$item.displayName}}</ui-select-match>
+                    <ui-select-choices repeat="multipleUser in availableUsers | filter:$select.search">
+                        {{multipleUser.displayName}}
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <input type="hidden" style="display: none" name="doc_id" value="{{ model.profile._id }}" id="profileIdConfig"/>
+            <input type="hidden" style="display: none" name="idParent" value="{{ idParent }}"  id="idParent"/>
+            <div class="form-group">
+                <input type="checkbox" ng-model="inherit" ng-true-value="'1'" ng-false-value="'0'">
+                <b>Các thư mục con cấp quyền giống thư mục này</b>
+            </div>
+
+            <div class="form-group">
+                <button md-ink-ripple="" class="btn btn-line-info btn-icon-inline  col-md-offset-8" type="submit"><i class="ion ion-folder"></i>Tạo thư mục<div class="md-ripple-container" style=""></div></button>
                 <div data-ng-show="error" class=" form-group text-center text-danger">
                     <strong style="margin-left: 100px" data-ng-bind="error"></strong>
                 </div>
-            </fieldset>
+            </div>
         </form>
     </div>
 </div>
-
+<style type = "text/css" scoped>
+    input[type="radio"] {
+        display:none;
+    }
+    input[type="radio"] + label {
+        font-family:Arial, sans-serif;
+        font-size:14px;
+    }
+    input[type="radio"] + label span {
+        display:inline-block;
+        width:100px;
+        height:30px;
+        vertical-align:middle;
+        cursor:pointer;
+    }
+    input[type="radio"] + label span {
+    }
+    input[type="radio"]:checked + label span{
+        border: 3px solid #000000;
+    }
+    input[type="radio"] + label span,
+    input[type="radio"]:checked + label span {
+        -webkit-transition:background-color 0.4s linear;
+        -o-transition:background-color 0.4s linear;
+        -moz-transition:background-color 0.4s linear;
+        transition:background-color 0.4s linear;
+    }
+</style>
 
 <!-- #end Modal Content -->

@@ -16,7 +16,9 @@ var mongoose = require('mongoose'),
  */
 exports.create = function(req, res) {
     //console.log(req);
-    var profile = new Profile(req.body);
+    var profile = new Profile();
+    profile = _.extend(profile , req.body);
+    //console.log(profile);
     var user = req.user;
     Company.find({"_id": user.company}, function (err, company) {
         if (err) {
@@ -26,7 +28,6 @@ exports.create = function(req, res) {
         } else {
             var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
             client.on('connected', function () {
-                console.log(company);
                 var _profile =
                 {
                     user: req.user._id,
@@ -34,7 +35,9 @@ exports.create = function(req, res) {
                     created : Date.now(),
                     name: profile.name,
                     parent: profile.parent,
-                    viewer: profile.viewer
+                    viewer: profile.viewer,
+                    color: profile.color,
+                    inherit:profile.inherit.toString()
 
                 };
                 client.collection('profiles').save(_profile,function(err,profile_done) {
@@ -60,7 +63,9 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
 	var profile = req.profile ;
 	profile = _.extend(profile , req.body);
-    var nameProfile = req.body.name;
+    profile._id = ObjectId(profile._id);
+    //console.log(profile);
+    //var nameProfile = req.body.name;
     var user = req.user;
     Company.find({"_id": user.company}, function (err, company) {
         if (err) {
@@ -70,7 +75,7 @@ exports.update = function(req, res) {
         } else {
             var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
             client.on('connected', function () {
-                client.collection('profiles').update({_id:ObjectId(profile._id)},{$set:{name:nameProfile}},function(err){
+                client.collection('profiles').update({_id:ObjectId(profile._id)},profile,function(err){
                     if (err) return console.log(err);
                     else{
                         client.collection('profiles').find({_id : ObjectId(profile._id)}).toArray(function(err, process_done) {
@@ -259,7 +264,7 @@ exports.childProfile = function(req, res) {
         } else {
             var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
             client.on('connected', function () {
-                client.collection('profiles').find({$and : [{'company': req.user.company},{'parent':obj},{$or:[{'user':req.user._id},{'viewer' : {$elemMatch: {"_id":req.user._id.toString()}}} ] } ]}).toArray(function (err, profiles) {
+                client.collection('profiles').find({$and : [{'company': req.user.company},{'parent':obj},{$or:[{'user':req.user._id.toString()},{'viewer' : {$elemMatch: {"_id":req.user._id.toString()}}} ] } ]}).toArray(function (err, profiles) {
                     if (err) return next(err);
                     if (! profiles) return next(new Error('Failed to load profiles ' + id));
                     res.json(profiles);
