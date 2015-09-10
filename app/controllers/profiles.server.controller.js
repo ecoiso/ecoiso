@@ -229,7 +229,7 @@ exports.rootProfile = function(req, res) {
         } else {
             var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
             client.on('connected', function () {
-                client.collection('profiles').find( {$and : [{'company': user.company},{'parent':[]},{$or:[{'user':user._id},{'viewer' : {$elemMatch: {"_id":user._id}}}] }] }).toArray(function(err,profiles) {
+                client.collection('profiles').find( {$and : [{'company': user.company},{'parent':[]},{$or:[{'user':user._id},{'viewer' : {$elemMatch: {"_id":user._id.toString()}}}] }] }).toArray(function(err,profiles) {
                     if (err) return next(err);
                     if (! profiles) return next(new Error('Failed to load profiles ' + id));
                     res.json(profiles);
@@ -237,17 +237,7 @@ exports.rootProfile = function(req, res) {
             });
         };
     });
-    /*Profile.find( {$and : [{'company': req.user.company},{'parent':[]},{$or:[{'user':req.user._id},{'viewer' : {$elemMatch: {"_id":req.user._id.toString()}}}] }] }, function (err, profiles) {
-    //Profile.find( {'viewer' : {$elemMatch: {"_id":req.user._id.toString()}}}, function (err, profiles) {
-        if (err) {
-            return res.status(400).send({
-                message: errorHandler.getErrorMessage(err)
-            });
-        } else {
-            res.json(profiles);
-        }
-    });*/
-}
+};
 /**
  *
  * */
@@ -255,7 +245,10 @@ exports.rootProfile = function(req, res) {
 exports.childProfile = function(req, res) {
     var user = req.user;
     var obj = [];
-    obj.push(req.profile._id.toString());
+    var prof = req.profile;
+    prof._id = prof._id.toString();
+    prof.user = prof.user.toString();
+    obj.push(prof);
     Company.find({"_id": user.company}, function (err, company) {
         if (err) {
             return res.status(400).send({
@@ -264,7 +257,7 @@ exports.childProfile = function(req, res) {
         } else {
             var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
             client.on('connected', function () {
-                client.collection('profiles').find({$and : [{'company': req.user.company},{'parent':obj},{$or:[{'user':req.user._id.toString()},{'viewer' : {$elemMatch: {"_id":req.user._id.toString()}}} ] } ]}).toArray(function (err, profiles) {
+                client.collection('profiles').find({$and : [{'company': req.user.company},{'parent':obj},{$or:[{'user':req.user._id},{'viewer' : {$elemMatch: {"_id":req.user._id.toString()}} } ] } ]}).toArray(function (err, profiles) {
                     if (err) return next(err);
                     if (! profiles) return next(new Error('Failed to load profiles ' + id));
                     res.json(profiles);
@@ -291,7 +284,7 @@ exports.documentChildProfile = function(req, res) {
         } else {
             var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
             client.on('connected', function () {
-                client.collection('documents').find({'folder':req.profile._id.toString()}).toArray(function (err, document) {
+                client.collection('documents').find({'folder':req.profile._id}).toArray(function (err, document) {
                     if (err) {
                         return res.status(400).send({
                             message: errorHandler.getErrorMessage(err)
