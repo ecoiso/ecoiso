@@ -18,17 +18,9 @@ exports.create = function(req, res) {
     var id = JSON.stringify(doc[0].process);
     id = id.substring(2, id.length - 2);
     /// create image thumb
-    var spawn_ = require('child_process').spawn;
-    var imageick;
-    imageick = spawn_("convert",['-thumbnail',' x150','/var/www/html/public/uploads/'+doc[0].thumb_image+'.pdf','/var/www/html/public/uploads/'+doc[0].thumb_image+'.jpg']);
-    imageick.stdout.on('data', function (data) {
-        console.log('stdout: ' + data);
-    });
-    imageick.on('close', function(code) {
-        console.log('closing imageick code: ' + code);
-    });
-
-    var user =req.user;
+    /*var spawn_ = require('child_process').spawn;
+    spawn_("convert", ['-thumbnail', ' x150', '/var/www/html/public/uploads/' + doc[0].thumb_image + '.pdf', '/var/www/html/public/uploads/' + doc[0].thumb_image + '.jpg']);
+    */var user =req.user;
     Company.find({_id: ObjectId(user.company)},function(err,data){
         var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
         client.on('connected', function () {
@@ -72,23 +64,29 @@ exports.update = function(req, res) {
 	var document = req.document ;
 
 	document = _.extend(document , req.body);
-    console.log(document);
-    /*var user =req.user;
-    Company.find({_id: ObjectId(user.company)},function(err,data) {
-        var client = mongoose.createConnection('mongodb://localhost/' + data[0].nameDB);
-        client.on('connected', function () {
+    var nameDocument= req.document.name;
+    var user = req.user;
+    Company.find({"_id": user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                client.collection('documents').update({_id:ObjectId(document._id)},{$set:{name:nameDocument}},function(err){
+                    if (err) return console.log(err);
+                    else{
+                        client.collection('documents').find({_id : ObjectId(document._id)}).toArray(function(err, process_done) {
+                            if (err) return console.log(err);
+                            res.jsonp(process_done[0]);
+                        });
+                    }
+                });
 
-        });
+            });
+        }
     });
-	save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(document);
-		}
-	});*/
 };
 
 /**
@@ -280,7 +278,7 @@ exports.updateNewVersion = function(req,res){
                             var fileExt = _filename.split('.').pop();
                             var input = _filename;
                             var output = input.substr(0, input.lastIndexOf('.')) || input;
-                            if (fileExt != 'pdf') {
+                            /*if (fileExt != 'pdf') {
                                 //convertDoc2Pdf(_filename);
                                 var spawn = require('child_process').spawn;
                                 var libreoffice;
@@ -290,7 +288,7 @@ exports.updateNewVersion = function(req,res){
                                 var spawn_ = require('child_process').spawn;
                                 var imageick;
                                 imageick = spawn_("convert",['-thumbnail',' x150','/var/www/html/public/uploads/'+output+'.pdf','/var/www/html/public/uploads/'+output+'.jpg']);
-                            }
+                            }*/
                             var urlPdf = '';
                             if (fileExt != 'pdf') {
                                 urlPdf = "/ViewerJS/index.html#/uploads/" + output + ".output.pdf";

@@ -70,7 +70,7 @@
                 <i class="arrow ion-chevron-left" style="margin-left: 205px;"></i>
                 <!--<span style="margin-left:210px" class="badge badge-xs badge-success">{{processesPublish.length}}</span>-->
             </a>
-            <ul class="inner-drop list-unstyled" data-ng-init="findPublish()" >
+            <ul class="inner-drop list-unstyled" data-ng-init="findPublish()" style="max-height:400px;overflow:auto">
                 <li style="display: inline-flex;width:100%;height:30px;line-height:30px" data-ng-repeat="process in processesPublish">
                     <a ng-controller="ActivitiesController" data-ng-href="{{company.shortName}}#!/processes/{{process._id}}"  md-ink-ripple><span data-ng-bind="process.name"></span></a>
                 </li>
@@ -94,6 +94,7 @@
                 <span class="text">Tạo tài khoản</span>
             </a>
         </li>
+
        <!--Create standard-->
         <li class="flags-active" ng-if="authentication.user.roles[0] == 'administrator'" onclick="activeNav(this)">
             <a ng-controller="ActivitiesController" href="/{{company.shortName}}#!/standards/create" md-ink-ripple>
@@ -109,6 +110,7 @@
             </a>
         </li>
         <!---->
+
         <li class="flags-active" ng-if="authentication.user.roles[0] == 'administrator'" onclick="activeNav(this)">
             <a ng-controller="ActivitiesController" href="/{{company.shortName}}#!/companies/{{authentication.user.company}}/edit" md-ink-ripple>
                 <i class="ion ion-android-settings"></i>

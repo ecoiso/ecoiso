@@ -35,7 +35,17 @@ var ProfileSchema = new Schema({
         type: String,
         default: '',
         trim: true
-    }
+    },
+	color:{
+		type: String,
+		default: '#FFA726',
+		trim: true
+	},
+	inherit:{
+		type: String,
+		default: '0',
+		trim: true
+	}
 });
 
 mongoose.model('Profile', ProfileSchema);
