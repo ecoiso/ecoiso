@@ -1,8 +1,8 @@
 'use strict';
 
 // Standards controller
-angular.module('standards').controller('StandardsController', ['$scope','$http', '$stateParams', '$location', 'Authentication', 'Standards',
-    function ($scope,$http, $stateParams, $location, Authentication, Standards) {
+angular.module('standards').controller('StandardsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Standards',
+    function ($scope, $stateParams, $location, Authentication, Standards) {
         $scope.authentication = Authentication;
         $scope.init = function () {
             if ($scope.authentication.user) {
