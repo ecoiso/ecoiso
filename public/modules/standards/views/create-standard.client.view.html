@@ -1,27 +1,26 @@
 <section data-ng-controller="StandardsController">
-    <div class="col-md-11  panel panel-info panel-hovered  mt10 ml10 mb10 mr10">
+    <div class="col-md-11  panel panel-default panel-hovered  mt10 ml10 mb10 mr10">
         <div class="page-header">
             <h4>Tạo tiêu chuẩn mới</h4>
         </div>
-        <div class="col-md-6 ml10">
+        <div class="col-md-8 ml15">
             <form class="form-horizontal" data-ng-submit="create()" novalidate>
                 <fieldset>
                     <div class="form-group">
                         <!--start show dialog message error-->
-                        <div data-ng-show="error" class="text-center text-danger">
+                        <!--<div data-ng-show="error" class="text-center text-danger">
                             <div class="alert alert-danger" role="alert">
                                 <strong data-ng-bind="error"></strong>
                             </div>
-                        </div>
+                        </div>-->
                         <!--end show dialog mesage error-->
                         <label class=" control-label mt10" for="name">Tiêu Chuẩn</label>
 
                         <div class="controls">
                             <input type="text" data-ng-model="name" id="name" class="form-control mt20"
-                                   placeholder="Tên tiêu chuẩn...." required>
+                                   placeholder="Tên tiêu chuẩn..." required>
                             <label class="control-label mt20" for="name">Mô tả</label>
-                            <textarea class="form-control" placeholder="thêm mô tả về tiêu chuẩn..."
-                                      data-ng-model="description" id="description" rows="12"></textarea>
+                            <textarea class="form-control" placeholder="Thêm mô tả về tiêu chuẩn..." data-ng-model="description" id="description" rows="12"></textarea>
                         </div>
                     </div>
                     <div class="form-group">

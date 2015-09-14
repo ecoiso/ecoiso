@@ -8,6 +8,7 @@ angular.module('standards').factory('Standards', ['$resource',
 			update: {
 				method: 'PUT'
 			}
+
 		});
 	}
 ]);

@@ -1,5 +1,5 @@
 <section data-ng-controller="StandardsController" data-ng-init="find()">
-    <div class="page-header">
+   <!-- <div class="page-header">
         <h3>Danh Sách Tiêu Chuẩn</h3>
     </div>
     <div class="panel panel-default">
@@ -33,9 +33,9 @@
     <div class="alert alert-warning text-center" data-ng-hide="!standards.$resolved || standards.length">
         chưa có tiêu chuẩn nào được khởi tạo ! hãy khởi tạo tiêu chuẩn mới ! <a href="/#!/standards/create">khởi tạo
         tiêu chuẩn</a>?
-    </div>
-    <!-- <div class="page-header">
-         <h1>Standards</h1>
+    </div>-->
+     <div class="page-header">
+         <h1>Tieu Chuan</h1>
      </div>
      <div class="list-group">
          <a data-ng-repeat="standard in standards" data-ng-href="#!/standards/{{standard._id}}" class="list-group-item">
@@ -50,5 +50,5 @@
      </div>
      <div class="alert alert-warning text-center" data-ng-hide="!standards.$resolved || standards.length">
          No Standards yet, why don't you <a href="/#!/standards/create">create one</a>?
-     </div>-->
+     </div>
 </section>

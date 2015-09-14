@@ -14,6 +14,10 @@ module.exports = function(app) {
 		.put(users.requiresLogin, standards.hasAuthorization, standards.update)
 		.delete(users.requiresLogin, standards.hasAuthorization, standards.delete);
 
+	/*app.route('/standards/create')
+		.get(standards.create)
+	*/
+
 	// Finish by binding the Standard middleware
 	app.param('standardId', standards.standardByID);
 };

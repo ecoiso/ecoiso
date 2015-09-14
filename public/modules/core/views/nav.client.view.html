@@ -94,7 +94,7 @@
                 <span class="text">Tạo tài khoản</span>
             </a>
         </li>
-       <!-- //tao tieu chuan-->
+       <!--Create standard-->
         <li class="flags-active" ng-if="authentication.user.roles[0] == 'administrator'" onclick="activeNav(this)">
             <a ng-controller="ActivitiesController" href="/{{company.shortName}}#!/standards/create" md-ink-ripple>
                 <i class="ion ion-ios-plus"></i>
@@ -108,6 +108,7 @@
                 <span class="text">Danh Sách Tiêu Chuẩn</span>
             </a>
         </li>
+        <!---->
         <li class="flags-active" ng-if="authentication.user.roles[0] == 'administrator'" onclick="activeNav(this)">
             <a ng-controller="ActivitiesController" href="/{{company.shortName}}#!/companies/{{authentication.user.company}}/edit" md-ink-ripple>
                 <i class="ion ion-android-settings"></i>
