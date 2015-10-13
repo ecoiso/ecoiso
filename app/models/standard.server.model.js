@@ -28,6 +28,11 @@ var StandardSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
+	},
+	company: {
+		type: String,
+		default: '',
+		trim: true
 	}
 });
 

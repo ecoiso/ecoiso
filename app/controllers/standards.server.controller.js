@@ -12,8 +12,39 @@ var mongoose = require('mongoose'),
  * Create a Standard
  */
 exports.create = function (req, res) {
-    console.log('i created a standard');
-    var standard = new Standard(req.body);
+    //console.log('i created a standard'); -> debug xong nho cmt
+    var standard = new Standard();
+    standard = _.extend(standard , req.body);
+    standard.user = req.user;
+
+    //console.log(profile);
+    var user = req.user;
+    Company.find({"_id": user.company}, function (err, company) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            var client = mongoose.createConnection('mongodb://localhost/' + company[0].nameDB);
+            client.on('connected', function () {
+                var _standard =
+                {
+                    user: standard.user._id,
+                    company: req.user.company,
+                    created : Date.now(),
+                    name: standard.name,
+                    description : standard.description
+
+                };
+                client.collection('standards').save(_standard,function(err,standard_done) {
+                    if (err) return console.log(err);
+                    else res.jsonp(standard_done);
+                });
+            });
+        };
+    });
+
+    /*var standard = new Standard(req.body);
     standard.user = req.user;
     standard.save(function (err) {
         if (err) {
@@ -22,8 +53,7 @@ exports.create = function (req, res) {
             });
         } else {
             res.jsonp(standard);
-        }
-    });
+        }*/
 };
 
 /**

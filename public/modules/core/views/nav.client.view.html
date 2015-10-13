@@ -37,6 +37,21 @@
                 <span class="text">Tạo Quy trình</span>
             </a>
         </li>
+        <!--Create standard-->
+        <!--<li class="flags-active" ng-if="authentication.user.roles[0] == 'manager'" onclick="activeNav(this)">
+            <a ng-controller="ActivitiesController" href="/{{company.shortName}}#!/standards/create" md-ink-ripple>
+                <i class="ion ion-ios-plus"></i>
+                <span class="text">Tạo Tiêu Chuẩn</span>
+            </a>
+        </li>
+
+        <li class="flags-active"  onclick="activeNav(this)">
+            <a ng-controller="ActivitiesController" href="/{{company.shortName}}#!/standards" md-ink-ripple>
+                <i class="ion ion-ios-list"></i>
+                <span class="text">Danh Sách Tiêu Chuẩn</span>
+            </a>
+        </li>-->
+        <!---->
         <li class="flags-active" ng-if="authentication.user.roles[0] == 'manager' || authentication.user.roles[0] == 'staff'" onclick="activeNav(this)">
             <a href="javascript:;" md-ink-ripple ng-mouseover="findDraft()" data-ng-click="findDraft()" id="find-draft">
                 <i class="ion ion-hammer"></i>
@@ -95,21 +110,7 @@
             </a>
         </li>
 
-       <!--Create standard-->
-        <li class="flags-active" ng-if="authentication.user.roles[0] == 'administrator'" onclick="activeNav(this)">
-            <a ng-controller="ActivitiesController" href="/{{company.shortName}}#!/standards/create" md-ink-ripple>
-                <i class="ion ion-ios-plus"></i>
-                <span class="text">Tạo Tiêu Chuẩn</span>
-            </a>
-        </li>
 
-        <li class="flags-active" ng-if="authentication.user.roles[0] == 'administrator'" onclick="activeNav(this)">
-            <a ng-controller="ActivitiesController" href="/{{company.shortName}}#!/standards" md-ink-ripple>
-                <i class="ion ion-ios-list"></i>
-                <span class="text">Danh Sách Tiêu Chuẩn</span>
-            </a>
-        </li>
-        <!---->
 
         <li class="flags-active" ng-if="authentication.user.roles[0] == 'administrator'" onclick="activeNav(this)">
             <a ng-controller="ActivitiesController" href="/{{company.shortName}}#!/companies/{{authentication.user.company}}/edit" md-ink-ripple>
